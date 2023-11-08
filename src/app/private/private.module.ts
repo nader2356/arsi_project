@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PrivateRoutingModule } from './private-routing.module';
-import { BaseComponent } from './component/base/base.component';
+import { BaseComponent } from './components/base/base.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
-    BaseComponent
+    BaseComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
