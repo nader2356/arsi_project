@@ -6,13 +6,19 @@ import { BaseComponent } from './components/base/base.component';
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
+import { FormationsComponent } from './components/formations/formations.component';
+import { AddFormationsModalComponent } from './components/formations/add-formations-modal/add-formations-modal.component';
 
 
 @NgModule({
   declarations: [
     BaseComponent,
     SidenavComponent,
-    UserlistComponent
+    UserlistComponent,
+    FormationsComponent,
+    AddFormationsModalComponent,
+    FormationsComponent,
+    AddFormationsModalComponent
   ],
   imports: [
     CommonModule,
