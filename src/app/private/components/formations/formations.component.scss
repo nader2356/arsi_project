@@ -3,3 +3,21 @@
       width: 75%;
     }
   }
+  .table-header-item {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px;
+  }
+  
+  .table-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .paragraph{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { RecoverPasswordComponent } from './auth/components/recover-password/recover-password.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RecoverPasswordComponent } from './auth/components/recover-password/rec
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
