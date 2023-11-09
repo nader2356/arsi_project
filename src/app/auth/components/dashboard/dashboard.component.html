@@ -1,0 +1,219 @@
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-lg-12">
+          <div class="card">
+             <div class="card-body p-0">
+                <div class="iq-edit-list usr-edit">
+                   <ul class="iq-edit-profile d-flex nav nav-pills">
+                      <li class="col-md-3 p-0">
+                         <a class="nav-link active" data-toggle="pill" href="#personal-information">
+                         Personal Information
+                         </a>
+                      </li>
+                      <li class="col-md-3 p-0">
+                         <a class="nav-link" data-toggle="pill" href="#chang-pwd">
+                         Change Password
+                         </a>
+                      </li>
+                      <li class="col-md-3 p-0">
+                         <a class="nav-link" data-toggle="pill" href="#emailandsms">
+                         Email and SMS
+                         </a>
+                      </li>
+                      <li class="col-md-3 p-0">
+                         <a class="nav-link" data-toggle="pill" href="#manage-contact">
+                         Manage Contact
+                         </a>
+                      </li>
+                   </ul>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-lg-12">
+          <div class="iq-edit-list-data">
+             <div class="tab-content">
+                <div class="tab-pane fade active show" id="personal-information" role="tabpanel">
+                   <div class="card">
+                      <div class="card-header d-flex justify-content-between">
+                         <div class="iq-header-title">
+                            <h4 class="card-title">Personal Information</h4>
+                         </div>
+                      </div>
+                      <div class="card-body">
+                         <form #Changeform="ngForm" (ngSubmit)="ChangeUser()">
+                            <div class="form-group row align-items-center">
+                               <div class="col-md-12">
+                                  <div class="profile-img-edit">
+                                     <div class="crm-profile-img-edit">
+                                        <img class="crm-profile-pic rounded-circle avatar-100" src="../assets/images/user/11.png" alt="profile-pic">
+                                        <div class="crm-p-image bg-primary">
+                                           <i class="las la-pen upload-button"></i>
+                                           <input class="file-upload" type="file" accept="image/*">
+                                        </div>
+                                     </div>                                          
+                                  </div>
+                               </div>
+                            </div>
+                            <div class=" row align-items-center">
+                               <div class="form-group col-sm-6">
+                                  <label for="fname">First Name:</label>
+                                  <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="user_update.first_name" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="lname">Last Name:</label>
+                                  <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="user_update.last_name" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="uname">User Name:</label>
+                                  <input type="text" class="form-control" id="uname" name="uname" [(ngModel)]="user_update.user_name" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="cname">City:</label>
+                                  <input type="text" class="form-control" id="cname"  name="cname" [(ngModel)]="user_update.city">
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label class="d-block">Gender:</label>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="male" name="customRadio1" class="custom-control-input" [(ngModel)]="user_update.gender" value="Male" checked>
+                                     <label class="custom-control-label" for="male"> Male </label>
+                                  </div>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                     <input type="radio" id="female" name="customRadio2" class="custom-control-input"  [(ngModel)]="user_update.gender" value="Female">
+                                     <label class="custom-control-label" for="female"> Female </label>
+                                  </div>
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="dob">Date Of Birth:</label>
+                                  <input  class="form-control" id="dob" name="dob" [(ngModel)]="user_update.date_of_birth" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="mstatus">Marital status:</label>
+                                  <input type="text" class="form-control" id="mstatus" name="mstatus" [(ngModel)]="user_update.marital_status" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="fname">Age:</label>
+                                  <input type="number" class="form-control" id="age" name="age" [(ngModel)]="user_update.age" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="country">Country:</label>
+                                  <input type="text" class="form-control" id="country" name="country" [(ngModel)]="user_update.country" >
+                               </div>
+                               <div class="form-group col-sm-6">
+                                  <label for="state">State:</label>
+                                  <input type="text" class="form-control" id="state" name="state" [(ngModel)]="user_update.state" >
+                               </div>
+                               <div class="form-group col-sm-12">
+                                  <label>Address:</label>
+                                  <textarea class="form-control" name="address" rows="5" style="line-height: 22px;" name="address" [(ngModel)]="user_update.address">
+                                  </textarea>
+                               </div>
+                            </div><br>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                         </form>
+                      </div>
+                   </div>
+                </div>
+                <div class="tab-pane fade" id="chang-pwd" role="tabpanel">
+                   <div class="card">
+                      <div class="card-header d-flex justify-content-between">
+                         <div class="iq-header-title">
+                            <h4 class="card-title">Change Password</h4>
+                         </div>
+                      </div>
+
+                   </div>
+                </div>
+                <div class="tab-pane fade" id="emailandsms" role="tabpanel">
+                   <div class="card">
+                      <div class="card-header d-flex justify-content-between">
+                         <div class="iq-header-title">
+                            <h4 class="card-title">Email and SMS</h4>
+                         </div>
+                      </div>
+                      <div class="card-body">
+                         <form #emailNotification="ngForm" (ngSubmit)="EmailNotification()">
+                            <div class="form-group row align-items-center">
+                               <label class="col-md-3" for="emailnotification">Email Notification:</label>
+                               <div class="col-md-9 custom-control custom-switch">
+                                  <input type="checkbox" class="custom-control-input" id="emailnotification" name="emailnotification" [(ngModel)]="email.emailNotification">
+                                  <label class="custom-control-label" for="emailnotification"></label>
+                               </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                               <label class="col-md-3" for="smsnotification">SMS Notification:</label>
+                               <div class="col-md-9 custom-control custom-switch">
+                                  <input type="checkbox" class="custom-control-input" id="smsnotification" name="smsnotification" [(ngModel)]="email.smsNotification">
+                                  <label class="custom-control-label" for="smsnotification"></label>
+                               </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                               <label class="col-md-3" for="npass">When To Email</label>
+                               <div class="col-md-9">
+                                  <div class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input" id="email01" name="email01" [(ngModel)]="email.email01">
+                                     <label class="custom-control-label" for="email01">You have new notifications.</label>
+                                  </div>
+                                  <div class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input" id="email02" name="email02" [(ngModel)]="email.email02">
+                                     <label class="custom-control-label" for="email02">You're sent a direct message</label>
+                                  </div>
+                                  <div class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input" id="email03" name="email03" [(ngModel)]="email.email03">
+                                     <label class="custom-control-label" for="email03">Someone adds you as a connection</label>
+                                  </div>
+                               </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                               <label class="col-md-3" for="npass">When To Escalate Emails</label>
+                               <div class="col-md-9">
+                                  <div class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input" id="email04" name="email04" [(ngModel)]="email.email04">
+                                     <label class="custom-control-label" for="email04"> Upon new order.</label>
+                                  </div>
+                                  <div class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input" id="email05" name="email05" [(ngModel)]="email.email05">
+                                     <label class="custom-control-label" for="email05"> New membership approval</label>
+                                  </div>
+                                  <div class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input" id="email06" name="email06" [(ngModel)]="email.email06">
+                                     <label class="custom-control-label" for="email06"> Member registration</label>
+                                  </div>
+                               </div>
+                            </div><br>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                         </form>
+                      </div>
+                   </div>
+                </div>
+                <div class="tab-pane fade" id="manage-contact" role="tabpanel">
+                   <div class="card">
+                      <div class="card-header d-flex justify-content-between">
+                         <div class="iq-header-title">
+                            <h4 class="card-title">Manage Contact</h4>
+                         </div>
+                      </div>
+                      <div class="card-body">
+                         <form #contact="ngForm" (ngSubmit)="ContactForm()">
+                            <div class="form-group">
+                               <label for="cno">Contact Number:</label>
+                               <input type="text" class="form-control" id="cno" value="001 2536 123 458">
+                            </div>
+                            <div class="form-group">
+                               <label for="email">Email:</label>
+                               <input type="text" class="form-control" id="email" value="Barryjone@demo.com">
+                            </div>
+                            <div class="form-group">
+                               <label for="url">Url:</label>
+                               <input type="text" class="form-control" id="url" value="https://getbootstrap.com">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                         </form><br>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

@@ -1,24 +1,6 @@
 
 
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Webkit | Responsive Bootstrap 4 Admin Dashboard Template</title>
-
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="../assets/images/favicon.ico" />
-        </head>
-  <body class=" ">
-    <!-- loader Start -->
-    <div id="loading">
-          <div id="loading-center">
-          </div>
-    </div>
-    <!-- loader END -->
-
       <div class="wrapper">
       <section class="login-content">
          <div class="container">
@@ -35,37 +17,37 @@
                                     <div class="row">
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="text" placeholder=" ">
+                                             <input class="floating-input form-control" type="text" placeholder=" " [(ngModel)]="user.full_name">
                                              <label>Full Name</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="text" placeholder=" ">
+                                             <input class="floating-input form-control" type="text" placeholder=" " [(ngModel)]="user.last_name">
                                              <label>Last Name</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="email" placeholder=" ">
+                                             <input class="floating-input form-control" type="email" placeholder=" " [(ngModel)]="user.email">
                                              <label>Email</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="text" placeholder=" ">
+                                             <input class="floating-input form-control" type="text" placeholder=" " [(ngModel)]="user.phone">
                                              <label>Phone No.</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="password" placeholder=" ">
+                                             <input class="floating-input form-control" type="password" placeholder=" "  [(ngModel)]="user.password">
                                              <label>Password</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="password" placeholder=" ">
+                                             <input class="floating-input form-control" type="password" placeholder=" "  [(ngModel)]="user.confirm_password">
                                              <label>Confirm Password</label>
                                           </div>
                                        </div>
@@ -94,6 +76,4 @@
          </div>
       </section>
       </div>
-  </body>
-  <router-outlet></router-outlet>
-</html>
+  
