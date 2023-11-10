@@ -1,0 +1,85 @@
+<div class="modal fade" role="dialog" aria-modal="true" id="edit-event-modal">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-block text-center pb-3 border-bttom">
+                <h3 class="modal-title" id="exampleModalCenterTitle01">New Event</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group mb-3">
+                            <label for="exampleInputText01" class="h5">Event Title</label>
+                            <input type="text" class="form-control" id="exampleInputText01" placeholder="Formation Name" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="exampleInputText2" class="h5">Event type *</label>
+                            <select name="type" class="selectpicker form-control" data-style="py-0">
+                                <option>Hackathon</option>
+                                <option>Competitive programming</option>
+                                <option>Conference</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group mb-3">
+                          <label for="exampleInputText07" class="h5">Number of Participants*</label>
+                          <input type="number" class="form-control" id="exampleInputText07">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group mb-3">
+                          <label for="exampleInputText01" class="h5">Location</label>
+                          <input type="text" class="form-control" id="exampleInputText01" placeholder="Location" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3">
+                            <label for="exampleInputText004" class="h5">Date*</label>
+                            <input type="date" class="form-control" id="exampleInputText004" value="">
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="form-group mb-3">
+                          <label for="exampleInputText004" class="h5">Description*</label>
+                          <textarea type="date" class="form-control" id="exampleInputText004" value=""></textarea>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="card">
+                         <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                               <h4 class="card-title"> Image</h4>
+                            </div>
+                         </div>
+                         <div class="card-body">
+                            <form id="file-upload-form" class="uploader-file">
+                               <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                               <label id="file-drag">
+                                  <img id="file-image" src="#" alt="Preview" class="hidden">
+                                  <span id="start-one">
+                                     <i class="fa fa-download" aria-hidden="true"></i>
+                                     <span class="d-block">Select a file or drag here</span>
+                                     <span id="notimage" class="hidden d-block">Please select image</span>
+                                     <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                  </span>
+                                  <span id="response" class="hidden">
+                                  <span id="messages"></span>
+                                  <progress class="progress" id="file-progress" value="0">
+                                     <span>0</span>%
+                                  </progress>
+                                  </span>
+                               </label>
+                            </form>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="col-lg-12 text-end">
+                    <div class="btn btn-success mr-3 btn-lg" data-dismiss="modal" (click)="updateEvent()">Update</div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -8,8 +8,10 @@ const routes: Routes = [
       import('./private/private.module').then((m) => m.PrivateModule),
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    path: '',
+    loadChildren: () => 
+    import('./private/private.module').then((m) => m.PrivateModule),
+    // import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '**',

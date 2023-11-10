@@ -13,6 +13,9 @@ import { ChangeInformationComponent} from './components/change-formations/change
 
 import { EventComponent } from './components/event/event.component';
 import { UserService } from './components/services/user.service';
+import { EventsComponent } from './components/events/events.component';
+import { EditEventComponent } from './components/events/edit-event/edit-event.component';
+import { AddEventComponent } from './components/events/add-event/add-event.component';
 
 
 
@@ -25,7 +28,10 @@ import { UserService } from './components/services/user.service';
     FormationsComponent,
     AddFormationsModalComponent,
     ChangeInformationComponent,
-    EventComponent
+    EventComponent,
+    EditEventComponent,
+    AddEventComponent,
+    EventsComponent,
   ],
   imports: [CommonModule, PrivateRoutingModule, FormsModule, HttpClientModule],
   providers: [UserService],
