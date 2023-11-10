@@ -6,5 +6,5 @@ export class User {
     password = '';
     confirm_password = '';
     region = 'sousse';
-    userName = 'login';
+    userName = 'admin';
   }

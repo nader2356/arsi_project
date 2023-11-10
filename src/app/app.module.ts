@@ -7,7 +7,9 @@ import { SigninComponent } from './auth/components/signin/signin.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { RecoverPasswordComponent } from './auth/components/recover-password/recover-password.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,10 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,12 @@ import { User } from '../user';
 export class SignupComponent {
   user = new User();
   msg = '';
-  constructor(private router: Router, private service: UserService) {}
+  constructor(
+    private router: Router,
+    private service: UserService,
+    private messageService: MessageService
+  ) {}
+
 
 
   ngOnInit(): void {
@@ -22,11 +27,20 @@ export class SignupComponent {
         console.log(this.user);
         this.msg = 'Registration successfully';
         this.user = new User();
-        alert(this.msg);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registration successfully',
+          detail: 'goal',
+        });
         this.router.navigate(['/auth/signin']);
 
       },
       (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Registration failed',
+          detail: 'Registration failed',
+        });
         console.log('Registration failed'), (this.msg = error.error);
         this.user = new User();
       }

@@ -9,22 +9,31 @@ import { UserService } from '../user.service';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent {
-  user=new User();
-  msg="";
-  constructor(private router :Router,private service:UserService) { }
+  user = new User();
+  msg = '';
+  constructor(
+    private router: Router,
+    private service: UserService,
+    private messageService: MessageService
+  ) {}
+
 
   ngOnInit(): void {
   }
   SigninUser(){
     this.service.SigninUserService(this.user).subscribe(
-      data =>{
-        console.log("response recieved"),
-        alert("login successfull");
-        this.router.navigate(['/auth'])
-      }
-      ,error =>{console.log("exception occured"),
-      alert("login failed ! please check your email or password"),
-      this.msg="Please check your information !!!"
+      (res) => {
+        console.log(res);
+        localStorage.setItem('access_token', res.token);
+        this.router.navigate(['/private/formations']);
+      },
+      (error) => {
+        console.log('exception occured'),
+          this.messageService.add({
+            severity: 'error',
+            summary: 'login failed ! please check your email or password',
+            detail: 'Please check your information !!!',
+          });
 
   })
 
