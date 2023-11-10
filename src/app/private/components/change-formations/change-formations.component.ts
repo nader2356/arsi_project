@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/auth/components/contact';
 import { Email } from 'src/app/auth/components/email';
-import { Password } from 'src/app/auth/components/password';
 import { UserUpdate } from 'src/app/auth/components/user-update';
 import { UserService } from 'src/app/auth/components/user.service';
+import { Password } from '../password';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-change-information',
+  templateUrl: './change-information.component.html',
+  styleUrls: ['./change-information.component.scss']
 })
-export class DashboardComponent {
+export class ChangeInformationComponent {
   user_update=new UserUpdate();
-  password_update:Password|undefined;
+  password_update=new Password();
   email=new Email();
   contact=new Contact();
   msg="";
@@ -38,7 +38,19 @@ export class DashboardComponent {
       });
   }
 
+  ChangePassword(){
+    this.service.PasswordService(this.password_update).subscribe(
+      data=>{console.log(this.password_update);
+        this.msg="Password is changed successfully";
+        this.password_update=new Password();
+        alert(this.msg)
 
+      },error=>{
+        console.log("Change password failed"),
+        this.msg=error.error;
+        this.password_update=new Password();
+      });
+  }
 
 
   EmailNotification(){

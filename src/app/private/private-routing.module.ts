@@ -21,13 +21,14 @@ const routes: Routes = [
     {
     path: 'admin',
     component: FormationsComponent
-   }
-    ]
-  },
-  {
+   },
+   {
     path: '**',
     redirectTo: '',
   },
+    ]
+  },
+ 
 ];
 
 @NgModule({

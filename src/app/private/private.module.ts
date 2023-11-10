@@ -8,7 +8,11 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { FormationsComponent } from './components/formations/formations.component';
 import { AddFormationsModalComponent } from './components/formations/add-formations-modal/add-formations-modal.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ChangeInformationComponent} from './components/change-formations/change-formations.component';
+import { UserService } from './components/user.service';
+
+import { EventComponent } from './components/event/event.component';
+
 
 
 
@@ -19,9 +23,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     UserlistComponent,
     FormationsComponent,
     AddFormationsModalComponent,
-    DashboardComponent
+    ChangeInformationComponent,
+    EventComponent
   ],
   imports: [CommonModule, PrivateRoutingModule,FormsModule,HttpClientModule],
-  providers: [],
+  providers: [UserService],
 })
 export class PrivateModule { }
