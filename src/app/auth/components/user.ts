@@ -1,9 +1,10 @@
-export class User{
-    full_name!:string;
-    last_name!:string;
-    email!:string;
-    phone!:string;
-    password!:string;
-    confirm_password!:string;
-
-}
+export class User {
+    firstName = '';
+    lastName = '';
+    email = '';
+    phone = '';
+    password = '';
+    confirm_password = '';
+    region = 'sousse';
+    userName = 'login';
+  }
