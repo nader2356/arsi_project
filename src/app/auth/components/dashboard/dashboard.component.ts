@@ -4,7 +4,8 @@ import { Contact } from '../contact';
 import { UserUpdate } from '../user-update';
 import { Password } from '../password';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
+
 
 @Component({
   selector: 'app-dashboard',

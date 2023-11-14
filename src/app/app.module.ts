@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { RecoverPasswordComponent } from './auth/components/recover-password/recover-password.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppHttpInterceptor } from './core/interceptor/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [
+    MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

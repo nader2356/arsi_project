@@ -8,9 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8081/api/arsii/admin/me'
+  private baseUrl = '/api/arsii/';
 
   constructor(private httpClient: HttpClient) { }
+
+  getCurrentUser(): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl + 'admin/me'}`);
+  }
+  
 
   getUserList(): Observable<User[]>{
     return this.httpClient.post<User[]>(`${this.baseUrl}`, {});

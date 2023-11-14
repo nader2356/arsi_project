@@ -1,11 +1,11 @@
-import { Contact } from './contact';
+import { Contact } from '../components/contact';
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './user';
-import { UserUpdate } from './user-update';
-import { Password } from './password';
-import { Email } from './email';
+import { User } from '../components/user';
+import { UserUpdate } from '../components/user-update';
+import { Password } from '../components/password';
+import { Email } from '../components/email';
 
 
 

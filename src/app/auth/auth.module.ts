@@ -6,7 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 
-import { UserService } from './components/user.service';
+import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
