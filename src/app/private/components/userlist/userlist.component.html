@@ -59,10 +59,10 @@
                       alt="profile"
                     />
                   </td>
-                  <td>{{ user.username }}</td>
+                  <td>{{ user.userName }}</td>
                   <td>{{ user.phoneNumber }}</td>
                   <td>{{ user.email }}</td>
-                  <td>{{ user.country }}</td>
+                  <td>{{ user.region }}</td>
                   <td>
                     <span
                       class="badge bg-danger"
@@ -85,10 +85,7 @@
               </tbody>
             </table>
           </div>
-          <div class="row justify-content-between mt-3">
-            <div id="user-list-page-info" class="col-md-6">
-              <span>Showing 1 to 5 of 5 entries</span>
-            </div>
+          <div class="row justify-content-end mt-3">
             <div class="col-md-6">
               <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end mb-0">

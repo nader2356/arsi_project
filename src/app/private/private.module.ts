@@ -11,7 +11,7 @@ import { AddFormationsModalComponent } from './components/formations/add-formati
 import { ChangeInformationComponent} from './components/change-formations/change-formations.component';
 
 
-import { EventComponent } from './components/event/event.component';
+
 import { UserService } from './components/services/user.service';
 
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
@@ -29,7 +29,6 @@ import { SkillsComponent } from './components/skills/skills.component';
     FormationsComponent,
     AddFormationsModalComponent,
     ChangeInformationComponent,
-    EventComponent,
     EditEventComponent,
     AddEventComponent,
     SkillsComponent

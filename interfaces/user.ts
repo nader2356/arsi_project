@@ -1,9 +1,9 @@
 export interface User {
     id: number;
-    username: string;
+    userName: string;
     email: string;
     phoneNumber: number;
-    country: string;
+    region: string;
     profileImage: string;
     accountStatus: boolean;
   }

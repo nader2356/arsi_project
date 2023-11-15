@@ -18,6 +18,6 @@ export class UserService {
   
 
   getUserList(): Observable<User[]>{
-    return this.httpClient.post<User[]>(`${this.baseUrl}`, {});
+    return this.httpClient.post(`${this.baseUrl + 'admin/filter'}`, {});
   }
 }
