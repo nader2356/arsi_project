@@ -22,7 +22,7 @@
              </li>
 
              <li class="col-md-3 p-0">
-               <a class="nav-link" data-toggle="pill" href="#emailandsms">
+              <a class="nav-link" data-toggle="pill" href="#cvupload">
                  Bibliographie
                </a>
              </li>
@@ -253,15 +253,11 @@
                    <a routerLink="/auth/reset" class="float-right"
                      >Forgot Password</a
                    >
-                   <input type="Password" class="form-control" id="cpass" />
+                   <input type="Password" class="form-control" id="cpass" name="Password" [(ngModel)]="password_update.current_password"  >
                  </div>
                  <div class="form-group">
                    <label for="npass">New Password:</label>
-                   <input type="Password" class="form-control" id="npass" />
-                 </div>
-                 <div class="form-group">
-                   <label for="vpass">Verify Password:</label>
-                   <input type="Password" class="form-control" id="vpass" />
+                   <input type="Password" class="form-control" id="npass"  name="Password" [(ngModel)]="password_update.new_password">
                  </div>
                  <button type="submit" class="btn btn-primary mr-2">
                    Submit
@@ -271,7 +267,7 @@
            </div>
          </div>
 
-         <div class="tab-pane fade" id="emailandsms" role="tabpanel">
+         <div class="tab-pane fade" id="cvupload" role="tabpanel">
            <div class="card">
              <div class="card-header d-flex justify-content-between">
                <div class="iq-header-title">

@@ -1,10 +1,9 @@
 import { User } from './user';
 import { UserUpdate } from './user-update';
-import { Password } from './password';
-
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Password } from './Password';
 
 
 
@@ -30,7 +29,10 @@ export class UserService {
 
   }
   
+  public CvService(data:FormData):Observable<any>{
+    return this.http.post<any>("http://localhost:8090/api/cv",data);
 
+  }
 
 
 }
