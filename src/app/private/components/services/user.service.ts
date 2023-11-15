@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 import { UserUpdate } from "../types/user-update";
 import { Password } from "../types/password";
 import { Contact } from "../types/contact";
-import { Email } from "../types/email";
+
 
 
 
@@ -36,10 +36,7 @@ export class UserService {
     return this.http.post<any>("http://localhost:8090/api/arsii/admin/password",password);
 
   }
-  public EmailService(email:Email):Observable<any>{
-    return this.http.post<any>("http://localhost:8090/api/",email);
-
-  }
+ 
   public ContactService(contact:Contact):Observable<any>{
     return this.http.post<any>("http://localhost:8090/api/",contact);
 
