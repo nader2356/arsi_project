@@ -12,11 +12,11 @@ import { ChangeInformationComponent} from './components/change-formations/change
 
 
 
-import { UserService } from './components/services/user.service';
 
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { AddEventComponent } from './components/events/add-event/add-event.component';
-import { SkillsComponent } from './components/skills/skills.component';
+
+import { MemberService } from './components/services/member.service';
 
 
 
@@ -30,10 +30,9 @@ import { SkillsComponent } from './components/skills/skills.component';
     AddFormationsModalComponent,
     ChangeInformationComponent,
     EditEventComponent,
-    AddEventComponent,
-    SkillsComponent
+    AddEventComponent
   ],
-  imports: [CommonModule, PrivateRoutingModule, FormsModule, HttpClientModule,ReactiveFormsModule],
-  providers: [UserService],
+  imports: [CommonModule, PrivateRoutingModule, FormsModule,ReactiveFormsModule],
+  providers: [MemberService],
 })
 export class PrivateModule { }

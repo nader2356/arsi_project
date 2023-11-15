@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Email } from '../email';
 import { Contact } from '../contact';
 import { UserUpdate } from '../user-update';
-import { Password } from '../password';
+import { Password } from '../types/password';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 

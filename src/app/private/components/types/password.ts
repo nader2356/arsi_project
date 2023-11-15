@@ -1,5 +1,5 @@
 export class Password{
-    current_password!:string;
-    new_password!:string;
+    oldPassword!:string;
+    newPassword!:string;
    
 }

@@ -3,18 +3,15 @@ export class UserUpdate {
     firstName!: string;
     lastName!: string;
     userName!: string;
-    job!: string;
-    password!: string;
-    phoneNumber!: string;
     email!: string;
-    confirmPassword!: string;
+    password!: string;
     gender!: string;
-    birth!: string;
-    maritalStatus!: string; //
-    age!: number;
-    country!: string; //
+    dateOfBirth!:string;
+    phoneNumber!: string;
     region!: string;
-    address!: string;
-    urlSite!: string;
-    urlLinkedin!: string;
+    job!: string;
+    universityOrCompany!: string;
+    office!:string;
+    image!:string;
+    cv!:File;
 }

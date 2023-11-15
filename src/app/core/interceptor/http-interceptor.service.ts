@@ -20,8 +20,10 @@ import {
       req: HttpRequest<any>,
       next: HttpHandler
     ): Observable<HttpEvent<any>> {
+      console.log("interceptor 1");
       if (this.authService.isLoggedIn) {
         const authToken = this.authService.getToken();
+        console.log("interceptor --is connceted");
   
         const cloned = req.clone({
           headers: req.headers.set('Authorization', 'Bearer ' + authToken),
@@ -40,6 +42,7 @@ import {
           })
         );
       } else {
+        console.log("interceptor --is deconected");
         return next.handle(req).pipe(finalize(() => {}));
       }
     }

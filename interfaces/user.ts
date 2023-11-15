@@ -5,5 +5,5 @@ export interface User {
     phoneNumber: number;
     region: string;
     profileImage: string;
-    accountStatus: boolean;
+    status: boolean;
   }

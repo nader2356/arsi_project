@@ -65,20 +65,23 @@
                   <td>{{ user.region }}</td>
                   <td>
                     <span
-                      class="badge bg-danger"
-                      *ngIf="user.accountStatus == false"
+                    class="badge bg-secondary"
+                    *ngIf="!user.status"
                       >Disabled</span
                     >
                     <span
                       class="badge bg-success"
-                      *ngIf="user.accountStatus == true"
+                      *ngIf="user.status"
                       >Enabled</span
                     >
                   </td>
                   <td>
                     <div class="flex align-items-center list-user-action">
-                      <button class="btn btn-primary mr-1">Enable</button>
-                      <button class="btn btn-secondary">Delete</button>
+                      <button [hidden]="onDelete || user.status" class="btn btn-primary mr-1" (click)="onDisableUser(user.id)">Enable</button>
+                      <button [hidden]="onDelete || !user.status" class="btn btn-primary mr-1" (click)="onDisableUser(user.id)">Disable</button>
+                      <button [hidden]="onDelete" class="btn btn-danger" (click)="onDelete = true">Delete</button>
+                      <button [hidden]="!onDelete" class="btn btn-danger mr-1" (click)="onDeleteAccount(user.id)">Yes</button>
+                      <button [hidden]="!onDelete" class="btn btn-light" (click)="onDelete = false">No</button>
                     </div>
                   </td>
                 </tr>

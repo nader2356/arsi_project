@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseComponent } from './components/base/base.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
 import { FormationsComponent } from './components/formations/formations.component';
-import { EventComponent } from './components/event/event.component';
+
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
+import { EventsComponent } from './components/events/events.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
   },
   {
    path: 'events',
-   component: EventComponent
+   component: EventsComponent
   },
   {
    path: 'events/:id',

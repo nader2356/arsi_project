@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SigninComponent,SignupComponent,RecoverPasswordComponent],
-  imports: [ CommonModule,AuthRoutingModule,FormsModule,HttpClientModule],
+  imports: [CommonModule, AuthRoutingModule, FormsModule],
   providers: [
     UserService
   ]

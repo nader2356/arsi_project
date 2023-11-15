@@ -13,11 +13,23 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   getCurrentUser(): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl + 'admin/me'}`);
+    return this.httpClient.get(`${this.baseUrl}admin/me`);
   }
   
 
   getUserList(): Observable<User[]>{
-    return this.httpClient.post(`${this.baseUrl + 'admin/filter'}`, {});
+    return this.httpClient.post(`${this.baseUrl}admin/filter`, {"role": "MEMBER"});
+  }
+
+  enableUser(id: number): Observable<any> {
+    return this.httpClient.put(this.baseUrl + 'admin/enable/' + id, {}, {responseType: 'text'})
+  }
+
+  disableUser(id: number): Observable<any> {
+    return this.httpClient.put(this.baseUrl + 'admin/disable/' + id, {}, {responseType: 'text'})
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.httpClient.delete(this.baseUrl + 'admin/' + id, {responseType: 'text'}) //`${this.baseUrl}admin/${id}`
   }
 }
