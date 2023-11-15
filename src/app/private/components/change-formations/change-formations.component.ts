@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserUpdate } from '../user-update';
+import { Password } from '../Password';
+import { Contact } from '../contact';
+import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { Contact } from '../types/contact';
-import { Email } from '../types/email';
-import { Password } from '../types/password';
-import { UserUpdate } from '../types/user-update';
+import { HttpClient } from '@angular/common/http';
+import { Email } from '../Email';
 
 
 
@@ -20,7 +21,7 @@ export class ChangeInformationComponent {
   contact = new Contact();
   msg = '';
 
-  constructor(private  service :UserService,private router:Router) { }
+  constructor(private service:UserService,private router:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -57,33 +58,30 @@ export class ChangeInformationComponent {
     );
   }
 
+  selectedFile: File | null = null;
 
-  EmailNotification(){
-    this.service.EmailService(this.email).subscribe(
-      (data) => {
-        console.log(this.password_update);
-        this.msg = 'Email sended';
-        this.email = new Email();
-        alert(this.msg);
-      },
-      (error) => {
-        console.log('Eroor'), (this.msg = error.error);
-        this.email = new Email();
-      }
-    );
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 
-  ContactForm() {
-    this.service.ContactService(this.contact).subscribe(
-      (data) => {
-        console.log(this.user_update);
-        this.msg = 'Message send';
-        this.contact = new Contact();
-        alert(this.msg);
+  uploadFile() {
+    if (!this.selectedFile) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('cv', this.selectedFile);
+
+    // Replace 'your-upload-api-url' with the actual URL to your server-side API
+    this.http.post('http://localhost/api/cv', formData).subscribe(
+      (response) => {
+        console.log('File uploaded successfully:', response);
+        // Handle success, e.g., display a success message to the user
       },
       (error) => {
-        this.msg = error.error;
-        this.contact = new Contact();
+        console.error('File upload error:', error);
+        // Handle error, e.g., display an error message to the user
       }
     );
   }

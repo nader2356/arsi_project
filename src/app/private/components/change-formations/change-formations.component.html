@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-       <div class="col-lg-12">
+      <div class="col-sm-12">
           <div class="card">
              <div class="card-body p-0">
                 <div class="iq-edit-list usr-edit">
@@ -17,7 +17,7 @@
                       </li>
                       <li class="col-md-3 p-0">
                          <a class="nav-link" data-toggle="pill" href="#emailandsms">
-                         Email and SMS
+                           Bibliographie
                          </a>
                       </li>
                       <li class="col-md-3 p-0">
@@ -25,6 +25,11 @@
                          Manage Contact
                          </a>
                       </li>
+                      <li class="col-md-3 p-0">
+                        <a class="nav-link" data-toggle="pill" href="#change-skill">
+                        Update Skills
+                        </a>
+                     </li>
                    </ul>
                 </div>
              </div>
@@ -58,20 +63,24 @@
                             <div class=" row align-items-center">
                                <div class="form-group col-sm-6">
                                   <label for="fname">First Name:</label>
-                                  <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="user_update.first_name" >
+                                  <input type="text" class="form-control" id="fname" name="fname" [(ngModel)]="user_update.firstName" >
                                </div>
                                <div class="form-group col-sm-6">
                                   <label for="lname">Last Name:</label>
-                                  <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="user_update.last_name" >
+                                  <input type="text" class="form-control" id="lname" name="lname" [(ngModel)]="user_update.lastName" >
                                </div>
                                <div class="form-group col-sm-6">
                                   <label for="uname">User Name:</label>
-                                  <input type="text" class="form-control" id="uname" name="uname" [(ngModel)]="user_update.user_name" >
+                                  <input type="text" class="form-control" id="uname" name="uname" [(ngModel)]="user_update.userName" >
                                </div>
                                <div class="form-group col-sm-6">
-                                  <label for="cname">City:</label>
-                                  <input type="text" class="form-control" id="cname"  name="cname" [(ngModel)]="user_update.city">
-                               </div>
+                                 <label>Job</label>
+                                 <select class="form-control" id="Function" name="function" [(ngModel)]="user_update.job">
+                                    <option selected="">Etudiant</option>
+                                    <option>Ingenieur</option>
+                                    <option>Enseignat</option>
+                                 </select>
+                              </div>
                                <div class="form-group col-sm-6">
                                   <label class="d-block">Gender:</label>
                                   <div class="custom-control custom-radio custom-control-inline">
@@ -85,23 +94,28 @@
                                </div>
                                <div class="form-group col-sm-6">
                                   <label for="dob">Date Of Birth:</label>
-                                  <input  class="form-control" id="dob" name="dob" [(ngModel)]="user_update.date_of_birth" >
+                                  <input  class="form-control" id="dob" name="dob" [(ngModel)]="user_update.birth" >
                                </div>
                                <div class="form-group col-sm-6">
-                                  <label for="mstatus">Marital status:</label>
-                                  <input type="text" class="form-control" id="mstatus" name="mstatus" [(ngModel)]="user_update.marital_status" >
-                               </div>
+                                 <label>Marital Status:</label>
+                                 <select class="form-control" id="maritalstatus" name="maritalstatus" [(ngModel)]="user_update.maritalStatus">
+                                    <option selected="">Single</option>
+                                    <option>Married</option>
+                                    <option>Divorced</option>
+                                    <option>Separated </option>
+                                 </select>
+                              </div>
                                <div class="form-group col-sm-6">
                                   <label for="fname">Age:</label>
-                                  <input type="number" class="form-control" id="age" name="age" [(ngModel)]="user_update.age" >
+                                  <input type="number" class="form-control" id="age" name="age" [(ngModel)]="user_update.age" min="0">
                                </div>
                                <div class="form-group col-sm-6">
                                   <label for="country">Country:</label>
                                   <input type="text" class="form-control" id="country" name="country" [(ngModel)]="user_update.country" >
                                </div>
                                <div class="form-group col-sm-6">
-                                  <label for="state">State:</label>
-                                  <input type="text" class="form-control" id="state" name="state" [(ngModel)]="user_update.state" >
+                                 <label for="state">Region:</label>
+                                 <input type="text" class="form-control" id="state" name="state" [(ngModel)]="user_update.region" >
                                </div>
                                <div class="form-group col-sm-12">
                                   <label>Address:</label>
@@ -141,68 +155,23 @@
                      </div>
                   </div>
                </div>
-                <div class="tab-pane fade" id="emailandsms" role="tabpanel">
-                   <div class="card">
-                      <div class="card-header d-flex justify-content-between">
-                         <div class="iq-header-title">
-                            <h4 class="card-title">Email and SMS</h4>
-                         </div>
+              
+               <div class="tab-pane fade" id="emailandsms" role="tabpanel">
+                  <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                      <div class="iq-header-title">
+                        <h4 class="card-title">Upload your CV here</h4>
                       </div>
-                      <div class="card-body">
-                         <form #emailNotification="ngForm" (ngSubmit)="EmailNotification()">
-                            <div class="form-group row align-items-center">
-                               <label class="col-md-3" for="emailnotification">Email Notification:</label>
-                               <div class="col-md-9 custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="emailnotification" name="emailnotification" [(ngModel)]="email.emailNotification">
-                                  <label class="custom-control-label" for="emailnotification"></label>
-                               </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                               <label class="col-md-3" for="smsnotification">SMS Notification:</label>
-                               <div class="col-md-9 custom-control custom-switch">
-                                  <input type="checkbox" class="custom-control-input" id="smsnotification" name="smsnotification" [(ngModel)]="email.smsNotification">
-                                  <label class="custom-control-label" for="smsnotification"></label>
-                               </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                               <label class="col-md-3" for="npass">When To Email</label>
-                               <div class="col-md-9">
-                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" class="custom-control-input" id="email01" name="email01" [(ngModel)]="email.email01">
-                                     <label class="custom-control-label" for="email01">You have new notifications.</label>
-                                  </div>
-                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" class="custom-control-input" id="email02" name="email02" [(ngModel)]="email.email02">
-                                     <label class="custom-control-label" for="email02">You're sent a direct message</label>
-                                  </div>
-                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" class="custom-control-input" id="email03" name="email03" [(ngModel)]="email.email03">
-                                     <label class="custom-control-label" for="email03">Someone adds you as a connection</label>
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                               <label class="col-md-3" for="npass">When To Escalate Emails</label>
-                               <div class="col-md-9">
-                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" class="custom-control-input" id="email04" name="email04" [(ngModel)]="email.email04">
-                                     <label class="custom-control-label" for="email04"> Upon new order.</label>
-                                  </div>
-                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" class="custom-control-input" id="email05" name="email05" [(ngModel)]="email.email05">
-                                     <label class="custom-control-label" for="email05"> New membership approval</label>
-                                  </div>
-                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" class="custom-control-input" id="email06" name="email06" [(ngModel)]="email.email06">
-                                     <label class="custom-control-label" for="email06"> Member registration</label>
-                                  </div>
-                               </div>
-                            </div><br>
-                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                         </form>
-                      </div>
-                   </div>
+                  
+                    </div>
+                    <div class="card-body">
+                      <input type="file" (change)="onFileSelected($event)" #fileInput />
+                      <button (click)="uploadFile()" [disabled]="!selectedFile">Upload CV</button>
+                    </div>
+                  </div>
                 </div>
+                         
+                    
                 <div class="tab-pane fade" id="manage-contact" role="tabpanel">
                    <div class="card">
                       <div class="card-header d-flex justify-content-between">
@@ -211,24 +180,48 @@
                          </div>
                       </div>
                       <div class="card-body">
-                         <form #contact="ngForm" (ngSubmit)="ContactForm()">
-                            <div class="form-group">
+                        <form #Changeform="ngForm" (ngSubmit)="ChangeUser()">
+                           <div class="form-group">
                                <label for="cno">Contact Number:</label>
-                               <input type="text" class="form-control" id="cno" value="001 2536 123 458">
+                               <input type="text" class="form-control" id="cno" value="001 2536 123 458" name="contact" [(ngModel)]="user_update.phoneNumber">
                             </div>
                             <div class="form-group">
                                <label for="email">Email:</label>
-                               <input type="text" class="form-control" id="email" value="Barryjone@demo.com">
+                               <input type="email" class="form-control" id="email" value="Barryjone@demo.com" name="email" [(ngModel)]="user_update.email">
                             </div>
                             <div class="form-group">
-                               <label for="url">Url:</label>
-                               <input type="text" class="form-control" id="url" value="https://getbootstrap.com">
+                              <label for="url">Web Site Url:</label>
+                              <input type="text" class="form-control" id="url" value="https://getbootstrap.com" name="url" [(ngModel)]="user_update.urlSite">
                             </div>
+                            <div class="form-group">
+                              <label for="url">Linkedin Url:</label>
+                              <input type="text" class="form-control" id="url" value="https://getbootstrap.com" name="linkedin" [(ngModel)]="user_update. urlLinkedin">
+                           </div>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                          </form><br>
                       </div>
                    </div>
                 </div>
+                 <div class="tab-pane fade" id="change-skill" role="tabpanel">
+                  <div class="card">
+                     <div class="card-header d-flex justify-content-between">
+
+                                 <div id="all">
+                                 <div id="myDIV" class="header">
+                                    <h2>My To Do List</h2>
+                                    <input type="text" id="myInput"   >
+                                    <span onclick="newElement()" class="addBtn" id="buton">Add</span>
+                                 </div>
+
+                                 <ul id="myUL">
+                                    <li>Angular</li>
+                                    <li>Organize office</li>
+                                 </ul>
+                                 </div>
+                     </div>
+
+                  </div>
+               </div>
              </div>
           </div>
        </div>
