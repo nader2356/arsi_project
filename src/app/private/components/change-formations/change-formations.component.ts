@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserUpdate } from '../user-update';
 import { Password } from '../Password';
-import { Contact } from '../contact';
+
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Email } from '../Email';
+
 
 
 
@@ -17,8 +17,7 @@ import { Email } from '../Email';
 export class ChangeInformationComponent {
   user_update = new UserUpdate();
   password_update = new Password();
-  email = new Email();
-  contact = new Contact();
+
   msg = '';
 
   constructor(private service:UserService,private router:Router,private http:HttpClient) { }

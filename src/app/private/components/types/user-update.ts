@@ -1,13 +1,20 @@
-export class UserUpdate{
-    first_name!:string;
-    last_name!:string;
-    user_name!:string;
-    city!:string;
-    gender!:string;
-    date_of_birth!:string;
-    marital_status!:string;
-    age!:number;
-    country!:string;
-    state!:string;
-    address!:string;
+
+export class UserUpdate {
+    firstName!: string;
+    lastName!: string;
+    userName!: string;
+    job!: string;
+    password!: string;
+    phoneNumber!: string;
+    email!: string;
+    confirmPassword!: string;
+    gender!: string;
+    birth!: string;
+    maritalStatus!: string; //
+    age!: number;
+    country!: string; //
+    region!: string;
+    address!: string;
+    urlSite!: string;
+    urlLinkedin!: string;
 }
