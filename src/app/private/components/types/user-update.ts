@@ -6,12 +6,12 @@ export class UserUpdate {
     email!: string;
     password!: string;
     gender!: string;
-    dateOfBirth!:string;
+    dateOfBirth!: string;
     phoneNumber!: string;
     region!: string;
     job!: string;
     universityOrCompany!: string;
-    office!:string;
-    image!:string;
-    cv!:File;
+    office!: string;
+    image!: string;
+    cv!: any;
 }
