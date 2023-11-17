@@ -15,7 +15,6 @@ import { Cv } from '../types/cv';
 })
 export class ChangeInformationComponent implements OnInit {
   user_update = new UserUpdate();
-  password_update = new Password();
   msg = '';
   skill = new Skill();
   cv = new Cv();
@@ -23,7 +22,21 @@ export class ChangeInformationComponent implements OnInit {
   categories: Observable<any> | null = null;
   skills: Observable<any> | null = null;
   id!: number;
+  password_update = {
+    oldPassword: '',
+    newPassword: '',
+  };
 
+  showOldPassword = false;
+  showNewPassword = false;
+
+  toggleShowOldPassword() {
+    this.showOldPassword = !this.showOldPassword;
+  }
+
+  toggleShowNewPassword() {
+    this.showNewPassword = !this.showNewPassword;
+  }
 
 
 
@@ -117,16 +130,8 @@ export class ChangeInformationComponent implements OnInit {
   }
 
   Contact() {
-    this.service.getUserById().subscribe(
-      (data) => {
-        this.contact.userId = data.id;
-      },
-      (error) => {
-        console.log('error');
-      }
-    );
-   
-
+    
+    this.contact.userId=this.id;
     this.service.ContactService(this.contact).subscribe(
       (data) => {
         console.log(this.contact);
@@ -176,8 +181,8 @@ export class ChangeInformationComponent implements OnInit {
     );
   }
 
-  deleteCategory(CategoryId: number) {
-    this.service.deleteCategory(CategoryId).subscribe(
+  deleteCategory(id:number){
+    this.service.deleteCategory(id).subscribe(
       (data) => {
         console.log(data);
         this.categories = this.service.getCategories();
@@ -185,5 +190,15 @@ export class ChangeInformationComponent implements OnInit {
       (error) => console.log(error)
     );
   }
+  deleteskill(id:number){
+    this.service.deleteSkill(id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.skills=this.service.getSkills();
+      },
+      error => console.log(error));
+}
+
   getRelatedSkiills(id: number) {}
 }

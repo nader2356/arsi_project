@@ -41,13 +41,16 @@ export class MemberService {
 
 
   public getCategories():Observable<any>{
-    return 	this.http.get('api/arsii/admin/category' );
+    return this.http.get('api/arsii/admin/category' );
   }
-  public deleteCategory(CategoryId:number) : Observable<any> {
-    return this.http.delete<any>('api/arsii/admin/category/' + CategoryId);
+  public deleteCategory(Id:number) : Observable<any> {
+    return this.http.delete<any>('api/arsii/admin/category/'+Id);
   }
   public getSkills():Observable<any>{
-    return 	this.http.get('api/arsii/member/admin/competence' );
+    return 	this.http.get('api/arsii/admin/competence' );
+  }
+  public deleteSkill(Id:number) : Observable<any> {
+    return this.http.delete<any>('api/arsii/admin/competence/'+Id);
   }
   public addSkills(comp:Skill):Observable<any>{
     return 	this.http.post('api/arsii/member/usercompetences',comp );

@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
@@ -284,42 +284,30 @@
               <form #changePassword="ngForm" (ngSubmit)="ChangePassword()">
                 <div class="form-group">
                   <label for="cpass">Current Password:</label>
-                  <a routerLink="/auth/reset" class="float-right"
-                    >Forgot Password</a
-                  >
-                  <input
-                    type="Password"
-                    class="form-control"
-                    id="cpass"
-                    name="password"
-                    [(ngModel)]="password_update.oldPassword"
-                    required
-                    #opassword="ngModel"
-                    [class.is-invalid]="opassword.invalid && opassword.touched"
-                  />
+                  <a routerLink="/auth/reset" class="float-right">Forgot Password</a>
+                  <div class="input-group">
+                    <input type="Password" class="form-control" id="cpass" name="password" [(ngModel)]="password_update.oldPassword" required #opassword="ngModel"
+                      [class.is-invalid]="opassword.invalid && opassword.touched" [type]="showOldPassword ? 'text' : 'password'">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" (click)="toggleShowOldPassword()">
+                        <i class="fa custom-icon-class" [ngClass]="showOldPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                      </button>
+                    </div>
+                  </div>
                  
                 </div>
                 <div class="form-group">
                   <label for="npass">New Password:</label>
-                  <input
-                    type="Password"
-                    class="form-control"
-                    id="npass"
-                    name="npassword"
-                    [(ngModel)]="password_update.newPassword"
-                    required
-                    #npassword="ngModel"
-                    [class.is-invalid]="npassword.invalid && npassword.touched"
-                  />
-                
-                </div>
-                <button
-                  [disabled]="changePassword.form.invalid"
-                  type="submit"
-                  class="btn btn-primary mr-2"
-                >
-                  Submit
-                </button>
+                  <div class="input-group">
+                    <input type="Password" class="form-control" id="npass" name="npassword" [(ngModel)]="password_update.newPassword" required #npassword="ngModel"
+                      [class.is-invalid]="npassword.invalid && npassword.touched" [type]="showNewPassword ? 'text' : 'password'">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" (click)="toggleShowNewPassword()">
+                        <i class="fa custom-icon-class" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>        
               </form>
             </div>
           </div>
@@ -345,10 +333,8 @@
                     id="type"
                     value="https://getbootstrap.com"
                     name="type"
-                    [(ngModel)]="contact.platform"
-                    required
-                    #plat="ngModel"
-                    [class.is-invalid]="plat.invalid && plat.touched"
+                    [(ngModel)]="contact.platform" required #platform="ngModel"
+                    [class.is-invalid]="platform.invalid && platform.touched"
                   />
                 </div>
                 <div class="form-group">
@@ -378,6 +364,10 @@
           <div class="card">
             <thead>
               <tr>
+                <th>  Id   </th> 
+                <th>     </th> 
+                <th>     </th> 
+                <th>     </th> 
                 <th>Name</th>
                 <th></th>
                 <th></th>
@@ -387,36 +377,34 @@
             </thead>
             <tbody>
               <tr *ngFor="let categ of categories | async">
-                <td>{{ categ.CategoryId }}</td>
+                <td>{{categ.id}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>{{ categ.name }}</td>
+                <td>                     </td>
+                <td>                      </td>
+                <td>                       </td>
                 <td>{{ categ.description }}</td>
                 <td></td>
+                  <td></td></td>
   
   
   
-                <td>
-                  <button
-                    style="margin-right: 16px"
-                    (click)="deleteCategory(categ.CategoryId)"
-                    class="btn btn-danger"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    style="margin-right: 16px"
-                    (click)="getRelatedSkiills(categ.CategoryId)"
-                    class="btn btn-success"
-                    style="margin-left: 10px"
-                  >
-                    Get Related skills
-                  </button>
+                  <td>
+                    <button style='margin-right:16px' (click)="deleteCategory(categ.id)" class="btn btn-danger">Delete</button>
+                    <button style='margin-right:16px' (click)="getRelatedSkiills(categ.id)" class="btn btn-success" style="margin-left: 10px">Get Related skills</button>
                 </td>
               </tr>
             </tbody>
             <br /><br />
             <thead>
               <tr>
-                <th>SkillName</th>
+                <th>SkillId</th> 
+                <th>     </th> 
+                <th>     </th> 
+                <th>     </th> 
+                <th >Name</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -424,11 +412,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let categ of categories | async">
-                <td>{{ categ.CategoryId }}</td>
-                <td>{{ categ.name }}</td>
-                <td>{{ categ.description }}</td>
-                <td></td>
+              <tr *ngFor="let skill of skills |async ">
+                <td>{{skill.id}}</td>
+                <td>{{skill.name}}</td>
+                <td>{{skill.description}}</td>
+                <td><button style='margin-right:16px' (click)="deleteskill(skill.id)" class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
           </div>

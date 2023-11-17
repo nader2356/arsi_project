@@ -1,5 +1,5 @@
 export class Skill {
-    skillId!:number;
+    CategoryId!:number;
     name!:number;
     description!:string;
   }

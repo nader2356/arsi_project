@@ -1,6 +1,6 @@
 export class Category {
 
-    CategoryId!:number;
+    id!:number;
     name!:number;
     description!:string;
   }
