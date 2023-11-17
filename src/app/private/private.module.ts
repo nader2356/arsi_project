@@ -9,14 +9,12 @@ import { UserlistComponent } from './components/userlist/userlist.component';
 import { FormationsComponent } from './components/formations/formations.component';
 import { AddFormationsModalComponent } from './components/formations/add-formations-modal/add-formations-modal.component';
 import { ChangeInformationComponent} from './components/change-formations/change-formations.component';
-
-
-
-
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { AddEventComponent } from './components/events/add-event/add-event.component';
-
 import { MemberService } from './components/services/member.service';
+import { AddOpportunityComponent } from './components/opportunity/add-opportunity/add-opportunity.component';
+import { EditOpportunityComponent } from './components/opportunity/edit-opportunity/edit-opportunity.component';
+import { OpportunityComponent } from './components/opportunity/opportunity.component';
 
 
 
@@ -30,7 +28,10 @@ import { MemberService } from './components/services/member.service';
     AddFormationsModalComponent,
     ChangeInformationComponent,
     EditEventComponent,
-    AddEventComponent
+    AddEventComponent,
+    OpportunityComponent,
+    AddOpportunityComponent,
+    EditOpportunityComponent
   ],
   imports: [CommonModule, PrivateRoutingModule, FormsModule,ReactiveFormsModule],
   providers: [MemberService],

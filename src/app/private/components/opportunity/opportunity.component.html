@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div class="header-title">
+            <h4 class="card-title">Opportunity List</h4>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <div class="row justify-content-between">
+              <div class="col-sm-6 col-md-6">
+                <div id="user_list_datatable_info" class="dataTables_filter">
+                  <form class="mr-3 position-relative">
+                    <div class="form-group mb-0">
+                      <input
+                        type="search"
+                        class="form-control"
+                        id="exampleInputSearch"
+                        placeholder="Search"
+                        aria-controls="user-list-table"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <div class="user-list-files d-flex">
+                  <a class="bg-primary" href="javascript:void();"> Excel </a>
+                  <a class="bg-primary" href="javascript:void();"> Pdf </a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div
+                        class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content">
+                        <h5>Opportunities</h5>
+                          <div class="pl-3 border-left btn-new">
+                            <a href="#" class="btn btn-primary mx-2" data-target="#add-opportunity-modal" data-toggle="modal"> Add Opportunity </a>
+                            <a href="#" class="btn btn-success mx-2" data-target="#edit-opportunity-modal" data-toggle="modal"> Edit Opportunity </a>
+                            <button class="btn btn-secondary mx-2">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div id="grid" class="item-content animate__animated animate__fadeIn active" data-toggle-extra="tab-content">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6">
+                    <div class="card card-block card-stretch card-height">
+                      <div class="card-body">
+                        <div class="text-end">
+                          <div class="dropdown">
+                            <span class="py-2" id="dropdownMenuButton04" data-toggle="dropdown">
+                            <i class="ri-more-fill"></i>
+                            </span>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton04">
+                              <a class="dropdown-item"  data-target="#edit-event-modal" data-toggle="modal"> <i class="ri-edit-2-line mr-2"></i>Edit</a>
+                              <a class="dropdown-item" href="#"><i class="ri-delete-bin-5-line mr-2"></i>Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                          <img src="../../../../assets/images/insert-image.png" alt="" class="event-image">
+                        </div>
+                        <h5 class="mb-1">Offre de stage PFA</h5>
+                        <p class="mb-3">
+                          Nous vous proposones une offre de stage : poste du developpeur web junior pour un stage de 3 mois.
+                        </p>
+                        <div class="pt-3 border-top">
+                          <p class="mb-1"><i class="ri-map-pin-line"></i> ARSII Sousse, Sahloul 4</p>
+                          <div class="d-flex justify-content-between mb-1">
+                            <span>
+                              <i class="ri-calendar-2-line"></i> 16 Octobre 2023
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-add-opportunity></app-add-opportunity>
+    <app-edit-opportunity></app-edit-opportunity>
