@@ -15,6 +15,7 @@ import { MemberService } from './components/services/member.service';
 import { AddOpportunityComponent } from './components/opportunity/add-opportunity/add-opportunity.component';
 import { EditOpportunityComponent } from './components/opportunity/edit-opportunity/edit-opportunity.component';
 import { OpportunityComponent } from './components/opportunity/opportunity.component';
+import { SkillsComponent } from './components/skills/skills.component';
 
 
 
@@ -27,11 +28,13 @@ import { OpportunityComponent } from './components/opportunity/opportunity.compo
     FormationsComponent,
     AddFormationsModalComponent,
     ChangeInformationComponent,
+    SkillsComponent,
     EditEventComponent,
     AddEventComponent,
     OpportunityComponent,
     AddOpportunityComponent,
-    EditOpportunityComponent
+    EditOpportunityComponent,
+    SkillsComponent
   ],
   imports: [CommonModule, PrivateRoutingModule, FormsModule,ReactiveFormsModule],
   providers: [MemberService],
