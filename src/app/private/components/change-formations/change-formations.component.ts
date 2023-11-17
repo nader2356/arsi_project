@@ -95,8 +95,11 @@ export class ChangeInformationComponent implements OnInit {
       (data) => {
         console.log(this.user_update);
         this.msg = 'Updated successfully';
-        this.user_update = new UserUpdate();
-        alert(this.msg);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'User Updated Successfully',
+          detail: 'User Updated Successfully !!!',
+        });
 
       },
       (error) => {
@@ -114,8 +117,11 @@ export class ChangeInformationComponent implements OnInit {
       (data) => {
         console.log(this.password_update);
         this.msg = 'Password is changed successfully';
-        this.password_update = new Password();
-        alert(this.msg);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Password is Updated Successfully',
+          detail: 'Password is Updated Successfully !!!',
+        });    
       },
       (error) => {
         console.log('Change password failed'), (this.msg = error.error);
@@ -136,6 +142,11 @@ export class ChangeInformationComponent implements OnInit {
       (data) => {
         console.log(this.contact);
         this.msg = 'Contact urls sended successfully';
+        this.messageService.add({
+          severity: 'success',
+          summary: 'User Contact is Updated Successfully',
+          detail: 'User Contact is Updated Successfully !!!',
+        });
       },
       (error) => {
         console.log('error,send contact urls failed'), (this.msg = error.error);
@@ -171,13 +182,6 @@ export class ChangeInformationComponent implements OnInit {
           detail: 'Please check your cv format !!!',
         });
       }
-
-
-
-
-
-
-
     );
   }
 
