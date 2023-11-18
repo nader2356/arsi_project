@@ -5,7 +5,7 @@ import { PrivateRoutingModule } from './private-routing.module';
 import { BaseComponent } from './components/base/base.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { UserlistComponent } from './components/userlist/userlist.component';
+import { UserlistComponent } from './components/user-list/userlist.component';
 import { FormationsComponent } from './components/formations/formations.component';
 import { AddFormationsModalComponent } from './components/formations/add-formations-modal/add-formations-modal.component';
 import { ChangeInformationComponent} from './components/change-formations/change-formations.component';
@@ -16,6 +16,8 @@ import { AddOpportunityComponent } from './components/opportunity/add-opportunit
 import { EditOpportunityComponent } from './components/opportunity/edit-opportunity/edit-opportunity.component';
 import { OpportunityComponent } from './components/opportunity/opportunity.component';
 import { SkillsComponent } from './components/skills/skills.component';
+import { AddUserComponent } from './components/user-list/add-user/add-user.component';
+import { EditUserComponent } from './components/user-list/edit-user/edit-user.component';
 
 
 
@@ -34,7 +36,9 @@ import { SkillsComponent } from './components/skills/skills.component';
     OpportunityComponent,
     AddOpportunityComponent,
     EditOpportunityComponent,
-    SkillsComponent
+    SkillsComponent,
+    AddUserComponent,
+    EditUserComponent
   ],
   imports: [CommonModule, PrivateRoutingModule, FormsModule,ReactiveFormsModule],
   providers: [MemberService],

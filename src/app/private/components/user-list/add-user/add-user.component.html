@@ -1,0 +1,132 @@
+<div class="pt-0">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-xs-12">
+                <div class="card">
+                   <div class="card-header d-flex justify-content-between">
+                      <div class="header-title">
+                         <h4 class="card-title">New User Information</h4>
+                      </div>
+                   </div>
+                <div class="card-body">
+                    <div class="new-user-info">
+                      <form #myForm="ngForm" (ngSubmit)="onSubmit(newUser)">
+                          <div class="row">
+                            <div class="form-group col-md-6">
+                              <label for="fname">First Name:</label>
+                              <input type="text" class="form-control" name="firstName" placeholder="First Name" [(ngModel)]="newUser.firstName" required>
+                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['firstName']?.invalid && myForm.controls['firstName'].touched">
+                                First Name is required.
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="lname">Last Name:</label>
+                              <input type="text" class="form-control" name="lastName" placeholder="Last Name" [(ngModel)]="newUser.lastName" required>
+                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['lastName']?.invalid && myForm.controls['lastName'].touched">
+                                Last Name is required.
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="uname">Username:</label>
+                              <input type="text" class="form-control" name="userName" placeholder="Username" [(ngModel)]="newUser.userName" required>
+                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['userName']?.invalid && myForm.controls['userName'].touched">
+                                username is required.
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="mobno">Phone Number:</label>
+                              <input type="text" class="form-control" name="phoneNumber" placeholder="22558877" maxlength="8" minlength="8" [(ngModel)]="newUser.phoneNumber" required>
+                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['phoneNumber']?.invalid && myForm.controls['phoneNumber'].touched && !myForm.controls['phoneNumber']?.hasError('minlength')">
+                                Phone number is required.
+                              </div>
+                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['phoneNumber']?.hasError('minlength')">Phone number must have 8 characters.</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="email">Email:</label>
+                              <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="newUser.email" required email>
+                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['email']?.invalid && myForm.controls['email'].touched && !myForm.controls['email']?.hasError('email')">
+                                Email is required.
+                              </div>
+                              <div class="text-danger mt-2" *ngIf="myForm.controls['email']?.hasError('email')">
+                                Please enter a valid email address.
+                              </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="newUser.password" required>
+                            <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['password']?.invalid && myForm.controls['password'].touched">
+                              Password is required.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="email">Date of birth:</label>
+                          <input type="date" class="form-control" name="dateOfBirth" placeholder="date Of Birth" [(ngModel)]="newUser.dateOfBirth" required>
+                          <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['dateOfBirth']?.invalid && myForm.controls['dateOfBirth'].touched">
+                            Date of birth is required.
+                          </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="email">Job:</label>
+                        <input type="text" class="form-control" name="job" placeholder="job" [(ngModel)]="newUser.job" required>
+                        <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['job']?.invalid && myForm.controls['job'].touched">
+                         Job input is required.
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label>Office</label>
+                      <select class="form-control" name="office" [(ngModel)]="newUser.office" required>
+                        <option>OFFICE_SFAX</option>
+                        <option>OFFICE_TUNIS</option>
+                        <option>OFFICE_SOUSSE</option>
+                      </select>
+                      <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['office']?.invalid && myForm.controls['office'].touched">
+                        Must select on option.
+                      </div>
+                    </div>
+  
+                    <div class="form-group col-sm-6">
+                      <label>Gender:</label>
+                      <select class="form-control" name="gender" [(ngModel)]="newUser.gender" required>
+                        <option>male</option>
+                        <option>female</option>
+                      </select>
+                      <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['gender']?.invalid && myForm.controls['gender'].touched">
+                        Must select on option.
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="cname">University Name:</label>
+                      <input type="text" class="form-control" name="universityOrCompany" placeholder="Company Name" [(ngModel)]="newUser.universityOrCompany" required>
+                      <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['universityOrCompany']?.invalid && myForm.controls['universityOrCompany'].touched">
+                        university name is required.
+                      </div>
+                    </div>
+                        <div class="form-group col-md-6">
+                          <label for="city">Region:</label>
+                          <input type="text" class="form-control" name="region" placeholder="Town/City" [(ngModel)]="newUser.region" required>
+                          <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['region']?.invalid && myForm.controls['region'].touched">
+                            Region is required.
+                          </div>
+                        </div>
+  
+                        <div class="card-body">
+                          <p>Profile Image:</p>
+                          <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" name="image" accept="image/*" [(ngModel)]="newUser.image">
+                            <label class="custom-file-label">{{newUser.image ? newUser.image.split('\\').pop() : "Choose file"}}</label>
+                          </div>
+                       </div>
+                    </div>
+                    <hr>
+                    <div class="text-center mt-2">
+                      <button type="submit" class="btn btn-primary mr-2" [disabled]="myForm.invalid">Add New User</button>
+                      <button button type="reset" class="btn bg-gray" (click)="goBack()">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  </div>

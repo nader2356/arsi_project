@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseComponent } from './components/base/base.component';
-import { UserlistComponent } from './components/userlist/userlist.component';
+import { UserlistComponent } from './components/user-list/userlist.component';
 import { FormationsComponent } from './components/formations/formations.component';
 import { EditEventComponent } from './components/events/edit-event/edit-event.component';
 import { EventsComponent } from './components/events/events.component';
