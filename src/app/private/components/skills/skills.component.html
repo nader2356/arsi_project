@@ -25,18 +25,22 @@
           class="col-lg-12"
           id="collapseEdit1"
           *ngFor="let item of categories; let i = index"
-          (click)="
-          selectedCategory != item
-            ? (selectedCategory = item)
-            : (selectedCategory = null)
-        "
+         
+      
         >
           <div class="card card-widget task-card">
             <div class="card-body">
               <div
                 class="d-flex flex-wrap align-items-center justify-content-between"
               >
-                <div class="d-flex align-items-center">
+              <div
+              class="d-flex align-items-center"
+              (click)="
+                selectedCategory != item
+                  ? (selectedCategory = item)
+                  : (selectedCategory = null)
+              "
+            >
                   <div
                     class="custom-control custom-task custom-checkbox custom-control-inline"
                   >
@@ -116,8 +120,7 @@
               <div class="card-body">
                 <div class="form-group mb-0">
                   <label for="exampleInputText01" class="h5"
-                    >Ajouter compétance</label
-                  >
+                  >Ajouter compétence</label>
                   <div class="form-group mb-3 position-relative">
                     <input
                       type="text"
@@ -135,7 +138,7 @@
                     </a>
                   </div>
                 </div>
-                <label for="exampleInputText01" class="h5">Les compétance</label>
+                <label for="exampleInputText01" class="h5">Les compétence</label>
                 <div
                   class="form-group mb-3 position-relative"
                   *ngFor="let skill of item.competences"

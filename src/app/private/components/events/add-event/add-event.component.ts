@@ -34,4 +34,9 @@ export class AddEventComponent implements OnInit {
     this.router.navigate(['/private/events']);
   }
 
+  selectedFile: File | null = null;
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
 }
