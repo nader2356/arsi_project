@@ -93,4 +93,7 @@ export class MemberService {
   public getAllOpportunity(): Observable<any> {
     return this.http.get<any>('api/arsii/admin/opportunity/');
   }
+  public getAllMedia(): Observable<any> {
+    return this.http.get<any>('api/arsii/admin/medias/');
+  }
 }

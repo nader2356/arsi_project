@@ -15,6 +15,9 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { AddUserComponent } from './components/user-list/add-user/add-user.component';
 import { EditUserComponent } from './components/user-list/edit-user/edit-user.component';
 import { UserListComponent } from './components/user-list/userlist.component';
+import { MediasComponent } from './components/medias/medias.component';
+import { AddMediaComponent } from './components/medias/add-media/add-media.component';
+import { EditMediaComponent } from './components/medias/edit-media/edit-media.component';
 
 
 
@@ -33,7 +36,10 @@ import { UserListComponent } from './components/user-list/userlist.component';
     EditOpportunityComponent,
     SkillsComponent,
     AddUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    MediasComponent,
+    AddMediaComponent,
+    EditMediaComponent
   ],
   imports: [CommonModule, PrivateRoutingModule, FormsModule,ReactiveFormsModule],
   providers: [MemberService],
