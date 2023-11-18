@@ -33,8 +33,8 @@ export class EventsComponent implements OnInit {
   }
 
   goToEditPage(eventId: number | undefined) {
-    if(eventId != undefined) {
-      this.router.navigate(['/private/editEvent', eventId]);
+    if (eventId != undefined) {
+      this.router.navigate(['/private/events', eventId]);
     }
   }
 
@@ -43,7 +43,7 @@ export class EventsComponent implements OnInit {
     if(eventId != undefined) {
       this.eventService.deleteEvent(eventId).subscribe((data) => {
         this.getAllEvents();
-      })
+      });
     }
 
   }

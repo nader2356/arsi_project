@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AddEventComponent implements OnInit {
 
-  newEvent: any = {
 
-  };
 
   constructor(private eventService: EventService, private router: Router) { }
 
@@ -19,12 +17,17 @@ export class AddEventComponent implements OnInit {
   }
 
   onSubmit(eventData: Event) {
-    this.eventService.addEvent({...eventData, date: new Date(eventData.date)}).subscribe((response) => {
-      console.log('response', response);
-      if(response) {
-        this.router.navigate(['/private/events']);
-      }
+    this.eventService
+    .updateEvent(this.eventId, {
+      ...eventData,
+      date: new Date(eventData.date),
+      maxOfParticipants: Number(eventData.maxOfParticipants),
+      price: Number(eventData.price),
     })
+    .subscribe((data) => {
+      console.log(data);
+      this.router.navigate(['/private/events']);
+    });
   }
 
   goBack() {

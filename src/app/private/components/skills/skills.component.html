@@ -1,10 +1,35 @@
 <div class="card">
     <div class="card-body">
       <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div
+                class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content"
+              >
+                <h5>Categories</h5>
+                <div class="d-flex flex-wrap align-items-center">
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    data-target="#new-task-modal"
+                    data-toggle="modal"
+                    >Nouveau categorie</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div
           class="col-lg-12"
           id="collapseEdit1"
           *ngFor="let item of categories; let i = index"
+          (click)="
+          selectedCategory != item
+            ? (selectedCategory = item)
+            : (selectedCategory = null)
+        "
         >
           <div class="card card-widget task-card">
             <div class="card-body">
@@ -40,11 +65,21 @@
                 <div class="media align-items-center mt-md-0 mt-3">
                   <!-- <a href="#" class="btn bg-secondary-light mr-3">Design</a> -->
                   <a
-                    (click)="selectedCategory = item"
-                    class="btn"
-                    [ngClass]="
-                      (i + 1) % 2 != 0 ? 'bg-success-light' : 'bg-secondary-light'
+                  class="bg-secondary-light rounded-circle iq-card-icon-small mx-2"
+                  >
+                    <i
+                      class="ri-delete-bin-line m-0"
+                      (click)="deleteCategory(item)"
+                    ></i>
+                  </a>
+                  <a
+                    (click)="
+                      selectedCategory != item
+                        ? (selectedCategory = item)
+                        : (selectedCategory = null)
                     "
+                    class="btn"
+                    [ngClass]="'bg-success-light'"
                     role="button"
                     ><i class="ri-edit-box-line m-0"></i
                   ></a>
@@ -88,9 +123,15 @@
                       type="text"
                       class="form-control bg-white"
                       placeholder="skill"
+                      style="width: 90%"
+                      [(ngModel)]="newSkill"
                     />
                     <a class="task-edit task-simple-edit text-body">
-                      <a class="btn bg-primary-light mr-3">Ajouter</a>
+                      <a
+                      class="btn bg-primary-light mr-3"
+                      (click)="addSkill(item)"
+                      >Ajouter</a
+                    >
                     </a>
                   </div>
                 </div>
@@ -101,16 +142,12 @@
                 >
                   <input
                     type="text"
+                    style="width: 80%"
                     class="form-control bg-white"
                     placeholder="{{ skill.name }}"
                     [(ngModel)]="skill.name"
                   />
-                  <a
-                    (click)="editSkill(skill)"
-                    class="task-edit task-simple-edit text-body"
-                    ><i class="ri-edit-box-line"></i
-                  ></a>
-                </div>
+                 
   
                 <!-- <div class="card mb-3">
                   <div class="card-body">
@@ -289,6 +326,86 @@
                     </div>
                   </div>
                 </div> -->
+
+                <a class="task-edit task-simple-edit text-body">
+                  <a
+                    class="btn bg-success-light mr-3"
+                    (click)="editSkill(item, skill)"
+                    >modifier</a
+                  >
+                  <a
+                    class="btn bg-secondary-light mr-3"
+                    (click)="deleteSkill(skill)"
+                    >supprimer</a
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade bd-example-modal-lg"
+  role="dialog"
+  aria-modal="true"
+  id="new-task-modal"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block text-center pb-3 border-bttom">
+        <h3 class="modal-title" id="exampleModalCenterTitle">
+          Nouveau Category
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group mb-3">
+              <label for="exampleInputText02" class="h5"
+                >Titre de categorie</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputText02"
+                placeholder="Titre de categorie"
+                [(ngModel)]="newCategory.name"
+              />
+              <a href="#" class="task-edit text-body"
+                ><i class="ri-edit-box-line"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group mb-3">
+              <label for="exampleInputText02" class="h5">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputText02"
+                placeholder="description"
+                [(ngModel)]="newCategory.description"
+              />
+              <a href="#" class="task-edit text-body"
+                ><i class="ri-edit-box-line"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div
+              class="d-flex flex-wrap align-items-ceter justify-content-center mt-4"
+            >
+              <div
+                class="btn btn-primary mr-3"
+                data-dismiss="modal"
+                (click)="addCategory()"
+              >
+                Enregistrer
+              </div>
+              <div class="btn btn-primary" data-dismiss="modal">Annuler</div>
               </div>
             </div>
           </div>
