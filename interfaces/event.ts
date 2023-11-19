@@ -4,11 +4,11 @@ export interface Event {
   description: string;
   date: Date;
   formateur: string;
-  image: string;
+  image: any;
   maxOfParticipants: number;
   numberOfParticipants: number;
   location: string;
   status: boolean;
   price: number;
-  type: string
+  type: string;
   }

@@ -45,5 +45,24 @@ export class EventService {
       })
     );
   }
+
+  updateEventImg(id: number, data: Event) {
+    if (data.image) {
+      return this.membreService.uploadImage(data.image).pipe(
+        mergeMap((result: any) => {
+          const reqData = {
+            ...data,
+            image: result.file,
+          };
+          return this.httpClient.put(
+            `${this.baseUrl}admin/event/` + id,
+            reqData
+          );
+        })
+      );
+    } else {
+      return this.httpClient.put(`${this.baseUrl}admin/event/` + id, data);
+    }
+  }
   
 }

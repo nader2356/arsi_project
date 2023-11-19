@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../services/member.service';
 import { Opportunity } from '../types/opportunity';
 import { Popover } from 'bootstrap';
+import { OpportunityService } from './services/opportunity.service';
 @Component({
   selector: 'app-opportunity',
   templateUrl: './opportunity.component.html',
@@ -9,23 +10,40 @@ import { Popover } from 'bootstrap';
 })
 export class OpportunityComponent implements OnInit {
 
-  opportunities: Opportunity[] = [];
-
-  constructor(private memberService: MemberService) { }
+  opportunities: any[] = [];
+  selectedOpportunity = {
+    company: '',
+    description: '',
+    image: '',
+    title: '',
+    type: 'Summer_internship',
+  };
+  constructor(private opportunityService: OpportunityService) {}
 
   ngOnInit(): void {
-    Array.from(document.querySelectorAll('a[data-toggle="popover"]'))
-    .forEach(popverMode => new Popover(popverMode));
+    Array.from(document.querySelectorAll('a[data-toggle="popover"]')).forEach(
+      (popverMode) => new Popover(popverMode)
+    );
     this.getAllOpportunity();
   }
 
-  private getAllOpportunity(){
-    this.memberService.getAllOpportunity().subscribe((data:any) => {
+  private getAllOpportunity() {
+    this.opportunityService.getOpportunities().subscribe((data: any) => {
       console.log('data', data);
       this.opportunities = data;
     })
   }
-  goToEditPage() {
+  goToEditPage() {}
+
+  addopportunityCheck(data: any) {
+    if (data) {
+      this.getAllOpportunity();
+    } else {
+      console.log('no');
+    }
+  }
+  selectOpportunity(data: any) {
+    this.selectedOpportunity = data;
 
   }
 }

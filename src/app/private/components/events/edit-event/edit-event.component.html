@@ -1,94 +1,240 @@
-
-                      
-  <div class="pt-0">
-    <div class="container-fluid">
-       <div class="row">
-          <div class="col-xs-12">
-                <div class="card">
-                   <div class="card-header d-flex justify-content-between">
-                      <div class="header-title">
-                         <h4 class="card-title">New User Information</h4>
-                      </div>
-                    </div>
-                  
-                   </div>
-                <div class="card-body">
-                    <div class="new-user-info">
-                      <form #myForm="ngForm"> required
-                          <div class="row">
-                            <div class="form-group col-md-6">
-                              <label for="fname">Event Title</label>
-                              <input type="text" class="form-control" name="title" placeholder="Event Titile" [(ngModel)]="event.title" required>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['title']?.invalid && myForm.controls['title'].touched">
-                                title is required.
-                              </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="lname">Formateur Name (Optional)</label>
-                              <input type="text" class="form-control" name="name" placeholder="Formateur Name" [(ngModel)]="event.formateur">
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="uname">Location</label>
-                              <input type="text" class="form-control" name="location" placeholder="location"[(ngModel)]="event.location" required>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['location']?.invalid && myForm.controls['location'].touched">
-                                location is required.
-                              </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="mobno">Price:</label>
-                              <input type="text" class="form-control" name="price" placeholder="20 TND"[(ngModel)]="event.price" required>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['price']?.invalid && myForm.controls['price'].touched">
-                                price is required.
-                              </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="email">Number of participants:</label>
-                              <input type="email" class="form-control" name="maxOfParticipants" placeholder="Max Number of participants" [(ngModel)]="event.maxOfParticipants" required>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['maxOfParticipants']?.invalid && myForm.controls['maxOfParticipants'].touched">
-                                maxOfParticipants is required.
-                              </div>
-                          </div>
-                        <div class="form-group col-md-6">
-                          <label for="email">Date:</label>
-                          <input type="date" class="form-control" name="date" [(ngModel)]="event.date" required>
-                          <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['date']?.invalid && myForm.controls['date'].touched">
-                                date is required.
-                              </div>
-                      </div>
-                    
-                   
-                   
-                      <div class="form-group col-sm-12">
-                        <label>Type:</label>
-                        <select class="form-control" name="type"[(ngModel)]="event.type" required>
-                          <option></option>
-                          <option>Formation</option>
-                          <option>Event</option>
-                        </select>
-                        <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['type']?.invalid && myForm.controls['type'].touched">
-                                type is required.
-                              </div>
-                      <div class="form-group col-md-12">
-                        <label for="email">Description</label>
-                        <textarea type="text" class="form-control" name="description" placeholder="job" [(ngModel)]="event.description" required></textarea>
-                      </div>
-                  
-                      <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['description']?.invalid && myForm.controls['description'].touched">
-                        description is required.
-                      </div>
-  
-                    </div>
-                    <hr>
-                    <div class="text-center mt-2">
-                      <button type="submit" class="btn btn-primary mr-2" (click)="updateEvent(event)" [disabled]="myForm.invalid">Update</button>
-                      <button button type="reset" class="btn bg-gray" (click)="goBack()">Cancel</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+<div class="pt-0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+              <h4 class="card-title">New User Information</h4>
             </div>
-        </div>
           </div>
-       </div>
+          <div class="card-body">
+            <div class="new-user-info">
+              <form #myForm="ngForm">
+                required
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="fname">Event Title</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="title"
+                      placeholder="Event Titile"
+                      [(ngModel)]="event.title"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['title']?.invalid &&
+                        myForm.controls['title'].touched
+                      "
+                    >
+                      title is required.
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="lname">Formateur Name (Optional)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      placeholder="Formateur Name"
+                      [(ngModel)]="event.formateur"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="uname">Location</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="location"
+                      placeholder="location"
+                      [(ngModel)]="event.location"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['location']?.invalid &&
+                        myForm.controls['location'].touched
+                      "
+                    >
+                      location is required.
+                    </div>
+                   
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="mobno">Price:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="price"
+                      placeholder="20 TND"
+                      [(ngModel)]="event.price"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['price']?.invalid &&
+                        myForm.controls['price'].touched
+                      "
+                    >
+                      price is required.
+                    </div>
+                  
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="email">Number of participants:</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="maxOfParticipants"
+                      placeholder="Max Number of participants"
+                      [(ngModel)]="event.maxOfParticipants"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['maxOfParticipants']?.invalid &&
+                        myForm.controls['maxOfParticipants'].touched
+                      "
+                    >
+                      maxOfParticipants is required.
+                    </div>
+                   
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="email">Date:</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="date"
+                      [(ngModel)]="event.date"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['date']?.invalid &&
+                        myForm.controls['date'].touched
+                      "
+                    >
+                      date is required.
+                    </div>
+
+                  </div>
+                 
+                  <div class="form-group col-sm-12">
+                    <label>Type:</label>
+                    <select
+                      class="form-control"
+                      name="type"
+                      [(ngModel)]="event.type"
+                      required
+                    >
+                      <option></option>
+                      <option>Formation</option>
+                      <option>Event</option>
+                    </select>
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['type']?.invalid &&
+                        myForm.controls['type'].touched
+                      "
+                    >
+                      type is required.
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="email">Description</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="description"
+                      placeholder="job"
+                      [(ngModel)]="event.description"
+                      required
+                    ></textarea>
+                  </div>
+                  <div
+                    class="text-danger text-sm ml-2"
+                    *ngIf="
+                      myForm.controls['description']?.invalid &&
+                      myForm.controls['description'].touched
+                    "
+                  >
+                    description is required.
+                  </div>
+                </div>
+                <div class="custom-control custom-switch custom-control-inline">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="customSwitch2"
+                    name="activity"
+                    checked=""
+                    [(ngModel)]="event.activity"
+                  />
+                  <label class="custom-control-label" for="customSwitch2"
+                    >nouveauté</label
+                  >
+                </div>
+                <div class="card">
+                  <div class="d-flex justify-content-center">
+                    <img
+                      *ngIf="imageEvent"
+                      [src]="'/api/arsii/file/img/' + imageEvent"
+                      width="300"
+                    />
+                    <img
+                      *ngIf="!imageEvent"
+                      src="../../../../assets/images/insert-image.png"
+                      width="300"
+                    />
+                  </div>
+                  <div class="card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                      <h4 class="card-title">Upload image</h4>
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+                    <input
+                      class="mx-5"
+                      type="file"
+                      (change)="onFileSelected($event)"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="text-center mt-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary mr-2"
+                    (click)="updateEvent(event)"
+                    [disabled]="myForm.invalid"
+                  >
+                    Update
+                  </button>
+                  <button
+                    button
+                    type="reset"
+                    class="btn bg-gray"
+                    (click)="goBack()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+     </div>
+      </div>
     </div>
   </div>
+</div>

@@ -28,7 +28,12 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="user-list-files d-flex">
                   
-                <button class="btn bg-primary" (click)="redirectToNewUsertPage()"> Add User </button>
+                    <button
+                    class="btn bg-primary"
+                    (click)="redirectToNewUsertPage()"
+                  >
+                    Add User
+                  </button>
                   </div>
                </div>
             </div>
@@ -51,35 +56,67 @@
               </thead>
               <tbody class="text-center">
                 <tr *ngFor="let user of users">
-                  <td><img src="/api/arsii/file/img/{{user.image}}" alt="image"></td>
+                  <img src="/api/arsii/file/img/{{ user.image }}" alt="image" />
+                </td>
                   <td>{{ user.userName }}</td>
                   <td>{{ user.phoneNumber }}</td>
                   <td>{{ user.email }}</td>
                   <td>{{ user.region }}</td>
                   <td>
-                    <span
-                    class="badge bg-secondary"
-                    *ngIf="!user.status"
+                    <span class="badge bg-secondary" *ngIf="!user.status"
                       >Disabled</span
                     >
-                    <span
-                      class="badge bg-success"
-                      *ngIf="user.status"
+                    <span class="badge bg-success" *ngIf="user.status"
                       >Enabled</span
                     >
                   </td>
                   <td class="pt-0 ">
                     <div class="list-user-action">
                       <div [hidden]="confirmDeleteId == user.id">
-                        <button class="btn btn-sm btn-warning mr-1" (click)="redirectToEditPage(user.id)">Edit</button>
-                        <button [hidden]="user.status" class="btn btn-sm btn-primary mr-1" (click)="onEnableUser(user.id)">Enable</button>
-                        <button [hidden]="!user.status" class="btn btn-sm btn-primary mr-1" (click)="onEnableUser(user.id)">Disable</button>
-                        <button class="btn btn-sm btn-danger" (click)="confirmDeleteId = user.id!">Delete</button>
+                        <button
+                        class="btn btn-sm btn-warning mr-1"
+                        (click)="redirectToEditPage(user.id)"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        [hidden]="user.status"
+                        class="btn btn-sm btn-primary mr-1"
+                        (click)="onEnableUser(user.id)"
+                      >
+                        Enable
+                      </button>
+                      <button
+                        [hidden]="!user.status"
+                        class="btn btn-sm btn-primary mr-1"
+                        (click)="onEnableUser(user.id)"
+                      >
+                        Disable
+                      </button>
+                      <button
+                        class="btn btn-sm btn-danger"
+                        (click)="confirmDeleteId = user.id!"
+                      >
+                        Delete
+                      </button>
                       </div>
-                      <div [hidden]="confirmDeleteId !== user.id" class="text-center mb-2">
+                      <div
+                      [hidden]="confirmDeleteId !== user.id"
+                      class="text-center mb-2"
+                    >
                         <strong class="text-sm">Delete?</strong><br />
-                        <button class="btn btn-sm btn-danger mr-1" (click)="onDeleteAccount(user.id)">Yes</button>
-                        <button class="btn btn-sm btn-light" (click)="confirmDeleteId = 0">No</button>
+                        <button
+                        class="btn btn-sm btn-danger mr-1"
+                        (click)="onDeleteAccount(user.id)"
+                      >
+                        Yes
+                      </button>
+                      <button
+                        class="btn btn-sm btn-light"
+                        (click)="confirmDeleteId = 0"
+                      >
+                        No
+                      </button>
                       </div>
                     </div>
                   </td>
