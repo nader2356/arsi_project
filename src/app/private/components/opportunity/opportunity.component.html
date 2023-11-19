@@ -98,7 +98,9 @@
                           >
                             <i class="ri-edit-2-line mr-2"></i>Edit</a
                           >
-                          <a class="dropdown-item" href="#"
+                          <a
+                              class="dropdown-item"
+                              (click)="deleteOpportunity(item)"
                             ><i class="ri-delete-bin-5-line mr-2"></i
                             >Delete</a
                           >
@@ -109,14 +111,14 @@
                     <div
                       class="d-flex align-items-center justify-content-between mb-4"
                     >
-                      <img
-                        src="../../../../assets/images/insert-image.png"
+                     <!-- <img
+                          src="assets/images/insert-image.png"
                         class="event-image"
                         *ngIf="!item.image"
-                      />
+                        /> -->
                       <img
-                        *ngIf="item.image"
-                        [src]="'/api/arsii/file/img/' + item.image"
+                      *ngIf="item.type"
+                      [src]="'assets/images/' + item.type + '.jpg'"
                         class="event-image"
                       />
                     </div>
@@ -156,5 +158,6 @@
 ></app-add-opportunity>
 <app-edit-opportunity
   [opportunity]="selectedOpportunity"
+  (customEvent)="editopportunityCheck($event)"
 ></app-edit-opportunity>
 </div>

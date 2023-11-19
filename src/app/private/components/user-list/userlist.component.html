@@ -56,7 +56,17 @@
               </thead>
               <tbody class="text-center">
                 <tr *ngFor="let user of users">
-                  <img src="/api/arsii/file/img/{{ user.image }}" alt="image" />
+                  <img
+                    *ngIf="!user.image"
+                    src="assets/images/user/11.png"
+                    alt="image"
+                    height="50"
+                  />
+                  <img
+                    *ngIf="user.image"
+                    [src]="'/api/arsii/file/img/' + user.image"
+                    alt="image"
+                  />
                 </td>
                   <td>{{ user.userName }}</td>
                   <td>{{ user.phoneNumber }}</td>

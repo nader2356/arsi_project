@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { OpportunityService } from '../services/opportunity.service';
+import { OpportunityService } from '../../services/opportunity.service';
 
 @Component({
   selector: 'app-add-opportunity',

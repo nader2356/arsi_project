@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { OpportunityService } from '../services/opportunity.service';
+import { OpportunityService } from '../../services/opportunity.service';
 
 @Component({
   selector: 'app-edit-opportunity',
