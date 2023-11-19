@@ -9,29 +9,52 @@ import { ChangeInformationComponent } from './components/change-formations/chang
 import { MediasComponent } from './components/medias/medias.component';
 import { AddUserComponent } from './components/user-list/add-user/add-user.component';
 import { EditUserComponent } from './components/user-list/edit-user/edit-user.component';
+import { SkillsComponent } from './components/skills/skills.component';
+import { AddEventComponent } from './components/events/add-event/add-event.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: BaseComponent,
-    children : [
+    children: [
+     {
+      path: 'user-list',
+      component: UserListComponent,
+     },
+     {
+      path: 'media',
+      component: MediasComponent
+     },
+     {
+      path: 'events',
+      component: EventsComponent
+     },
+     {
+      path: 'events/:id',
+      component: EditEventComponent
+     },
+
+     {
+      path: '**',
+      redirectTo: '',
+     },
       {
-        path: 'user-list',
-        component: UserListComponent,
-      },
-      {
-        path: 'addUser',
-        component: AddUserComponent,
+        path: 'skills',
+        component: SkillsComponent,
       },
       {
         path: 'opportunity',
         component: OpportunityComponent,
       },
       {
-        path: 'media',
-        component: MediasComponent
-       },
+        path: 'change',
+        component: ChangeInformationComponent,
+      },
+      {
+        path: 'addUser',
+        component: AddUserComponent,
+      },
       {
         path: 'editUser/:id',
         component: EditUserComponent,
@@ -41,21 +64,20 @@ const routes: Routes = [
         component: EventsComponent,
       },
       {
-        path: 'events/:id',
-        component: EditEventComponent,
+        path: 'addEvent',
+        component: AddEventComponent,
       },
-      {
-        path: 'change',
-        component: ChangeInformationComponent,
-      },
+      // {
+      //   path: 'editEvent/:id',
+      //   component: EditEventComponent,
+      // },
 
       {
         path: '**',
         redirectTo: '',
       },
-    ],
-  },
-];
+    ]}
+    ]
  
 
 
