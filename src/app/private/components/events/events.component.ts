@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Popover } from 'bootstrap';
-import { EventService } from './event.service';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-events',

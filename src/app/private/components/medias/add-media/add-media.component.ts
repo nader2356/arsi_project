@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MediaService } from '../../services/media.service';
 
 @Component({
   selector: 'app-add-media',
@@ -6,14 +7,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-media.component.scss']
 })
 export class AddMediaComponent implements OnInit {
+  newMedia = {
+    urlPost: '',
+    description: '',
+    image: '',
+    title: '',
+    type: 'Summer_internship',
+  };
+  @Output() customEvent = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private mediaService: MediaService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  emitEvent(data: any) {
+    this.customEvent.emit(data);
   }
-  updateMedia() {
-    // update event code here
-    console.log('updateEventWorking');
+   addMedia() {
+    console.log(this.selectedFile);
 
+    this.mediaService
+      .addMedia({ ...this.newMedia, image: this.selectedFile })
+      .subscribe((res: any) => {
+        console.log(res);
+        this.emitEvent(true);
+      });
+  }
+  selectedFile: File | null = null;
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 }

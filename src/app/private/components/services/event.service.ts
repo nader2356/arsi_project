@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Event } from 'interfaces/event';
 import { Observable, mergeMap } from 'rxjs';
-import { MemberService } from '../services/member.service';
+import { MemberService } from './member.service';
 
 @Injectable({
   providedIn: 'root'
