@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MemberService } from '../services/member.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,8 +9,10 @@ import { MemberService } from '../services/member.service';
 })
 export class SidenavComponent {
   userData: any = null;
-  constructor(private membreService: MemberService) {}
-
+  constructor(
+    private membreService: MemberService,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {
     this.displayCurrentUser();
   }
@@ -19,5 +22,9 @@ export class SidenavComponent {
 
       this.userData = data;
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
