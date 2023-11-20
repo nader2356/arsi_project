@@ -1,68 +1,90 @@
-
-
-      <div class="wrapper">
-      <section class="login-content">
-         <div class="container">
-            <div class="row align-items-center justify-content-center height-self-center">
-               <div class="col-lg-8">
-                  <div class="card auth-card">
-                     <div class="card-body p-0">
-                        <div class="d-flex align-items-center auth-content">
-                           <div class="col-lg-6 bg-primary content-left">
-                              <div class="p-3">
-                                 <h2 class="mb-2 text-white">Sign In</h2>
-                                 <p>Login to stay connected.</p>
-                                 <form>
-                                    <div class="row">
-                                       <div class="col-lg-12">
-                                          <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="text"  name="name" [(ngModel)]="user.userName" required #name ="ngModel"
-                                             [class.is-invalid]="name.invalid && name.touched">
-                                             <label>User Name</label>
-                                          </div>
-                                       </div>
-                                       <div class="col-lg-12">
-                                          <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="password"  name="password" [(ngModel)]="user.password" required #password ="ngModel"
-                                             [class.is-invalid]="password.invalid && password.touched">
-                                             <label>Password</label>
-                                          </div>
-                                       </div>
-                                       <div class="col-lg-">
-                                          <a
-                                            routerLink="/auth/reset"
-                                            class="text-white float-right"
-                                            >Forgot Password?</a
-                                          >
-                                    </div>
-                                 </div>
-                                 <button
-                                   [disabled]="Signinform.form.invalid"
-                                   type="submit"
-                                   class="btn btn-white"
-                                 >
-                                   Sign In
-                                 </button>
-                                 <p class="mt-3">
-                                   Create an Account
-                                   <a
-                                     routerLink="/auth/signup"
-                                     class="text-white text-underline"
-                                     >Sign Up</a
-                                   >
-                                 </p>
-                               </form>
-                              </div>
-                           </div>
-                           <div class="col-lg-6 content-right">
-                              <img src="../assets/images/login/01.png" class="img-fluid image-right" alt="">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      </div>
+<div class="wrapper">
+   <section class="login-content">
+     <div class="container">
+       <div
+         class="row align-items-center justify-content-center height-self-center"
+       >
+         <div class="col-lg-12">
+           <div class="card auth-card">
+             <div class="card-body p-0">
+               <div class="d-flex align-items-center auth-content">
+                 <div class="col-lg-6 bg-primary content-left">
+                   <div class="p-3">
+                     <h2 class="mb-2 text-white">Sign In</h2>
+                     <p>Login to stay connected.</p>
+                     <form #Signinform="ngForm" (ngSubmit)="SigninUser()">
+                       <div class="row">
+                         <div class="col-lg-12">
+                           <div class="form-group">
+                             <label>User Name</label>
  
+                             <input
+                               class="floating-input form-control"
+                               type="text"
+                               name="name"
+                               [(ngModel)]="user.userName"
+                               required
+                               #name="ngModel"
+                               [class.is-invalid]="name.invalid && name.touched"
+                             />
+                           </div>
+                         </div>
+                         <div class="col-lg-12">
+                           <div class="form-group">
+                             <label>Password</label>
+ 
+                             <input
+                               class="floating-input form-control"
+                               type="password"
+                               name="password"
+                               [(ngModel)]="user.password"
+                               required
+                               #password="ngModel"
+                               [class.is-invalid]="
+                                 password.invalid && password.touched
+                               "
+                             />
+                           </div>
+                         </div>
+ 
+                         <div class="col-lg-">
+                           <a
+                             routerLink="/auth/reset"
+                             class="text-white float-right"
+                             >Forgot Password?</a
+                           >
+                         </div>
+                       </div>
+                       <button
+                         [disabled]="Signinform.form.invalid"
+                         type="submit"
+                         class="btn btn-white"
+                       >
+                         Sign In
+                       </button>
+                       <p class="mt-3">
+                         Create an Account
+                         <a
+                           routerLink="/auth/signup"
+                           class="text-white text-underline"
+                           >Sign Up</a
+                         >
+                       </p>
+                     </form>
+                   </div>
+                 </div>
+                 <div class="col-lg-6 content-right">
+                   <img
+                     src="../assets/images/login/01.png"
+                     class="img-fluid image-right"
+                     alt=""
+                   />
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+ </div>
