@@ -18,6 +18,9 @@ import { UserListComponent } from './components/user-list/userlist.component';
 import { MediasComponent } from './components/medias/medias.component';
 import { AddMediaComponent } from './components/medias/add-media/add-media.component';
 import { EditMediaComponent } from './components/medias/edit-media/edit-media.component';
+import { PartenaireComponent } from './components/partenaire/partenaire.component';
+import { AddPartenaireComponent } from './components/partenaire/add-partenaire/add-partenaire.component';
+import { EditPartenaireComponent } from './components/partenaire/edit-partenaire/edit-partenaire.component';
 
 
 
@@ -39,7 +42,10 @@ import { EditMediaComponent } from './components/medias/edit-media/edit-media.co
     EditUserComponent,
     MediasComponent,
     AddMediaComponent,
-    EditMediaComponent
+    EditMediaComponent,
+    PartenaireComponent,
+    AddPartenaireComponent,
+    EditPartenaireComponent
   ],
   imports: [CommonModule, PrivateRoutingModule, FormsModule,ReactiveFormsModule],
   providers: [MemberService],

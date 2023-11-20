@@ -11,6 +11,7 @@ import { AddUserComponent } from './components/user-list/add-user/add-user.compo
 import { EditUserComponent } from './components/user-list/edit-user/edit-user.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { AddEventComponent } from './components/events/add-event/add-event.component';
+import { PartenaireService } from './components/services/partenaire.service';
 
 
 const routes: Routes = [
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'addEvent',
         component: AddEventComponent,
+      },
+      {
+        path: 'partenaire',
+        component: PartenaireService,
       },
       // {
       //   path: 'editEvent/:id',
