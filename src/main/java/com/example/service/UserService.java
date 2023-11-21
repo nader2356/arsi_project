@@ -1,9 +1,9 @@
 package com.example.service;
 
 import java.util.List;
-import com.example.backendarsii.dto.requestDto.RegisterRequest;
-import com.example.backendarsii.dto.searchRequest.SearchAdmin;
-import com.example.backendarsii.dto.searchRequest.SearchMember;
+import com.example.dto.requestDto.RegisterRequest;
+import com.example.dto.searchRequest.SearchAdmin;
+import com.example.dto.searchRequest.SearchMember;
 
 import com.example.dto.UserDto;
 

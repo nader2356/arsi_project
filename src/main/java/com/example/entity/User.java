@@ -58,6 +58,7 @@ public class User implements UserDetails {
     private Post post;
     @Enumerated(EnumType.STRING)
     private Office office;
+     private String image;
 
 
     @CreationTimestamp

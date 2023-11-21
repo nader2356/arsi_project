@@ -1,4 +1,4 @@
-package com.example.dto;
+package com.example.dto.responseDto;
 
 
 import com.example.dto.entity.Competence;
@@ -14,7 +14,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class CompetenceDTO {
+public class CompetenceResponse {
 
     private Long id;
     private String name;
@@ -22,8 +22,8 @@ public class CompetenceDTO {
     private Instant createdAt;
     private Instant updatedAt;
 
-    public static CompetenceDTO makeCompetence(Competence competence){
-        return CompetenceDTO.builder()
+      public static CompetenceResponse makeCompetence(Competence competence){
+        return CompetenceResponse.builder()
                 .id(competence.getId())
                 .name(competence.getName())
                 .description(competence.getDescription())

@@ -1,4 +1,4 @@
-package com.example.dto;
+package com.example.dto.responseDto;
 
 import java.time.Instant;
 
@@ -36,6 +36,7 @@ public class UserDto {
 	    private Post post;
 	    @Enumerated(EnumType.STRING)
 	    private Office office;
+		private String image;
 	    private Instant createdAt;
 	    private Instant updatedAt;
 	    private Instant expiresAt;
@@ -56,6 +57,7 @@ public class UserDto {
 	                .region(user.getRegion())
 	                .post(user.getPost())
 	                .office(user.getOffice())
+					.image(user.getImage())
 	                .createdAt(user.getCreatedAt())
 	                .updatedAt(user.getUpdatedAt())
 	                .expiresAt(user.getExpiresAt())

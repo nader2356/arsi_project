@@ -1,8 +1,8 @@
 package com.example.backendarsii.service;
 
-import com.example.backendarsii.dto.CompetenceDTO;
-import com.example.backendarsii.dto.requestDto.CompetenceRequest;
-import com.example.backendarsii.entity.Competence;
+import com.example.dto.CompetenceDTO;
+import com.example.dto.requestDto.CompetenceRequest;
+import com.example.entity.Competence;
 
 import java.util.List;
 
