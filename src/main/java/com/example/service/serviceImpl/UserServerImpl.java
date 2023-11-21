@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
+import com.example.backendarsii.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
 
@@ -40,8 +40,7 @@ public class UserServerImpl implements UserService {
 
 	    @Override
 	    public UserDto getMemberById(Long id) {
-	        User user = userRepository.findById(id).orElseThrow();
-	        System.out.println("*********************&&&&&&&&&&&&&&&&&&&&&&"+user.getAuthorities());
+	        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("this user with id [%s] not exist",id)));
 	        return UserDto.makeUser(user);
 	    }
 

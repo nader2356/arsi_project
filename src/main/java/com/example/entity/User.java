@@ -88,7 +88,8 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         if (role == Role.MEMBER){
         // return true if today < expires_at
-        return expiresAt.isAfter(Instant.now());}
+        return expiresAt.isAfter(Instant.now());
+        }
         return true;
     }
 
