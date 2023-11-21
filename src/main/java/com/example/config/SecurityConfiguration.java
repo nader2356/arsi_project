@@ -30,6 +30,8 @@ public class SecurityConfiguration    {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                 .requestMatchers("/webjars/**","/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs","/v3/api-docs/**",
+         "/swagger-ui/**").permitAll()
                     .requestMatchers(APP_ROOT+"/auth/**").permitAll()
                     .requestMatchers(APP_ROOT+"/member/**").hasAnyAuthority("MEMBER","ADMIN")
                     .requestMatchers(APP_ROOT+"/admin/**").hasAnyAuthority("ADMIN")
