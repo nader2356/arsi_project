@@ -1,8 +1,8 @@
-package com.example.util.enumData;
+package com.example.backendarsii.util.enumData;
 
 public enum Level {
-	 Beginner,
-	    Intermediate,
-	    Advanced,
-	    Expert
+    Beginner,
+    Intermediate,
+    Advanced,
+    Expert
 }
