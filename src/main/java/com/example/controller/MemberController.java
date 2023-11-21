@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.example.backendarsii.dto.requestDto.RegisterRequest;
+import com.example.backendarsii.dto.searchRequest.SearchMember;
 import com.example.dto.UserDto;
 import com.example.service.UserService;
 
@@ -35,4 +36,15 @@ public class MemberController {
     public ResponseEntity<UserDto> getUserConnected(){
         return ResponseEntity.ok(userService.getConnectedUser());
     }
+
+     @GetMapping(value = "/filter")
+    public ResponseEntity<List<UserDto>> getAllMember(@RequestBody SearchMember request){
+        return ResponseEntity.ok(userService.getMemberByFilter(request));
+    }
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<String> updateMember(@PathVariable(name = "id") Long id ,@RequestBody RegisterRequest request){
+        userService.updateMember(id,request);
+        return ResponseEntity.ok("update success!!");
+    }
+
 }

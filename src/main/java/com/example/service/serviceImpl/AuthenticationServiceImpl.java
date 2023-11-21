@@ -7,9 +7,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.dto.AuthenticationRequest;
+import com.example.backendarsii.dto.requestDto.AuthenticationRequest;
 import com.example.dto.AuthenticationResponse;
-import com.example.dto.RegisterRequest;
+import com.example.backendarsii.dto.requestDto.RegisterRequest;
+import com.example.backendarsii.exception.ConflictException;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.service.AuthenticationService;
@@ -30,8 +31,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
 
-        if (userRepository.findByEmail(request.getEmail()).isPresent()|| userRepository.findByUserName(request.getUserName()).isPresent()){
-            throw new RuntimeException("this email or userName is already exist");
+        if (userRepository.findByEmail(request.getEmail()).isPresent()){
+            throw new ConflictException(String.format("this email is already exist ( [%s] ) ",request.getEmail()));
+        }
+         if ( userRepository.findByUserName(request.getUserName()).isPresent()){
+            throw new ConflictException(String.format("this email is already exist ( [%s] ) ",request.getUserName()));
         }
 
         var user = User.builder()

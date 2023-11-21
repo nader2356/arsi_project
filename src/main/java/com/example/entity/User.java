@@ -29,6 +29,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -37,7 +38,7 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @SQLDelete(sql = "UPDATE user SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted = false ")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,6 +69,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean deleted = Boolean.FALSE;
+    @OneToMany(fetch = FetchType.EAGER ,mappedBy = "user")
+    private Set<UserCompetence> userCompetenceSet;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.example.backendarsii.dto.searchRequest.SearchAdmin;
+import com.example.backendarsii.dto.searchRequest.SearchMember;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,6 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class AdminController {
 	public final UserService userService;
+
+
+     @GetMapping(value = "/filter")
+    public ResponseEntity<List<UserDto>> getAllUserByFilter(@RequestBody SearchAdmin request){
+        return ResponseEntity.ok(userService.getAllUserByFilter(request));
+    }
 
     @PutMapping(value = "enableAccount/{id}")
     public ResponseEntity<String> enableMember(@PathVariable(name = "id") Long id){

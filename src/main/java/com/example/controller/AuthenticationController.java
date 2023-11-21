@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dto.AuthenticationRequest;
-import com.example.dto.AuthenticationResponse;
+import com.example.backendarsii.dto.requestDto.AuthenticationRequest;
+import com.example.backendarsii.dto.requestDto.RegisterRequest;
 import com.example.dto.RegisterRequest;
 import com.example.service.AuthenticationService;
 

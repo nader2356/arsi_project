@@ -1,4 +1,4 @@
-package com.example.dto;
+package com.example.dto.requestDto;
 
 import com.example.util.enumData.Gender;
 import com.example.util.enumData.Office;

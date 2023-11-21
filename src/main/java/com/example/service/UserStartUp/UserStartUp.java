@@ -2,7 +2,7 @@ package com.example.service.UserStartUp;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.example.dto.RegisterRequest;
+import com.example.backendarsii.dto.requestDto.RegisterRequest;
 import com.example.util.enumData.Gender;
 import com.example.util.enumData.Office;
 import com.example.util.enumData.Post;
@@ -13,7 +13,7 @@ import com.example.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
+import java.util.HashSet;
 
 @Component
 @RequiredArgsConstructor
@@ -65,7 +65,8 @@ public class UserStartUp {
                 null,
                 null,
                 Role.MEMBER,
-                Boolean.FALSE
+               Boolean.FALSE,
+                new HashSet<>()
 
 
                 ));
@@ -75,7 +76,7 @@ public class UserStartUp {
                 "admin",
                 "admin",
                 "admin@gmail.com",
-                passwordEncoder.encode("Skandar_mb50**"),
+                passwordEncoder.encode("123"),
                 Gender.male,
                 "21333444",
                 "admin",
@@ -87,7 +88,8 @@ public class UserStartUp {
                 null,
                 null,
                 Role.ADMIN,
-                Boolean.FALSE
+                Boolean.FALSE,
+                new HashSet<>()
 
 
         ));
