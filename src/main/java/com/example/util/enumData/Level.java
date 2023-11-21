@@ -1,4 +1,4 @@
-package com.example.backendarsii.util.enumData;
+package com.example.util.enumData;
 
 public enum Level {
     Beginner,

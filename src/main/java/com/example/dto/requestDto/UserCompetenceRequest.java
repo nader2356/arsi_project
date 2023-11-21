@@ -1,15 +1,16 @@
 package com.example.dto.requestDto;
 
 import com.example.util.enumData.Level;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 
 @Data
 @AllArgsConstructor

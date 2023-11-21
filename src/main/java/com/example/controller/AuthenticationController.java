@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.responseDto.AuthenticationResponse;
-import com.example.dto.requestDto.RegisterRequest;
-import com.example.dto.RegisterRequest;
 import com.example.service.AuthenticationService;
+import com.example.dto.requestDto.AuthenticationRequest;
+import com.example.dto.requestDto.RegisterRequest;
+
 
 import lombok.RequiredArgsConstructor;
 import com.example.util.Constants;

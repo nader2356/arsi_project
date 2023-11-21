@@ -1,4 +1,4 @@
-package com.example.startUpApp;
+package com.example.StartUpApp;
 
 
 import com.example.dto.requestDto.CategoryRequest;

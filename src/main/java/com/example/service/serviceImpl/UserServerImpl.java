@@ -1,29 +1,33 @@
 package com.example.service.serviceImpl;
 
-import java.util.ArrayList;
 
-import com.example.dto.requestDto.RegisterRequest;
+
+import com.example.dto.requestDto.PasswordChangeRequest;
+import com.example.dto.requestDto.UpdateMemberRequest;
+import com.example.dto.requestDto.UpdateUserRequest;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.dto.searchRequest.SearchMember;
-import com.example.dto.UserDto;
+
+import com.example.dto.responseDto.UserDto;
+import com.example.exception.ConflictException;
+import com.example.util.enumData.Role;
 import com.example.entity.User;
+import com.example.exception.NotFoundException;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.example.exception.NotFoundException;
-import lombok.RequiredArgsConstructor;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import jakarta.time.Instant;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,33 +36,30 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserServerImpl implements UserService {
-
-	    private final UserRepository userRepository;
-		private final EntityManager em;
-        private final PasswordEncoder passwordEncoder;
-
-	    @Override
-	    public List<UserDto> getAllMember() {
-
-	        List<User> users = userRepository.findAllMember();
-	        List<UserDto> members = new ArrayList<>();
-	        for (User user:users) {
-	            UserDto member = UserDto.makeUser(user);
-	            members.add(member);
-	        }
-	        return members;
-	    }
-
-	    @Override
-	    public UserDto getMemberById(Long id) {
-	       User user = userRepository.findById(id).orElseThrow(() ->
+    private final UserRepository userRepository;
+    private final EntityManager em;
+    private final PasswordEncoder passwordEncoder;
+    @Override
+    public List<UserDto> getAllMember() {
+        List<User> users = userRepository.findAllMember();
+        List<UserDto> members = new ArrayList<>();
+        for (User user:users) {
+            UserDto member = UserDto.makeUser(user);
+            members.add(member);
+        }
+        return members;
+    }
+    @Override
+    public UserDto getMemberById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("this user with id [%s] not exist",id)));
-	        return UserDto.makeUser(user);
-	    }
+        return UserDto.makeUser(user);
+    }
 
-	    @Override
-	    public void updateMember(Long id, RegisterRequest request) {
-         User user = userRepository.findById(id).orElseThrow(()->
+    @Override
+    public void updateMember(Long id, UpdateMemberRequest request) {
+
+        User user = userRepository.findById(id).orElseThrow(()->
                 new NotFoundException(String.format("this user with id [%s] not exist",id)));
 
         if(!user.getEmail().equals(request.getEmail()) && userRepository.existsByEmail(request.getEmail())){
@@ -78,51 +79,70 @@ public class UserServerImpl implements UserService {
         user.setJob(request.getJob());
         user.setUniversityOrCompany(request.getUniversityOrCompany());
         user.setOffice(request.getOffice());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setImage(request.getImage());
 
         userRepository.save(user);
 
-	    }
+    }
 
-	    @Override
-	    public UserDto getConnectedUser() {
-	        System.out.println(SecurityContextHolder.getContext().getAuthentication());
-	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	        String currentUserName = authentication.getName();
-	        Optional<User> user = userRepository.findByUserName(currentUserName);
-	        if (user.isPresent()) {
-	            return UserDto.makeUser(user.get());
-	        }else throw new RuntimeException("mafamech User *************");
-	    }
+    @Override
+    public void updateUser(Long id, UpdateUserRequest request) {
 
-	    @Override
-	    public void deleteMember(Long id) {
+        User user = userRepository.findById(id).orElseThrow(()->
+                new NotFoundException(String.format("this user with id [%s] not exist",id)));
+        if(!user.getEmail().equals(request.getEmail()) && userRepository.existsByEmail(request.getEmail())){
+            throw  new ConflictException(String.format("this email is already exist ( [%s] ) ",request.getEmail()));
+        }
+        if(!user.getUsername().equals(request.getUserName()) && userRepository.existsByUserName(request.getUserName())){
+            throw  new ConflictException(String.format("this userName is already exist ( [%s] ) ",request.getUserName()));
+        }
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setUserName(request.getUserName());
+        user.setEmail(request.getEmail());
+        user.setGender(request.getGender());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setRegion(request.getRegion());
+        user.setJob(request.getJob());
+        user.setUniversityOrCompany(request.getUniversityOrCompany());
+        user.setOffice(request.getOffice());
+        ///user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setImage(request.getImage());
+        user.setPost(request.getPost());
+        user.setRole(request.getRole());
 
-	        userRepository.deleteById(id);
+        userRepository.save(user);
 
-	    }
+    }
 
-	    @Override
-	    public void enableMember(Long id) {
-
-	        User user = userRepository.findById(id).orElseThrow();
-	        Calendar today = Calendar.getInstance();
-	        today.add(Calendar.YEAR,1);
-	        user.setExpiresAt(today.toInstant());
-
-	        userRepository.save(user);
-
-	    }
-
-		 @Override
+    @Override
+    public UserDto getConnectedUser() {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+        Optional<User> user = userRepository.findByUserName(currentUserName);
+        if (user.isPresent()) {
+            return UserDto.makeUser(user.get());
+        }else throw new RuntimeException("mafamech User *************");
+    }
+    @Override
+    public void deleteMember(Long id) {
+        userRepository.deleteById(id);
+    }
+    @Override
+    public void enableMember(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.YEAR,1);
+        user.setExpiresAt(today.toInstant());
+        userRepository.save(user);
+    }
+    @Override
     public List<UserDto> getMemberByFilter(SearchMember serachUserDTO) {
-
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         List<Predicate> predicates = new ArrayList<>();
-
         Root<User> root = criteriaQuery.from(User.class);
-
         if (serachUserDTO.getFirstName() != null){
             Predicate firstNamePredicate = criteriaBuilder
                     .like(root.get("firstName"),"%"+serachUserDTO.getFirstName()+"%");
@@ -163,7 +183,6 @@ public class UserServerImpl implements UserService {
                     .equal(root.get("office"),serachUserDTO.getOffice());
             predicates.add(officePredicate);
         }
-
         Predicate expiresPredicate = criteriaBuilder.greaterThan(root.get("expiresAt"), Instant.now());
         predicates.add(expiresPredicate);
         Predicate rolePredicate = criteriaBuilder.equal(root.get("role"), Role.MEMBER);
@@ -176,7 +195,6 @@ public class UserServerImpl implements UserService {
         );
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         List<User> users = query.getResultList();
-
         List<UserDto> userDto = new ArrayList<>();
         for (User user:users) {
             UserDto member = UserDto.makeUser(user);
@@ -184,15 +202,12 @@ public class UserServerImpl implements UserService {
         }
         return userDto;
     }
-
     @Override
     public List<UserDto> getAllUserByFilter(SearchAdmin searchAdmin) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         List<Predicate> predicates = new ArrayList<>();
-
         Root<User> root = criteriaQuery.from(User.class);
-
         if (searchAdmin.getFirstName() != null){
             Predicate firstNamePredicate = criteriaBuilder
                     .like(root.get("firstName"),"%"+searchAdmin.getFirstName()+"%");
@@ -233,7 +248,6 @@ public class UserServerImpl implements UserService {
                     .equal(root.get("office"),searchAdmin.getOffice());
             predicates.add(officePredicate);
         }
-
         if (searchAdmin.isExpired()){
             Predicate expiresPredicate;
             expiresPredicate = criteriaBuilder.lessThan(root.get("expiresAt"), Instant.now());
@@ -241,24 +255,34 @@ public class UserServerImpl implements UserService {
             Predicate finalPredicate = criteriaBuilder.and(expiresPredicate, memberRolePredicate);
             predicates.add(finalPredicate);
         }
-
-
         if (searchAdmin.getRole()!= null  ){
         Predicate rolePredicate = criteriaBuilder.equal(root.get("role"), searchAdmin.getRole());
         predicates.add(rolePredicate);
         }
-
         criteriaQuery.where(
                 criteriaBuilder.and(predicates.toArray(new Predicate[0]))
         );
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         List<User> users = query.getResultList();
-
         List<UserDto> userDto = new ArrayList<>();
         for (User user:users) {
             UserDto member = UserDto.makeUser(user);
             userDto.add(member);
         }
         return userDto;
+    }
+
+    @Override
+    public void changePassword(PasswordChangeRequest passwordChangeRequest, Long id) {
+
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(String.format("this user with id [%s] is not exist",id)));
+
+        if (!passwordEncoder.matches(passwordChangeRequest.getOldPassword(),user.getPassword())){
+            throw new ConflictException("Old password is incorrect");
+        }
+        user.setPassword(passwordEncoder.encode(passwordChangeRequest.getNewPassword()));
+        userRepository.save(user);
+
     }
 }

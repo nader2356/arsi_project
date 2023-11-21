@@ -1,6 +1,6 @@
-package com.example.startUpApp;
+package com.example.StartUpApp;
 
-import com.example.dto.requestDto.CategoryRequest;
+
 import com.example.dto.requestDto.CompetenceRequest;
 import com.example.service.CompetenceService;
 import lombok.RequiredArgsConstructor;

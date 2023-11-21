@@ -1,8 +1,8 @@
-package com.example.service.UserStartUp;
+package com.example.StartUpApp;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.example.backendarsii.dto.requestDto.RegisterRequest;
+import com.example.dto.requestDto.RegisterRequest;
 import com.example.util.enumData.Gender;
 import com.example.util.enumData.Office;
 import com.example.util.enumData.Post;
@@ -17,12 +17,10 @@ import java.util.HashSet;
 
 @Component
 @RequiredArgsConstructor
-public class UserStartUp {
-	private final AuthenticationService authenticationService;
+public class UserStartUp implements CommandLineRunner {
+    private final AuthenticationService authenticationService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-
     @Override
     public void run(String... args) throws Exception {
         authenticationService.register(new RegisterRequest("Skandar",
@@ -35,7 +33,8 @@ public class UserStartUp {
                 "Bembla",
                 "Batal",
                 "fi dar",
-                Office.OFFICE_SOUSSE));
+                Office.OFFICE_SOUSSE,
+                "https://www.overleaf.com/login?"));
         authenticationService.register(new RegisterRequest("ali",
                 "salem",
                 "alisalem",
@@ -46,7 +45,8 @@ public class UserStartUp {
                 "sousse",
                 "ingenieur",
                 "fi dar",
-                Office.OFFICE_SOUSSE));
+                Office.OFFICE_SOUSSE,
+                "https://www.overleaf.com/login?"));
         userRepository.save(new User(
                 null,
                 "mohamed",
@@ -61,14 +61,12 @@ public class UserStartUp {
                 "Gloulou",
                 Post.GENERAL_SECRETARY,
                 Office.OFFICE_SOUSSE,
+                "https://www.overleaf.com/login?",
                 null,
                 null,
                 null,
                 Role.MEMBER,
-               Boolean.FALSE,
-                new HashSet<>()
-
-
+                Boolean.FALSE
                 ));
         userRepository.save(new User(
                 null,
@@ -84,15 +82,12 @@ public class UserStartUp {
                 "admin",
                 Post.NATIONAL_PRESIDENT,
                 Office.OFFICE_SOUSSE,
+                "https://www.overleaf.com/login?",
                 null,
                 null,
                 null,
-                Role.ADMIN,
-                Boolean.FALSE,
-                new HashSet<>()
-
+                Role.ADMIN
 
         ));
     }
-
 }

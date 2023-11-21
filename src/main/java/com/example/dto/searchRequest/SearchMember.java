@@ -4,10 +4,12 @@ package com.example.dto.searchRequest;
 import com.example.util.enumData.Gender;
 import com.example.util.enumData.Office;
 import com.example.util.enumData.Post;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 
 @Data
 public class SearchMember {
