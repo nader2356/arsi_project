@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.backendarsii.dto.searchRequest.SearchAdmin;
-import com.example.backendarsii.dto.searchRequest.SearchMember;
+import com.example.dto.searchRequest.SearchAdmin;
+import com.example.dto.searchRequest.SearchMember;
 import java.util.List;
 
 @RequiredArgsConstructor

@@ -7,10 +7,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.backendarsii.dto.requestDto.AuthenticationRequest;
+import com.example.dto.requestDto.AuthenticationRequest;
 import com.example.dto.AuthenticationResponse;
-import com.example.backendarsii.dto.requestDto.RegisterRequest;
-import com.example.backendarsii.exception.ConflictException;
+import com.example.dto.requestDto.RegisterRequest;
+import com.example.exception.ConflictException;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.service.AuthenticationService;

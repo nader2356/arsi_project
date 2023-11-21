@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import static com.example.util.Constants.APP_ROOT;
+import static com.example.util.Constants.*;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -32,9 +32,9 @@ public class SecurityConfiguration    {
                 .authorizeHttpRequests()
                  .requestMatchers("/webjars/**","/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs","/v3/api-docs/**",
          "/swagger-ui/**").permitAll()
-                    .antMatchers(APP_ROOT+"/auth/**","/swagger-ui.html").permitAll()
-                    .requestMatchers(APP_ROOT+"/member/**").hasAnyAuthority("MEMBER","ADMIN")
-                    .requestMatchers(APP_ROOT+"/admin/**").hasAnyAuthority("ADMIN")
+                    .requestMatchers(APP_ROOT+"/auth/**","/swagger-ui.html").permitAll()
+                    .requestMatchers(APP_ROOT_MEMBER+"/**").hasAnyAuthority("MEMBER","ADMIN")
+                    .requestMatchers(APP_ROOT_ADMIN+"/**").hasAnyAuthority("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

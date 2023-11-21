@@ -2,9 +2,9 @@ package com.example.service.serviceImpl;
 
 import java.util.ArrayList;
 
-import com.example.backendarsii.dto.requestDto.RegisterRequest;
-import com.example.backendarsii.dto.searchRequest.SearchAdmin;
-import com.example.backendarsii.dto.searchRequest.SearchMember;
+import com.example.dto.requestDto.RegisterRequest;
+import com.example.dto.searchRequest.SearchAdmin;
+import com.example.dto.searchRequest.SearchMember;
 import com.example.dto.UserDto;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
@@ -14,7 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.example.backendarsii.exception.NotFoundException;
+import com.example.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;

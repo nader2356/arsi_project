@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.backendarsii.dto.requestDto.RegisterRequest;
-import com.example.backendarsii.dto.searchRequest.SearchMember;
+import com.example.dto.requestDto.RegisterRequest;
+import com.example.dto.searchRequest.SearchMember;
 import com.example.dto.UserDto;
 import com.example.service.UserService;
 
