@@ -14,10 +14,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import jakarta.websocket.server.PathParam;
 
 import java.util.List;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,6 +38,9 @@ public class AdminController {
     public final UserService userService;
     
     private final FileStorageService fileStorageService;
+    
+    @Value("${file.upload-dir}")
+    private String fileStorageLocation;
 
 
     @PostMapping(value = "/filter")
@@ -62,6 +73,16 @@ public class AdminController {
         UserResponse user = userService.getConnectedUser();
         userService.updateUser(user.getId(),request);
         return ResponseEntity.ok("update success!!");
+    }
+    
+    @GetMapping("/{filename:.+}")
+    public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
+
+        System.out.println("fileName  --**--:"+filename);
+      Resource resource =   fileStorageService.loadFileAsResource(filename);
+     return   ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg") // Modify the content type as needed
+                .body(resource);
     }
     @PutMapping(value = "/password")
     public ResponseEntity<String> changeMyPassword(@RequestBody PasswordChangeRequest request){
