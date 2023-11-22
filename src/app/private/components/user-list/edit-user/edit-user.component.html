@@ -1,69 +1,177 @@
 <div class="row">
-    <div class="col-lg-12">
-      <div class="iq-edit-list-data">
-          <div class="tab-content">
-            <div class="tab-pane fade active show" id="personal-information" role="tabpanel">
-                <div class="card">
-                    <div class="card-header">
-                      <div class="iq-header-title">
-                          <h4 class="card-title">Edit User</h4>
-                        </div>
-                      </div>
-                    <div class="card-body">
-                      <form #myForm="ngForm">
-                        <div class="row">
-                          <div class="form-group col-sm-6">
-                            <label for="uname">Username:</label>
-                            <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" required>
-                            <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['userName']?.invalid && myForm.controls['userName'].touched">
-                              First Name is required.
-                            </div>
-                          </div>
-                          <div class="form-group col-sm-6">
-                              <label for="email">Email:</label>
-                              <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['email']?.invalid && myForm.controls['email'].touched && !myForm.controls['email']?.hasError('email')">
-                                Email is required.
-                              </div>
-                              <div class="text-danger mt-2" *ngIf="myForm.controls['email']?.hasError('email')">
-                                Please enter a valid email address.
-                              </div>
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="email">Region:</label>
-                            <input type="email" class="form-control" name="region" [(ngModel)]="user.region" required>
-                            <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['region']?.invalid && myForm.controls['region'].touched">
-                              Region is required.
-                            </div>
-                          </div>
-                          <div class="form-group col-sm-6">
-                              <label for="cname">Phone number:</label>
-                              <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="user.phoneNumber" required>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['phoneNumber']?.invalid && myForm.controls['phoneNumber'].touched && !myForm.controls['phoneNumber']?.hasError('minlength')">
-                                Phone number is required.
-                              </div>
-                              <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['phoneNumber']?.hasError('minlength')">Phone number must have 8 characters.</div>
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label>Role:</label>
-                            <select class="form-control" name="role" [(ngModel)]="user.role" required>
-                              <option>MEMBER</option>
-                              <option>ADMIN</option>
-                              <option>Visitor</option>
-                            </select>
-                            <div class="text-danger text-sm ml-2" *ngIf="myForm.controls['role']?.invalid && myForm.controls['role'].touched">
-                              Must select on option.
-                            </div>
-                          </div>
-                        </div>
-                      <div class="text-center mt-2">
-                        <button type="submit" class="btn btn-primary mr-2" (click)="updateUser(user)" [disabled]="myForm.invalid">Submit</button>
-                        <button type="reset" class="btn bg-gray" (click)="goBack()">Cancel</button>
-                      </div>
-                    </form>
+  <div class="col-lg-12">
+    <div class="iq-edit-list-data">
+      <div class="tab-content">
+        <div
+          class="tab-pane fade active show"
+          id="personal-information"
+          role="tabpanel"
+        >
+          <div class="card">
+            <div class="card-header">
+              <div class="iq-header-title">
+                <h4 class="card-title">Edit User</h4>
+              </div>
+            </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="email">Email:</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      [(ngModel)]="user.email"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['email']?.invalid &&
+                        myForm.controls['email'].touched &&
+                        !myForm.controls['email']?.hasError('email')
+                      "
+                    >
+                      Email is required.
+                    </div>
+                    <div
+                      class="text-danger mt-2"
+                      *ngIf="myForm.controls['email']?.hasError('email')"
+                    >
+                      Please enter a valid email address.
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="email">Region:</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="region"
+                      [(ngModel)]="user.region"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['region']?.invalid &&
+                        myForm.controls['region'].touched
+                      "
+                    >
+                      Region is required.
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="cname">Phone number:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phoneNumber"
+                      [(ngModel)]="user.phoneNumber"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['phoneNumber']?.invalid &&
+                        myForm.controls['phoneNumber'].touched &&
+                        !myForm.controls['phoneNumber']?.hasError('minlength')
+                      "
+                    >
+                      Phone number is required.
+                    </div>
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['phoneNumber']?.hasError('minlength')
+                      "
+                    >
+                      Phone number must have 8 characters.
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label>Role:</label>
+                    <select
+                      class="form-control"
+                      name="role"
+                      [(ngModel)]="user.role"
+                      required
+                    >
+                      <option>MEMBER</option>
+                      <option>ADMIN</option>
+                      <option>Visitor</option>
+                    </select>
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['role']?.invalid &&
+                        myForm.controls['role'].touched
+                      "
+                    >
+                      Must select on option.
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label>Post:</label>
+                    <select
+                      class="form-control"
+                      name="role"
+                      [(ngModel)]="user.post"
+                      required
+                    >
+                      <option value="MEMBER">MEMBER</option>
+                      <option value="NATIONAL_PRESIDENT">
+                        NATIONAL PRESIDENT
+                      </option>
+                      <option value="VICE_PRESIDENT">VICE PRESIDENT</option>
+                      <option value="TREASURER">TREASURER</option>
+                      <option value="GENERAL_SECRETARY">
+                        GENERAL SECRETARY
+                      </option>
+                      <option value="PROJECT_MANAGER">PROJECT MANAGER</option>
+                      <option value="ASSISTANT_TREASURER">
+                        ASSISTANT TREASURER
+                      </option>
+                      <option value="DEPUTY_SECRETARY_GENERAL">
+                        DEPUTY SECRETARY GENERAL
+                      </option>
+                      <option value="R_D_MANAGER">R D MANAGER</option>
+                      <option value="LOGISTICS_MANAGER">
+                        LOGISTICS MANAGER
+                      </option>
+                      <option value="TRAINING_MANAGER">TRAINING MANAGER</option>
+                      <option
+                        value="OPPORTUNITIES_INTERNSHIPS_MANAGER"
+                      ></option>
+                      OPPORTUNITIES INTERNSHIPS MANAGER
+                    </select>
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['post']?.invalid &&
+                        myForm.controls['post'].touched
+                      "
+                    >
+                      Must select on option.
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary mr-2"
+                    (click)="updateUser(user)"
+                    [disabled]="myForm.invalid"
+                  >
+                    Submit
+                  </button>
+                  <button type="reset" class="btn bg-gray" (click)="goBack()">
+                    Cancel
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
