@@ -1,10 +1,8 @@
 package com.example.controller.adminController;
 
 import com.example.dto.requestDto.PasswordChangeRequest;
-import com.example.dto.requestDto.RegisterRequest;
-import com.example.dto.requestDto.UpdateMemberRequest;
 import com.example.dto.requestDto.UpdateUserRequest;
-import com.example.dto.responseDto.UserDto;
+import com.example.dto.responseDto.UserResponse;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.service.UserService;
 import com.example.util.Constants;
@@ -27,7 +25,7 @@ public class AdminController {
 
 
     @PostMapping(value = "/filter")
-    public ResponseEntity<List<UserDto>> getAllUserByFilter(@RequestBody SearchAdmin request){
+    public ResponseEntity<List<UserResponse>> getAllUserByFilter(@RequestBody SearchAdmin request){
         return ResponseEntity.ok(userService.getAllUserByFilter(request));
     }
     @PutMapping(value = "/enable/{id}")
@@ -41,7 +39,7 @@ public class AdminController {
         return ResponseEntity.ok("this Account is deleted");
     }
     @GetMapping(value = "me")
-    public ResponseEntity<UserDto> getUserConnected(){
+    public ResponseEntity<UserResponse> getUserConnected(){
 
         return ResponseEntity.ok(userService.getConnectedUser());
     }
@@ -53,13 +51,13 @@ public class AdminController {
     }
     @PutMapping
     public ResponseEntity<String> updateMe(@RequestBody UpdateUserRequest request){
-        UserDto user = userService.getConnectedUser();
+        UserResponse user = userService.getConnectedUser();
         userService.updateUser(user.getId(),request);
         return ResponseEntity.ok("update success!!");
     }
     @PutMapping(value = "/password")
     public ResponseEntity<String> changeMyPassword(@RequestBody PasswordChangeRequest request){
-        UserDto user = userService.getConnectedUser();
+        UserResponse user = userService.getConnectedUser();
         userService.changePassword(request,user.getId());
         return ResponseEntity.ok("Password changed successfully !!");
     }

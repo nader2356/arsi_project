@@ -2,7 +2,7 @@ package com.example.controller.memberController;
 
 import com.example.dto.requestDto.UserCompetenceRequest;
 import com.example.dto.responseDto.UserCompetenceResponse;
-import com.example.dto.responseDto.UserDto;
+import com.example.dto.responseDto.UserResponse;
 import com.example.service.UserCompetenceService;
 import com.example.service.UserService;
 import com.example.util.Constants;
@@ -33,12 +33,12 @@ public class UserCompetenceMemberController {
         return ResponseEntity.ok("save success !!");
     }
     @GetMapping(value = "users/{id}")
-    public ResponseEntity<List<UserDto>> getAllUserByCompetence(@PathVariable Long id){
+    public ResponseEntity<List<UserResponse>> getAllUserByCompetence(@PathVariable Long id){
         return ResponseEntity.ok(userCompetenceService.getAllUserByCompetence(id));
     }
     @GetMapping(value = "competences")
     public ResponseEntity<List<UserCompetenceResponse>> getAllCompetencesByMe(){
-        UserDto userDto = userService.getConnectedUser();
+        UserResponse userDto = userService.getConnectedUser();
         return ResponseEntity.ok(userCompetenceService.getAllCompetenceByUser(userDto.getId()));
     }
 

@@ -8,7 +8,7 @@ import com.example.dto.requestDto.UpdateUserRequest;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.dto.searchRequest.SearchMember;
 
-import com.example.dto.responseDto.UserDto;
+import com.example.dto.responseDto.UserResponse;
 import com.example.exception.ConflictException;
 import com.example.util.enumData.Role;
 import com.example.entity.User;
@@ -40,20 +40,20 @@ public class UserServerImpl implements UserService {
     private final EntityManager em;
     private final PasswordEncoder passwordEncoder;
     @Override
-    public List<UserDto> getAllMember() {
+    public List<UserResponse> getAllMember() {
         List<User> users = userRepository.findAllMember();
-        List<UserDto> members = new ArrayList<>();
+        List<UserResponse> members = new ArrayList<>();
         for (User user:users) {
-            UserDto member = UserDto.makeUser(user);
+            UserResponse member = UserResponse.makeUser(user);
             members.add(member);
         }
         return members;
     }
     @Override
-    public UserDto getMemberById(Long id) {
+    public UserResponse getMemberById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("this user with id [%s] not exist",id)));
-        return UserDto.makeUser(user);
+        return UserResponse.makeUser(user);
     }
 
     @Override
@@ -116,13 +116,13 @@ public class UserServerImpl implements UserService {
     }
 
     @Override
-    public UserDto getConnectedUser() {
+    public UserResponse getConnectedUser() {
         System.out.println(SecurityContextHolder.getContext().getAuthentication());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         Optional<User> user = userRepository.findByUserName(currentUserName);
         if (user.isPresent()) {
-            return UserDto.makeUser(user.get());
+            return UserResponse.makeUser(user.get());
         }else throw new RuntimeException("mafamech User *************");
     }
     @Override
@@ -138,7 +138,7 @@ public class UserServerImpl implements UserService {
         userRepository.save(user);
     }
     @Override
-    public List<UserDto> getMemberByFilter(SearchMember serachUserDTO) {
+    public List<UserResponse> getMemberByFilter(SearchMember serachUserDTO) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         List<Predicate> predicates = new ArrayList<>();
@@ -195,15 +195,15 @@ public class UserServerImpl implements UserService {
         );
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         List<User> users = query.getResultList();
-        List<UserDto> userDto = new ArrayList<>();
+        List<UserResponse> userDto = new ArrayList<>();
         for (User user:users) {
-            UserDto member = UserDto.makeUser(user);
+            UserResponse member = UserResponse.makeUser(user);
             userDto.add(member);
         }
         return userDto;
     }
     @Override
-    public List<UserDto> getAllUserByFilter(SearchAdmin searchAdmin) {
+    public List<UserResponse> getAllUserByFilter(SearchAdmin searchAdmin) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         List<Predicate> predicates = new ArrayList<>();
@@ -264,9 +264,9 @@ public class UserServerImpl implements UserService {
         );
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         List<User> users = query.getResultList();
-        List<UserDto> userDto = new ArrayList<>();
+        List<UserResponse> userDto = new ArrayList<>();
         for (User user:users) {
-            UserDto member = UserDto.makeUser(user);
+            UserResponse member = UserResponse.makeUser(user);
             userDto.add(member);
         }
         return userDto;
