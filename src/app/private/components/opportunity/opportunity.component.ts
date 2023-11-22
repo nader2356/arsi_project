@@ -44,7 +44,7 @@ export class OpportunityComponent implements OnInit {
       this.getAllOpportunity();
       this.messageService.add({
         severity: 'success',
-        summary: 'opporunity added Successfully',
+        summary: 'Opportunité ajoutée avec succès.',
       });
     } else {
       console.log('no');
@@ -55,10 +55,10 @@ export class OpportunityComponent implements OnInit {
       this.getAllOpportunity();
       this.messageService.add({
         severity: 'success',
-        summary: 'opporunity updated Successfully',
+        summary: 'Opportunité mise à jour avec succès.',
       });
     } else {
-      console.log('no');
+      console.log('not updated');
     }
   }
   selectOpportunity(data: any) {
@@ -73,7 +73,7 @@ export class OpportunityComponent implements OnInit {
         this.getAllOpportunity();
         this.messageService.add({
           severity: 'success',
-          summary: 'opporunity deleted Successfully',
+          summary: 'Opportunité supprimée avec succès.',
         });
       });
   }
