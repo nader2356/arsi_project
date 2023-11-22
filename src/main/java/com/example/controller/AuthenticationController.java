@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.dto.responseDto.AuthenticationResponse;
 import com.example.service.AuthenticationService;
+import com.example.service.UserService;
 import com.example.dto.requestDto.AuthenticationRequest;
 import com.example.dto.requestDto.RegisterRequest;
 
@@ -25,6 +26,7 @@ import jakarta.validation.Valid;
 @CrossOrigin("*")
 public class AuthenticationController {
 	 private final AuthenticationService authenticationService;
+	 private final UserService userService;
 
 
 	    @PostMapping("/register")
@@ -41,5 +43,20 @@ public class AuthenticationController {
 	    ){
 	        return ResponseEntity.ok(authenticationService.authenticate(request));
 	    }
+        
+	    @PostMapping("/forgot-password")
+	    public String forgotPassword(@RequestParam String username) {
+	        userService.forgotPassword(username);
+	        return "OTP sent to your email.";
+	    }
 
+	    @PostMapping("/reset-password")
+	    public String resetPassword(
+	            @RequestParam String username,
+	            @RequestParam String otp,
+	            @RequestParam String newPassword
+	    ) {
+	        userService.resetPasswordWithOTP(username, otp, newPassword);
+	        return "Password reset successfully.";
+	    }
 }

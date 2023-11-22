@@ -6,10 +6,16 @@ import com.example.dto.responseDto.UserResponse;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.service.UserService;
 import com.example.util.Constants;
+import com.example.util.FileStorageService;
+
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.websocket.server.PathParam;
 
 import java.util.List;
 
@@ -22,6 +28,8 @@ import java.util.List;
 public class AdminController {
 
     public final UserService userService;
+    
+    private final FileStorageService fileStorageService;
 
 
     @PostMapping(value = "/filter")
@@ -61,6 +69,14 @@ public class AdminController {
         userService.changePassword(request,user.getId());
         return ResponseEntity.ok("Password changed successfully !!");
     }
+    
+    @PostMapping(value = "uploadImage{userId}")
+    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file,@PathVariable Long userId){
+        userService.uploadImage(file,userId);
+        return ResponseEntity.ok("upload success");
+    }
+    
+    
     @PutMapping(value = "/password/{id}")
     public ResponseEntity<String> changeUserPassword(@RequestBody PasswordChangeRequest request,
                                                  @PathVariable Long id){

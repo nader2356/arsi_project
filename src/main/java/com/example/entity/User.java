@@ -30,6 +30,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -52,6 +53,7 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    private Date dateOfBirth;
     private String phoneNumber;
     private String region;
     private String job;
@@ -71,6 +73,7 @@ public class User implements UserDetails {
     private Instant updatedAt;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private String otp;
     private boolean deleted = Boolean.FALSE;
     @OneToMany(fetch = FetchType.EAGER ,mappedBy = "user")
     private Set<UserCompetence> userCompetenceSet;

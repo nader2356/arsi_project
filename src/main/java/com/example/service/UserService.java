@@ -8,6 +8,8 @@ import com.example.dto.requestDto.UpdateUserRequest;
 import com.example.dto.responseDto.UserResponse;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.dto.searchRequest.SearchMember;
+import org.springframework.web.multipart.MultipartFile;
+
 
 
 
@@ -23,5 +25,12 @@ public interface UserService {
     List<UserResponse> getMemberByFilter(SearchMember serachUserDTO);
     List<UserResponse> getAllUserByFilter(SearchAdmin searchAdmin);
     void changePassword(PasswordChangeRequest passwordChangeRequest,Long id);
+    
+    void forgotPassword(String username) ;
+
+
+    void resetPasswordWithOTP(String username, String otp, String newPassword) ;
+
+    void uploadImage(MultipartFile file,Long id);
 
 }

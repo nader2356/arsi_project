@@ -17,6 +17,10 @@ import com.example.dto.requestDto.RegisterRequest;
 import com.example.dto.requestDto.UpdateMemberRequest;
 import com.example.dto.searchRequest.SearchMember;
 import com.example.dto.responseDto.UserResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.websocket.server.PathParam;
 import com.example.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -64,6 +68,12 @@ public class MemberController {
         UserResponse user = userService.getConnectedUser();
         userService.changePassword(request,user.getId());
         return ResponseEntity.ok("Password changed successfully !!");
+    }
+    
+    @PostMapping(value = "uploadImage{userId}")
+    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file, @PathVariable Long userId){
+        userService.uploadImage(file,userId);
+        return ResponseEntity.ok("upload success");
     }
     
 

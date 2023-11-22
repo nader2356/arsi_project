@@ -45,6 +45,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .userName(request.getUserName())
                 .email(request.getEmail())
                 .gender(request.getGender())
+                .dateOfBirth(request.getDateOfBirth())
                 .phoneNumber(request.getPhoneNumber())
                 .region(request.getRegion())
                 .job(request.getJob())

@@ -1,6 +1,7 @@
 package com.example.dto.responseDto;
 
 import java.time.Instant;
+import java.util.Date;
 
 import com.example.entity.User;
 import com.example.util.enumData.Gender;
@@ -28,6 +29,7 @@ public class UserResponse {
 	    private String email;
 	    @Enumerated(EnumType.STRING)
 	    private Gender gender;
+	    private Date dateOfBirth;
 	    private String phoneNumber;
 	    private String region;
 	    private String job;
@@ -55,6 +57,7 @@ public class UserResponse {
 	                .universityOrCompany(user.getUniversityOrCompany())
 	                .phoneNumber(user.getPhoneNumber())
 	                .region(user.getRegion())
+	                .dateOfBirth(user.getDateOfBirth())
 	                .post(user.getPost())
 	                .office(user.getOffice())
 					.image(user.getImage())

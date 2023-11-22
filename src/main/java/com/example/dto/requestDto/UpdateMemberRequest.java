@@ -12,6 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
 import org.hibernate.validator.constraints.URL;
 
 
@@ -32,6 +35,7 @@ public class UpdateMemberRequest {
     private String email;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    private Date dateOfBirth;
     @Pattern(regexp = "^[0-9]{8}$",message = "phone number not valid")
     private String phoneNumber;
     @NotBlank(message = "your region is required")

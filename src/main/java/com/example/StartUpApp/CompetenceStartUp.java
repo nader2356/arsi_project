@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class CompetenceStartUp implements CommandLineRunner {
 
     private final CompetenceService competenceService;
+    
     @Override
     public void run(String... args) throws Exception {
         competenceService.addCompetence(new CompetenceRequest(
