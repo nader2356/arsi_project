@@ -37,8 +37,8 @@ export class SkillsComponent {
         this.displayCategory();
         this.messageService.add({
           severity: 'success',
-          summary: 'skills is Updated Successfully',
-          detail: 'skillsis Updated Successfully !!!',
+          summary: 'Les compétences ont été mises à jour avec succès.',
+          detail: 'Les compétences ont été mises à jour avec succès. !!!',
         });
         console.log(res);
       });
@@ -49,8 +49,8 @@ export class SkillsComponent {
       this.displayCategory();
       this.messageService.add({
         severity: 'success',
-        summary: 'category saved Successfully',
-        detail: 'category saved Successfully !!!',
+        summary: 'Catégorie enregistrée avec succès.',
+        detail: 'Catégorie enregistrée avec succès. !!!',
       });
       this.newCategory = {
         name: '',
@@ -72,8 +72,8 @@ export class SkillsComponent {
         console.log(res);
         this.messageService.add({
           severity: 'success',
-          summary: 'skill saved Successfully',
-          detail: 'skill saved Successfully !!!',
+          summary: 'Catégorie enregistrée avec succès.',
+          detail: 'Catégorie enregistrée avec succès. !!!',
         });
       });
   }

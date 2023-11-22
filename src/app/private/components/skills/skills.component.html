@@ -1,346 +1,166 @@
 <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div
+              class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content"
+            >
+              <h5>Catégories</h5>
+              <div class="d-flex flex-wrap align-items-center">
+                <a
+                  href="#"
+                  class="btn btn-primary"
+                  data-target="#new-task-modal"
+                  data-toggle="modal"
+                  >Nouvelle catégorie</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-12"
+        id="collapseEdit1"
+        *ngFor="let item of categories; let i = index"
+      >
+        <div class="card card-widget task-card">
+          <div class="card-body">
+            <div
+              class="d-flex flex-wrap align-items-center justify-content-between"
+            >
               <div
-                class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content"
+                class="d-flex align-items-center"
+                (click)="
+                  selectedCategory != item
+                    ? (selectedCategory = item)
+                    : (selectedCategory = null)
+                "
+                style="cursor: pointer"
               >
-                <h5>Categories</h5>
-                <div class="d-flex flex-wrap align-items-center">
-                  <a
-                    href="#"
-                    class="btn btn-primary"
-                    data-target="#new-task-modal"
-                    data-toggle="modal"
-                    >Nouveau categorie</a
-                  >
+                <div
+                  class="custom-control custom-task custom-checkbox custom-control-inline"
+                >
+                  <!-- <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="customCheck01"
+                  />
+                  <label
+                    class="custom-control-label"
+                    for="customCheck01"
+                  ></label> -->
+
                 </div>
+                <div>
+                  <h5 class="mb-2">{{ item.name }}</h5>
+                  <!-- <div class="media align-items-center">
+                    <div class="btn bg-body mr-3">
+                      <i class="ri-align-justify mr-2"></i>5/10
+                    </div>
+                    <div class="btn bg-body">
+                      <i class="ri-survey-line mr-2"></i>3
+                    </div>
+                  </div> -->
+
+                </div>
+              </div>
+              <div class="media align-items-center mt-md-0 mt-3">
+                <a
+                  class="bg-secondary-light rounded-circle iq-card-icon-small mx-2"
+                >
+                  <i
+                    class="ri-delete-bin-line m-0"
+                    (click)="deleteCategory(item)"
+                  ></i>
+                </a>
+                <a
+                  (click)="
+                    selectedCategory != item
+                      ? (selectedCategory = item)
+                      : (selectedCategory = null)
+                  "
+                  class="btn"
+                  [ngClass]="'bg-success-light'"
+                  role="button"
+                  ><i class="ri-edit-box-line m-0"></i
+                ></a>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="col-lg-12"
+          class="collapse"
+          [class.show]="selectedCategory === item"
           id="collapseEdit1"
-          *ngFor="let item of categories; let i = index"
-         
-      
+          style=""
         >
-          <div class="card card-widget task-card">
-            <div class="card-body">
-              <div
-                class="d-flex flex-wrap align-items-center justify-content-between"
-              >
-              <div
-              class="d-flex align-items-center"
-              (click)="
-                selectedCategory != item
-                  ? (selectedCategory = item)
-                  : (selectedCategory = null)
-              "
-              style="cursor: pointer"
+          <div class="card card-list task-card">
+            <div
+              class="card-header d-flex align-items-center justify-content-between px-0 mx-3"
             >
-                  <div
-                    class="custom-control custom-task custom-checkbox custom-control-inline"
+              <div class="header-title">
+                <div
+                  class="custom-control custom-checkbox custom-control-inline"
+                >
+                  <!-- <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="customCheck05"
+                  /> -->
+
+                  <label class="custom-control-label h5" for="customCheck05">
+                    {{ item.name }}</label
                   >
-                    <!-- <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="customCheck01"
-                    />
-                    <label
-                      class="custom-control-label"
-                      for="customCheck01"
-                    ></label> -->
-                  </div>
-                  <div>
-                    <h5 class="mb-2">{{ item.name }}</h5>
-                    <!-- <div class="media align-items-center">
-                      <div class="btn bg-body mr-3">
-                        <i class="ri-align-justify mr-2"></i>5/10
-                      </div>
-                      <div class="btn bg-body">
-                        <i class="ri-survey-line mr-2"></i>3
-                      </div>
-                    </div> -->
-                  </div>
-                </div>
-                <div class="media align-items-center mt-md-0 mt-3">
-                  <!-- <a href="#" class="btn bg-secondary-light mr-3">Design</a> -->
-                  <a
-                  class="bg-secondary-light rounded-circle iq-card-icon-small mx-2"
-                  >
-                    <i
-                      class="ri-delete-bin-line m-0"
-                      (click)="deleteCategory(item)"
-                    ></i>
-                  </a>
-                  <a
-                    (click)="
-                      selectedCategory != item
-                        ? (selectedCategory = item)
-                        : (selectedCategory = null)
-                    "
-                    class="btn"
-                    [ngClass]="'bg-success-light'"
-                    role="button"
-                    ><i class="ri-edit-box-line m-0"></i
-                  ></a>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            class="collapse"
-            [class.show]="selectedCategory === item"
-            id="collapseEdit1"
-            style=""
-          >
-            <div class="card card-list task-card">
-              <div
-                class="card-header d-flex align-items-center justify-content-between px-0 mx-3"
-              >
-                <div class="header-title">
-                  <div
-                    class="custom-control custom-checkbox custom-control-inline"
-                  >
-                    <!-- <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="customCheck05"
-                    /> -->
-                    <label class="custom-control-label h5" for="customCheck05">
-                      {{ item.name }}</label
-                    >
-                  </div>
-                </div>
-                <!-- <div><a href="#" class="btn bg-secondary-light">Design</a></div> -->
-              </div>
-              <div class="card-body">
-                <div class="form-group mb-0">
-                  <label for="exampleInputText01" class="h5"
-                  >Ajouter compétence</label>
-                  <div class="form-group mb-3 position-relative">
-                    <input
-                      type="text"
-                      class="form-control bg-white"
-                      placeholder="skill"
-                      style="width: 90%"
-                      [(ngModel)]="newSkill"
-                    />
-                    <a class="task-edit task-simple-edit text-body">
-                      <a
+            <div class="card-body">
+              <div class="form-group mb-0">
+                <label for="exampleInputText01" class="h5"
+                  >Ajouter compétence</label
+                >
+                <div class="form-group mb-3 position-relative">
+                  <input
+                    type="text"
+                    class="form-control bg-white"
+                    placeholder="Catégorie"
+                    style="width: 90%"
+                    [(ngModel)]="newSkill"
+                  />
+                  <a class="task-edit task-simple-edit text-body">
+                    <a
                       class="btn bg-primary-light mr-3"
                       (click)="addSkill(item)"
                       >Ajouter</a
                     >
-                    </a>
-                  </div>
+                  </a>
                 </div>
-                <label for="exampleInputText01" class="h5">Les compétence</label>
-                <div
-                  class="form-group mb-3 position-relative"
-                  *ngFor="let skill of item.competences"
-                >
-                  <input
-                    type="text"
-                    style="width: 80%"
-                    class="form-control bg-white"
-                    placeholder="{{ skill.name }}"
-                    [(ngModel)]="skill.name"
-                  />
-                 
-  
-                <!-- <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group mb-0">
-                          <label for="exampleInputText2" class="h5"
-                            >Memebers</label
-                          >
-                          <div class="dropdown bootstrap-select form-control">
-                            <select
-                              name="type"
-                              class="selectpicker form-control"
-                              data-style="py-0"
-                            >
-                              <option>Memebers</option>
-                              <option>Kianna Septimus</option>
-                              <option>Jaxson Herwitz</option>
-                              <option>Ryan Schleifer</option></select
-                            ><button
-                              type="button"
-                              tabindex="-1"
-                              class="btn dropdown-toggle py-0"
-                              data-toggle="dropdown"
-                              role="combobox"
-                              aria-owns="bs-select-1"
-                              aria-haspopup="listbox"
-                              aria-expanded="false"
-                              title="Memebers"
-                            >
-                              <div class="filter-option">
-                                <div class="filter-option-inner">
-                                  <div class="filter-option-inner-inner">
-                                    Memebers
-                                  </div>
-                                </div>
-                              </div>
-                            </button>
-                            <div class="dropdown-menu">
-                              <div
-                                class="inner show"
-                                role="listbox"
-                                id="bs-select-1"
-                                tabindex="-1"
-                              >
-                                <ul
-                                  class="dropdown-menu inner show"
-                                  role="presentation"
-                                ></ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group mb-0">
-                          <label for="exampleInputText3" class="h5"
-                            >Due Dates*</label
-                          >
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="exampleInputText3"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <h5 class="mb-2">Description</h5>
-                        <p class="mb-0">
-                          Amet minim mollit non deserunt ullamco est sit aliqua
-                          dolor do amet sint. Velit officia consequat duis enim
-                          velit mollit. Exercitation veniam consequat sunt nostrud
-                          amet.
-                        </p>
-                      </div>
-                      <div class="col-lg-6">
-                        <h5 class="mb-2">Checklist</h5>
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <div
-                              class="custom-control custom-checkbox custom-control-inline mr-0"
-                            >
-                              <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="customCheck1"
-                              />
-                              <label
-                                class="custom-control-label mb-1"
-                                for="customCheck1"
-                                >Design mobile version</label
-                              >
-                            </div>
-                            <div
-                              class="custom-control custom-checkbox custom-control-inline mr-0"
-                            >
-                              <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="customCheck02"
-                              />
-                              <label
-                                class="custom-control-label mb-1"
-                                for="customCheck02"
-                                >Use images of unsplash.com</label
-                              >
-                            </div>
-                            <div
-                              class="custom-control custom-checkbox custom-control-inline mr-0"
-                            >
-                              <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="customCheck3"
-                              />
-                              <label
-                                class="custom-control-label"
-                                for="customCheck3"
-                                >Vector images of small size.</label
-                              >
-                            </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <div
-                              class="custom-control custom-checkbox custom-control-inline mr-0"
-                            >
-                              <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="customCheck04"
-                              />
-                              <label
-                                class="custom-control-label mb-1"
-                                for="customCheck04"
-                                >Design mobile version of landing page</label
-                              >
-                            </div>
-                            <div
-                              class="custom-control custom-checkbox custom-control-inline mr-0"
-                            >
-                              <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="customCheck5"
-                              />
-                              <label
-                                class="custom-control-label mb-1"
-                                for="customCheck5"
-                                >Use images of unsplash.com</label
-                              >
-                            </div>
-                            <div
-                              class="custom-control custom-checkbox custom-control-inline mr-0"
-                            >
-                              <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="customCheck06"
-                              />
-                              <label
-                                class="custom-control-label"
-                                for="customCheck06"
-                                >Vector images of small size..</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
+              </div>
+              <label for="exampleInputText01" class="h5">Les compétences</label>
+              <div
+                class="form-group mb-3 position-relative"
+                *ngFor="let skill of item.competences"
+              >
+                <input
+                  style="width: 80%"
+                  type="text"
+                  class="form-control bg-white"
+                  placeholder="{{ skill.name }}"
+                  [(ngModel)]="skill.name"
+                />
                 <a class="task-edit task-simple-edit text-body">
                   <a
                     class="btn bg-success-light mr-3"
                     (click)="editSkill(item, skill)"
-                    >modifier</a
+                    >Modifier</a
                   >
                   <a
                     class="btn bg-secondary-light mr-3"
                     (click)="deleteSkill(skill)"
-                    >supprimer</a
+                    >Supprimer</a
                   >
                 </a>
               </div>
@@ -361,7 +181,7 @@
     <div class="modal-content">
       <div class="modal-header d-block text-center pb-3 border-bttom">
         <h3 class="modal-title" id="exampleModalCenterTitle">
-          Nouveau Category
+          Nouvelle Catégorie
         </h3>
       </div>
       <div class="modal-body">
@@ -369,13 +189,13 @@
           <div class="col-lg-12">
             <div class="form-group mb-3">
               <label for="exampleInputText02" class="h5"
-                >Titre de categorie</label
+                >Titre de la categorie</label
               >
               <input
                 type="text"
                 class="form-control"
                 id="exampleInputText02"
-                placeholder="Titre de categorie"
+                placeholder="Titre de la categorie"
                 [(ngModel)]="newCategory.name"
               />
               <a href="#" class="task-edit text-body"
@@ -390,7 +210,7 @@
                 type="text"
                 class="form-control"
                 id="exampleInputText02"
-                placeholder="description"
+                placeholder="Description"
                 [(ngModel)]="newCategory.description"
               />
               <a href="#" class="task-edit text-body"
@@ -410,10 +230,10 @@
                 Enregistrer
               </div>
               <div class="btn btn-primary" data-dismiss="modal">Annuler</div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
