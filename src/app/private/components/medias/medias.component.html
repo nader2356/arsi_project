@@ -3,12 +3,11 @@
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         <div class="header-title">
-          <h4 class="card-title">Media List</h4>
+          <h4 class="card-title">Médias</h4>
         </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <div class="row justify-content-between">
           <!-- <div class="row justify-content-between">
             <div class="col-sm-6 col-md-6">
               <div id="user_list_datatable_info" class="dataTables_filter">
@@ -26,6 +25,7 @@
               </div>
             </div>
           </div> -->
+
           <div class="row">
             <div class="col-lg-12">
               <div class="card">
@@ -33,7 +33,7 @@
                   <div
                     class="d-flex flex-wrap align-items-center justify-content-between breadcrumb-content"
                   >
-                    <h5>Medias</h5>
+                    <h5>Médias</h5>
                     <div class="pl-3 border-left btn-new">
                       <a
                         href="#"
@@ -41,9 +41,8 @@
                         data-target="#add-media-modal"
                         data-toggle="modal"
                       >
-                        Add Media
+                        Ajouter Média
                       </a>
-                     
                     </div>
                   </div>
                 </div>
@@ -91,7 +90,6 @@
                       >
                         <img
                           src="assets/images/insert-image.png"
-                         
                           class="event-image"
                           style="min-height: 240px"
                           *ngIf="!item.image"
@@ -105,18 +103,15 @@
                       </div>
                       <h5 class="mb-1">{{ item.title }}</h5>
                       <p class="mb-3">
-                      
                         {{ item.description }}
                       </p>
                       <div class="pt-3 border-top">
                         <p class="mb-1">
-                        
                           <i class="ri-map-pin-line"></i>
                           {{ item.type }}
                         </p>
                         <div class="d-flex justify-content-between mb-1">
                           <span>
-                   
                             <i class="ri-calendar-2-line"></i>
                             {{ item.createdAt | date }}
                           </span>
