@@ -20,6 +20,10 @@ import java.util.List;
 @RestController
 @RequestMapping(Constants.APP_ROOT_ADMIN+"/userCompetence")
 @Api(tags = "(Admin) User's Competence management ")
+
+
+
+@CrossOrigin("*")
 public class UserCompetenceAdminController {
 
     private final UserCompetenceService userCompetenceService;

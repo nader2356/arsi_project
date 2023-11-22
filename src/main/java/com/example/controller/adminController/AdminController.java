@@ -19,6 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping(Constants.APP_ROOT_ADMIN)
 @Api(tags = "(Admin) User Management ")
+
+@CrossOrigin("*")
 public class AdminController {
 
     public final UserService userService;

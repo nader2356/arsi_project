@@ -17,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping(Constants.APP_ROOT_ADMIN+"/competence")
 @Api(tags = "(Admin) Competence Management ")
+
+@CrossOrigin("*")
 public class CompetenceAdminController {
 
 

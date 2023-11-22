@@ -19,6 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping(Constants.APP_ROOT_MEMBER+"/userCompetence")
 @Api(tags = "(Member) User's Competence Management ")
+
+
+@CrossOrigin("*")
 public class UserCompetenceMemberController {
 
     private final UserCompetenceService userCompetenceService;

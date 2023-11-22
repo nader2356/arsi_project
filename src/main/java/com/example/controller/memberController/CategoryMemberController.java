@@ -14,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping(Constants.APP_ROOT_MEMBER+"/category")
 @Api(tags = "(Member) Category Management ")
+
+
+@CrossOrigin("*")
 public class CategoryMemberController {
 
     private final CategoryService categoryService;
