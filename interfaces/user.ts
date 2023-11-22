@@ -12,6 +12,7 @@ export interface User {
   dateOfBirth: Date;
   gender: string;
   job: string;
+  post?: string;
   office: string;
   password: string;
   universityOrCompany: string;
