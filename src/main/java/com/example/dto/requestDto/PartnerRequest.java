@@ -28,7 +28,6 @@ public class PartnerRequest {
     private String contact;
     @Enumerated(EnumType.STRING)
     private PartnerType type;
-    @URL(message = "this urlImage is not valid")
     private String image;
 
 

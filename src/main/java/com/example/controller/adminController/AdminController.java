@@ -39,8 +39,7 @@ public class AdminController {
     
     private final FileStorageService fileStorageService;
     
-    @Value("${file.upload-dir}")
-    private String fileStorageLocation;
+
 
 
     @PostMapping(value = "/filter")
@@ -52,6 +51,13 @@ public class AdminController {
         userService.enableMember(id);
         return ResponseEntity.ok("This Account enabled with success !!!!!");
     }
+    
+    @PutMapping(value = "/disable/{id}")
+    public ResponseEntity<String> disableMember(@PathVariable(name = "id") Long id) {
+        userService.disableAccount(id);
+        return ResponseEntity.ok("This Account is disabled !!!!!");
+    }
+    
     @DeleteMapping(value = "{id}")
     public ResponseEntity<String> deleteMember(@PathVariable(name = "id") Long id){
         userService.deleteMember(id);
@@ -75,11 +81,10 @@ public class AdminController {
         return ResponseEntity.ok("update success!!");
     }
     
-    @GetMapping("/{filename:.+}")
+    @GetMapping("img/{filename:.+}")
     public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
 
-        System.out.println("fileName  --**--:"+filename);
-      Resource resource =   fileStorageService.loadFileAsResource(filename);
+    	Resource resource = userService.serveImage(filename);
      return   ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, "image/jpeg") // Modify the content type as needed
                 .body(resource);
@@ -91,7 +96,7 @@ public class AdminController {
         return ResponseEntity.ok("Password changed successfully !!");
     }
     
-    @PostMapping(value = "uploadImage{userId}")
+    @PostMapping(value = "uploadImage/{userId}")
     public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file,@PathVariable Long userId){
         userService.uploadImage(file,userId);
         return ResponseEntity.ok("upload success");
@@ -104,5 +109,21 @@ public class AdminController {
 
         userService.changePassword(request,id);
         return ResponseEntity.ok("Password changed successfully !!");
+    }
+    
+    @PostMapping(value = "uploadCV/{userId}")
+    public ResponseEntity<String> storeCV(@PathParam("file") MultipartFile file,@PathVariable Long userId){
+        userService.uploadCv(file,userId);
+        return ResponseEntity.ok("upload success");
+    }
+
+    @GetMapping("CV/{filename:.+}")
+    public ResponseEntity<Resource> serveCV(@PathVariable String filename) {
+
+
+        Resource resource = userService.serveCv(filename);
+        return   ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf") // Modify the content type as needed
+                .body(resource);
     }
 }

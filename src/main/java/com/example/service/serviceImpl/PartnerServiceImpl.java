@@ -1,5 +1,6 @@
 package com.example.service.serviceImpl;
 
+import com.example.config.UtilsConfiguration;
 import com.example.dto.requestDto.PartnerRequest;
 
 import com.example.dto.responseDto.PartnerResponse;
@@ -9,17 +10,28 @@ import com.example.exception.ConflictException;
 import com.example.exception.NotFoundException;
 import com.example.repository.PartnerRepository;
 import com.example.service.PartnerService;
+import com.example.util.FileStorageService;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class PartnerServiceImpl implements PartnerService {
 
     private final PartnerRepository partnerRepository;
+    
+    @Autowired
+    private FileStorageService fileStorageService;
+    
     @Override
     public void addPartner(PartnerRequest partnerRequest) {
         if (partnerRepository.existsByName(partnerRequest.getName())){
@@ -85,4 +97,28 @@ public class PartnerServiceImpl implements PartnerService {
         }
         partnerRepository.deleteById(id);
     }
+    
+    @Override
+    public void uploadImage(MultipartFile file, Long id) {
+        Partner partner = partnerRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException("partner is not exist"));
+
+        if (UtilsConfiguration.isImage(Objects.requireNonNull(file.getContentType()))){
+
+            fileStorageService.storeFile(file, "PARTNER_IMG");
+            partner.setImage(file.getOriginalFilename());
+            partnerRepository.save(partner);
+
+        }else{
+            throw new RuntimeException("mahiyech image****************");
+        }
+    }
+
+    @Override
+    public Resource serveImage(String fileName) {
+        fileName = "PARTNER_IMG/"+fileName;
+        return fileStorageService.loadFileAsResource(fileName);
+    }
+    
+    
 }

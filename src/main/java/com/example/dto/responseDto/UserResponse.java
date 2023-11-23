@@ -39,6 +39,8 @@ public class UserResponse {
 	    @Enumerated(EnumType.STRING)
 	    private Office office;
 		private String image;
+		private String cv;
+		private boolean status;
 	    private Instant createdAt;
 	    private Instant updatedAt;
 	    private Instant expiresAt;
@@ -61,6 +63,8 @@ public class UserResponse {
 	                .post(user.getPost())
 	                .office(user.getOffice())
 					.image(user.getImage())
+					.cv(user.getCv())
+		            .status(user.isStatus())
 	                .createdAt(user.getCreatedAt())
 	                .updatedAt(user.getUpdatedAt())
 	                .expiresAt(user.getExpiresAt())

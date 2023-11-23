@@ -6,7 +6,11 @@ import com.example.dto.responseDto.FormationResponse;
 import com.example.service.FormationService;
 import com.example.util.Constants;
 import io.swagger.annotations.Api;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +55,21 @@ public class FormationAdminController {
 
         formationService.deleteFormation(id);
         return ResponseEntity.ok("delete success");
+    }
+    
+    @PostMapping(value = "uploadImage/{formationId}")
+    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file, @PathVariable Long formationId){
+        formationService.uploadImage(file,formationId);
+        return ResponseEntity.ok("upload success");
+    }
+
+    @GetMapping("img/{filename:.+}")
+    public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
+
+
+        Resource resource = formationService.serveImage(filename);
+        return   ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                .body(resource);
     }
 }

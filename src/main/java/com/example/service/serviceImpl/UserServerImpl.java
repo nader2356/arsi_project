@@ -21,11 +21,14 @@ import com.example.util.OtpUtil;
 import com.example.util.enumData.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityManager;
@@ -36,13 +39,8 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-
 
 @Service
 @RequiredArgsConstructor
@@ -56,8 +54,6 @@ public class UserServerImpl implements UserService {
     private EmailUtil emailUtil;
     @Autowired
     private FileStorageService fileStorageService;
-
-
     @Override
     public List<UserResponse> getAllMember() {
         List<User> users = userRepository.findAllMember();
@@ -96,7 +92,10 @@ public class UserServerImpl implements UserService {
         user.setUniversityOrCompany(request.getUniversityOrCompany());
         user.setOffice(request.getOffice());
         user.setImage(request.getImage());
+
+
         userRepository.save(user);
+
     }
     @Override
     public void updateUser(Long id, UpdateUserRequest request) {
@@ -122,6 +121,7 @@ public class UserServerImpl implements UserService {
         user.setImage(request.getImage());
         user.setPost(request.getPost());
         user.setRole(request.getRole());
+
         userRepository.save(user);
     }
     @Override
@@ -144,7 +144,17 @@ public class UserServerImpl implements UserService {
         today.add(Calendar.YEAR, 1);
         user.setExpiresAt(today.toInstant());
         userRepository.save(user);
+
     }
+
+    @Override
+    public void disableAccount(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.setStatus(!user.isStatus());
+        userRepository.save(user);
+    }
+
+
     @Override
     public List<UserResponse> getMemberByFilter(SearchMember serachUserDTO) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -285,20 +295,15 @@ public class UserServerImpl implements UserService {
         }
         user.setPassword(passwordEncoder.encode(passwordChangeRequest.getNewPassword()));
         userRepository.save(user);
-
     }
-
-
     @Transactional
     public void forgotPassword(String username) {
         User user = userRepository.findByUserName(username).orElseThrow();
-
         String otp = otpUtil.generateOTP();
         user.setOtp(otp);
         userRepository.save(user);
         emailUtil.sendOTPEmail(user.getEmail(), otp);
     }
-
     @Transactional
     public void resetPasswordWithOTP(String username, String otp, String newPassword) {
         User user = userRepository.findByUserName(username).orElseThrow();
@@ -311,22 +316,47 @@ public class UserServerImpl implements UserService {
             throw new RuntimeException("Invalid OTP or user not found.");
         }
     }
-
     @Override
     public void uploadImage(MultipartFile file, Long id) {
-
         User user = userRepository.findById(id).orElseThrow(
                 ()-> new NotFoundException("user is not exist"));
 
         if (UtilsConfiguration.isImage(Objects.requireNonNull(file.getContentType()))){
-
-            UploadFileDetails uploadFileDetails = fileStorageService.storeFile(file, "USER_IMG");
-
-             user.setImage(uploadFileDetails.getFileDisplayUri());
+            fileStorageService.storeFile(file, "USER_IMG");
+             user.setImage(file.getOriginalFilename());
              userRepository.save(user);
+
         }else{
             throw new RuntimeException("mahiyech image****************");
         }
+    }
+
+    @Override
+    public Resource serveImage(String fileName) {
+        fileName = "USER_IMG/"+fileName;
+        return fileStorageService.loadFileAsResource(fileName);
+    }
+
+    @Override
+    public void uploadCv(MultipartFile file, Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException("user is not exist"));
+
+        if (UtilsConfiguration.isPdf(Objects.requireNonNull(file.getContentType()))){
+
+            fileStorageService.storeFile(file, "USER_CV");
+            user.setCv(file.getOriginalFilename());
+            userRepository.save(user);
+
+        }else{
+            throw new RuntimeException("mahouwech PDF image****************");
+        }
+    }
+
+    @Override
+    public Resource serveCv(String fileName) {
+        fileName = "USER_CV/"+fileName;
+        return fileStorageService.loadFileAsResource(fileName);
     }
 
 

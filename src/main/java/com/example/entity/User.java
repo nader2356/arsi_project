@@ -1,5 +1,9 @@
 package com.example.entity;
 
+import com.example.util.enumData.Gender;
+import com.example.util.enumData.Office;
+import com.example.util.enumData.Post;
+import com.example.util.enumData.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,29 +15,11 @@ import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.example.util.enumData.Gender;
-import com.example.util.enumData.Office;
-import com.example.util.enumData.Post;
-import com.example.util.enumData.Role;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -62,9 +48,8 @@ public class User implements UserDetails {
     private Post post;
     @Enumerated(EnumType.STRING)
     private Office office;
-     private String image;
-
-
+    private String image;
+    private String cv;
     @CreationTimestamp
     private Instant expiresAt;
     @CreationTimestamp
@@ -74,47 +59,40 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     private String otp;
+    private boolean status = Boolean.TRUE;
     private boolean deleted = Boolean.FALSE;
-    @OneToMany(fetch = FetchType.EAGER ,mappedBy = "user")
-    private Set<UserCompetence> userCompetenceSet;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
-
     @Override
     public String getPassword() {
         return password;
     }
-
     @Override
     public String getUsername() {
         return userName;
     }
-
     @Override
     public boolean isAccountNonExpired() {
-        if (role == Role.MEMBER){
-        // return true if today < expires_at
-        return expiresAt.isAfter(Instant.now());
+        if (role == Role.MEMBER) {
+            // return true if today < expires_at
+            return (expiresAt.isAfter(Instant.now()) && status);
         }
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;
     }
-    
 }

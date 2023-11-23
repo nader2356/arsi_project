@@ -1,5 +1,6 @@
 package com.example.service.serviceImpl;
 
+import com.example.config.UtilsConfiguration;
 import com.example.dto.requestDto.FormationRequest;
 import com.example.dto.requestDto.UpdateFormationRequest;
 import com.example.dto.responseDto.FormationResponse;
@@ -7,17 +8,28 @@ import com.example.entity.Formation;
 import com.example.exception.NotFoundException;
 import com.example.repository.FormationRepository;
 import com.example.service.FormationService;
+import com.example.util.FileStorageService;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class FormationServiceImpl implements FormationService {
 
     private final FormationRepository formationRepository;
+    
+    @Autowired
+    private FileStorageService fileStorageService;
+    
     @Override
     public void addFormation(FormationRequest formationRequest, boolean status) {
        formationRepository.save(Formation.builder()
@@ -91,5 +103,27 @@ public class FormationServiceImpl implements FormationService {
         }
         formationRepository.deleteById(id);
 
+    }
+    
+    @Override
+    public void uploadImage(MultipartFile file, Long id) {
+        Formation formation = formationRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException("formation is not exist"));
+
+        if (UtilsConfiguration.isImage(Objects.requireNonNull(file.getContentType()))){
+
+            fileStorageService.storeFile(file, "FORMATION_IMG");
+            formation.setImage(file.getOriginalFilename());
+            formationRepository.save(formation);
+
+        }else{
+            throw new RuntimeException("mahiyech image****************");
+        }
+    }
+
+    @Override
+    public Resource serveImage(String fileName) {
+        fileName = "FORMATION_IMG/"+fileName;
+        return fileStorageService.loadFileAsResource(fileName);
     }
 }
