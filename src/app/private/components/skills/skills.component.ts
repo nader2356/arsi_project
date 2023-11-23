@@ -72,8 +72,8 @@ export class SkillsComponent {
         console.log(res);
         this.messageService.add({
           severity: 'success',
-          summary: 'Catégorie enregistrée avec succès.',
-          detail: 'Catégorie enregistrée avec succès. !!!',
+          summary: 'Catégorie supprimée avec succès.',
+          detail: 'Catégorie supprimée avec succès!',
         });
       });
   }
@@ -84,8 +84,8 @@ export class SkillsComponent {
       console.log(res);
       this.messageService.add({
         severity: 'success',
-        summary: 'skill deleted Successfully',
-        detail: 'skill deleted Successfully !!!',
+        summary: 'Catégorie supprimée avec succès.',
+        detail: 'Catégorie supprimée avec succès!',
       });
     });
   }
