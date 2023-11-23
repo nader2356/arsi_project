@@ -12,22 +12,23 @@
                 data-toggle="pill"
                 href="#personal-information"
               >
-                Personal Information
+              Informations personnelles
               </a>
             </li>
             <li class="col-md-3 p-2">
               <a class="nav-link" data-toggle="pill" href="#chang-pwd">
-                Change Password
+                Modifier mot de passe
               </a>
             </li>
+
             <li class="col-md-3 p-2">
               <a class="nav-link" data-toggle="pill" href="#manage-contact">
-                Manage Contact
+                Gérer les contacts
               </a>
             </li>
             <li class="col-md-2 p-2">
               <a class="nav-link" data-toggle="pill" href="#change-skill">
-                Member Skills
+                Compétences des membres
               </a>
             </li>
           </ul>
@@ -47,15 +48,14 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div class="iq-header-title">
-              <h4 class="card-title">Personal Information</h4>
+              <h4 class="card-title">Informations personnelles</h4>
             </div>
           </div>
           <div class="card-body">
- 
             <form #Changeform="ngForm">
               <div class="form-group row align-items-center">
                 <label for="image-upload" class="col-md-3 col-form-label"
-                  >Profile Image</label
+                  >Image Profile</label
                 >
                 <div class="col-md-9">
                   <div class="profile-img-edit">
@@ -66,7 +66,6 @@
                         src="assets/images/user/11.png"
                         alt="profile-pic"
                       />
-                  
                       <img
                         *ngIf="user_update.image"
                         class="crm-profile-pic rounded-circle avatar-100"
@@ -94,7 +93,7 @@
               <br /><br />
               <div class="row align-items-center">
                 <div class="form-group col-sm-6">
-                  <label for="fname">First Name:</label>
+                  <label for="fname">Nom : </label>
                   <input
                     type="text"
                     class="form-control"
@@ -107,7 +106,7 @@
                   />
                 </div>
                 <div class="form-group col-sm-6">
-                  <label for="lname">Last Name:</label>
+                  <label for="lname">Prénom :</label>
                   <input
                     type="text"
                     class="form-control"
@@ -120,7 +119,7 @@
                   />
                 </div>
                 <div class="form-group col-sm-6">
-                  <label for="uname">User Name:</label>
+                  <label for="uname">Login :</label>
                   <input
                     type="text"
                     class="form-control"
@@ -146,7 +145,7 @@
                   />
                 </div>
                 <div class="form-group col-sm-6">
-                  <label>Job</label>
+                  <label>Fonction</label>
                   <select
                     class="form-control"
                     id="Function"
@@ -159,7 +158,7 @@
                   </select>
                 </div>
                 <div class="form-group col-sm-6">
-                  <label for="uname">Phone:</label>
+                  <label for="uname">Téléphone :</label>
                   <input
                     type="text"
                     class="form-control"
@@ -171,8 +170,9 @@
                     [class.is-invalid]="phone.invalid && phone.touched"
                   />
                 </div>
+
                 <div class="form-group col-sm-6">
-                  <label for="dob">Date Of Birth:</label>
+                  <label for="dob">Date de Naissance:</label>
                   <input
                     class="form-control"
                     id="dob"
@@ -184,8 +184,9 @@
                     [class.is-invalid]="date.invalid && date.touched"
                   />
                 </div>
+
                 <div class="form-group col-sm-6">
-                  <label for="fname">University Or Company:</label>
+                  <label for="fname">Université ou Entreprise:</label>
                   <input
                     type="text"
                     class="form-control"
@@ -198,7 +199,7 @@
                   />
                 </div>
                 <div class="form-group col-sm-6">
-                  <label for="country">Office:</label>
+                  <label for="country">Bureau:</label>
                   <select
                     class="form-control"
                     id="office"
@@ -226,7 +227,7 @@
                 <div class="card">
                   <div class="card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                      <h4 class="card-title">Upload your CV here</h4>
+                      <h4 class="card-title">Téléchargez votre CV ici</h4>
                     </div>
                   </div>
                   <div class="card-body">
@@ -237,7 +238,6 @@
                       style="cursor: pointer"
                       *ngIf="user_update.cv"
                     />
-
                     <input
                       class="mx-5"
                       type="file"
@@ -245,13 +245,12 @@
                       [(ngModel)]="cv.file"
                       name="cv"
                     />
-                  
                     <button
                       (click)="uploadFile()"
                       class="btn btn-primary px-5"
                       [disabled]="!selectedFile"
                     >
-                      Upload CV
+                    Téléchargez le CV
                     </button>
                   </div>
                 </div>
@@ -263,7 +262,7 @@
                 class="btn btn-primary mr-2"
                 (click)="ChangeUser()"
               >
-                Submit
+                Sauvegarder
               </button>
             </form>
           </div>
@@ -273,15 +272,15 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div class="iq-header-title">
-              <h4 class="card-title">Change Password</h4>
+              <h4 class="card-title">Modifier Mot de passe</h4>
             </div>
           </div>
           <div class="card-body">
             <form #changePassword="ngForm" (ngSubmit)="ChangePassword()">
               <div class="form-group">
-                <label for="cpass">Current Password:</label>
+                <label for="cpass">Mot de passe actuel:</label>
                 <a routerLink="/auth/reset" class="float-right"
-                  >Forgot Password</a
+                  >Mot de passe oublié</a
                 >
                 <input
                   type="Password"
@@ -307,7 +306,7 @@
                 </span>
               </div>
               <div class="form-group">
-                <label for="npass">New Password:</label>
+                <label for="npass">Nouveau mot de passe:</label>
                 <input
                   type="Password"
                   class="form-control"
@@ -336,7 +335,7 @@
                 type="submit"
                 class="btn btn-primary mr-2"
               >
-                Submit
+                Sauvegarder
               </button>
             </form>
           </div>
@@ -346,14 +345,13 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div class="iq-header-title">
-              <h4 class="card-title">Manage Contact</h4>
+              <h4 class="card-title">Gestion des contacts</h4>
             </div>
           </div>
           <div class="card-body">
-           
             <form #Changeform="ngForm">
               <div class="form-group">
-                <label for="cno">Contact type:</label>
+                <label for="cno">CType Contact:</label>
                 <input
                   type="text"
                   placeholder="Email /Web Site /Email and website"
@@ -381,14 +379,12 @@
                   [class.is-invalid]="url.invalid && url.touched"
                 />
               </div>
-
-            
               <button
                 type="submit"
                 (click)="Contact()"
                 class="btn btn-primary mr-2"
               >
-                Submit
+                Sauvegarder
               </button>
             </form>
             <br />
@@ -400,6 +396,7 @@
           <thead>
             <tr>
               <th>Name</th>
+              <th>Nom</th>
               <th></th>
               <th></th>
               <th></th>
@@ -418,7 +415,7 @@
                   (click)="deleteCategory(categ.CategoryId)"
                   class="btn btn-danger"
                 >
-                  Delete
+                  Supprimer
                 </button>
                 <button
                   style="margin-right: 16px"
@@ -426,7 +423,7 @@
                   class="btn btn-success"
                   style="margin-left: 10px"
                 >
-                  Get Related skills
+                Obtenir des compétences connexes
                 </button>
               </td>
             </tr>
@@ -435,6 +432,7 @@
           <thead>
             <tr>
               <th>SkillName</th>
+              <th>Compétence</th>
               <th></th>
               <th></th>
               <th></th>
