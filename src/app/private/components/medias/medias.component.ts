@@ -44,7 +44,7 @@ export class MediasComponent  implements OnInit {
       this.getAllMedia();
       this.messageService.add({
         severity: 'success',
-        summary: 'media added Successfully',
+        summary: 'Média ajouter avec succès.',
       });
     } else {
       console.log('no');
@@ -55,7 +55,7 @@ export class MediasComponent  implements OnInit {
       this.getAllMedia();
       this.messageService.add({
         severity: 'success',
-        summary: 'media updated Successfully',
+        summary: 'Média Modifiée avec succès.',
       });
     } else {
       console.log('no');
@@ -70,7 +70,7 @@ export class MediasComponent  implements OnInit {
       this.getAllMedia();
       this.messageService.add({
         severity: 'success',
-        summary: 'media deleted Successfully',
+        summary: 'Média supprimée avec succès.',
       });
     });
   }
