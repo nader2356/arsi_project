@@ -10,9 +10,30 @@
           <div class="card">
             <div class="card-header">
               <div class="iq-header-title">
-                <h4 class="card-title">Edit User</h4>
+                <h4 class="card-title">Modifier un utilisateur</h4>
               </div>
             </div>
+            <div class="card-body">
+              <form #myForm="ngForm">
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="uname">Le nom de l'utilisateur</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="userName"
+                      [(ngModel)]="user.userName"
+                      required
+                    />
+                    <div
+                      class="text-danger text-sm ml-2"
+                      *ngIf="
+                        myForm.controls['userName']?.invalid &&
+                        myForm.controls['userName'].touched
+                      "
+                    >
+                      Le nom est obligatoire.
+                    </div>
                   </div>
                   <div class="form-group col-sm-6">
                     <label for="email">Email:</label>
@@ -31,17 +52,17 @@
                         !myForm.controls['email']?.hasError('email')
                       "
                     >
-                      Email is required.
+                      L'email est obligatoire.
                     </div>
                     <div
                       class="text-danger mt-2"
                       *ngIf="myForm.controls['email']?.hasError('email')"
                     >
-                      Please enter a valid email address.
+                      Merci d'entrer une adresse email valide.
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label for="email">Region:</label>
+                    <label for="email">Région:</label>
                     <input
                       type="email"
                       class="form-control"
@@ -56,11 +77,11 @@
                         myForm.controls['region'].touched
                       "
                     >
-                      Region is required.
+                      La région est obligatoire.
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label for="cname">Phone number:</label>
+                    <label for="cname">Numéro de téléphone:</label>
                     <input
                       type="text"
                       class="form-control"
@@ -76,7 +97,7 @@
                         !myForm.controls['phoneNumber']?.hasError('minlength')
                       "
                     >
-                      Phone number is required.
+                    Le numéro de téléphone est obligatoire.
                     </div>
                     <div
                       class="text-danger text-sm ml-2"
@@ -84,7 +105,7 @@
                         myForm.controls['phoneNumber']?.hasError('minlength')
                       "
                     >
-                      Phone number must have 8 characters.
+                      Le numéro de téléphone doit contenir 8 chiffres.
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -97,7 +118,6 @@
                     >
                       <option>MEMBER</option>
                       <option>ADMIN</option>
-                      <option>Visitor</option>
                     </select>
                     <div
                       class="text-danger text-sm ml-2"
@@ -106,11 +126,11 @@
                         myForm.controls['role'].touched
                       "
                     >
-                      Must select on option.
+                      Merci de séléctionner un role.
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label>Post:</label>
+                    <label>Poste:</label>
                     <select
                       class="form-control"
                       name="role"
@@ -150,7 +170,7 @@
                         myForm.controls['post'].touched
                       "
                     >
-                      Must select on option.
+                      Merci de séléctionner une poste.
                     </div>
                   </div>
                 </div>
@@ -161,10 +181,10 @@
                     (click)="updateUser(user)"
                     [disabled]="myForm.invalid"
                   >
-                    Submit
+                    Confirmer
                   </button>
                   <button type="reset" class="btn bg-gray" (click)="goBack()">
-                    Cancel
+                    Annuler
                   </button>
                 </div>
               </form>

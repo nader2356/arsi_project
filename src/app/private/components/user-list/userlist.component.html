@@ -1,61 +1,60 @@
 <div class="row">
-   <div class="col-sm-12">
-     <div class="card">
-       <div class="card-header d-flex justify-content-between">
-         <div class="header-title">
-           <h4 class="card-title">User List</h4>
-         </div>
-       </div>
-       <div class="card-body">
-         <div class="table-responsive">
-           <div class="row justify-content-between">
-             <div class="col-sm-6 col-md-6">
-               <div id="user_list_datatable_info" class="dataTables_filter">
-                 <form class="mr-3 position-relative">
-                   <div class="form-group mb-0">
-                     <input
-                       type="search"
-                       class="form-control"
-                       id="exampleInputSearch"
-                       placeholder="Search"
-                       aria-controls="user-list-table"
-                     />
-                   </div>
-                 </form>
-               </div>
-                </div>
-              
-                <div class="col-sm-6 col-md-6">
-                  <div class="user-list-files d-flex">
-                  
-                    <button
-                    class="btn bg-primary"
-                    (click)="redirectToNewUsertPage()"
-                  >
-                    Add User
-                  </button>
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+          <h4 class="card-title">Liste des utilisateurs</h4>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="row justify-content-between">
+            <div class="col-sm-6 col-md-6">
+              <div id="user_list_datatable_info" class="dataTables_filter">
+                <form class="mr-3 position-relative">
+                  <div class="form-group mb-0">
+                    <input
+                      type="search"
+                      class="form-control"
+                      id="exampleInputSearch"
+                      placeholder="Chercher ici"
+                      aria-controls="user-list-table"
+                    />
                   </div>
-               </div>
+                </form>
+              </div>
             </div>
-            <table
-              id="user-list-table"
-              class="table table-striped dataTable mt-4 text-md"
-              role="grid"
-              aria-describedby="user-list-page-info"
-            >
-              <thead>
-                <tr class="text-center">
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Contact</th>
-                  <th>Email</th>
-                  <th>Post</th>
-                  <th>Status</th>
-                  <th style="min-width: 110px">Action</th>
-                </tr>
-              </thead>
-              <tbody class="text-center">
-                <tr *ngFor="let user of users">
+            <div class="col-sm-6 col-md-6">
+              <div class="user-list-files d-flex">
+                <button
+                  class="btn bg-primary"
+                  (click)="redirectToNewUsertPage()"
+                >
+                  Nouveau utilisateur
+                </button>
+              </div>
+            </div>
+          </div>
+          <table
+            id="user-list-table"
+            class="table table-striped dataTable mt-4 text-md"
+            role="grid"
+            aria-describedby="user-list-page-info"
+          >
+            <thead>
+              <tr class="text-center">
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Poste</th>
+                <th>Statut</th>
+                <th style="min-width: 110px">Action</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr *ngFor="let user of users">
+                <td>
                   <img
                     *ngIf="!user.image"
                     src="assets/images/user/11.png"
@@ -68,98 +67,98 @@
                     alt="image"
                   />
                 </td>
-                  <td>{{ user.userName }}</td>
-                  <td>{{ user.phoneNumber }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.post }}</td>
-                  <td>
-                    <span class="badge bg-secondary" *ngIf="!user.status"
-                      >Disabled</span
-                    >
-                    <span class="badge bg-success" *ngIf="user.status"
-                      >Enabled</span
-                    >
-                  </td>
-                  <td class="pt-0 ">
-                    <div class="list-user-action">
-                      <div [hidden]="confirmDeleteId == user.id">
-                        <button
+                <td>{{ user.userName }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.post }}</td>
+                <td>
+                  <span class="badge bg-secondary" *ngIf="!user.status"
+                    >Desactiver</span
+                  >
+                  <span class="badge bg-success" *ngIf="user.status"
+                    >Activer</span
+                  >
+                </td>
+                <td class="pt-0">
+                  <div class="list-user-action">
+                    <div [hidden]="confirmDeleteId == user.id">
+                      <button
                         class="btn btn-sm btn-warning mr-1"
                         (click)="redirectToEditPage(user.id)"
                       >
-                        Edit
+                        Modifier
                       </button>
                       <button
                         [hidden]="user.status"
                         class="btn btn-sm btn-primary mr-1"
                         (click)="onEnableUser(user.id)"
                       >
-                        Enable
+                        Activer
                       </button>
                       <button
                         [hidden]="!user.status"
                         class="btn btn-sm btn-primary mr-1"
                         (click)="onEnableUser(user.id)"
                       >
-                        Disable
+                        Desactiver
                       </button>
                       <button
                         class="btn btn-sm btn-danger"
                         (click)="confirmDeleteId = user.id!"
                       >
-                        Delete
+                        Supprimer
                       </button>
-                      </div>
-                      <div
+                    </div>
+                    <div
                       [hidden]="confirmDeleteId !== user.id"
                       class="text-center mb-2"
                     >
-                        <strong class="text-sm">Delete?</strong><br />
-                        <button
+                      <strong class="text-sm">Voulez-vous supprimer ce utilisateur?</strong><br />
+                      <button
                         class="btn btn-sm btn-danger mr-1"
                         (click)="onDeleteAccount(user.id)"
                       >
-                        Yes
+                        Oui
                       </button>
                       <button
                         class="btn btn-sm btn-light"
                         (click)="confirmDeleteId = 0"
                       >
-                        No
+                        Non
                       </button>
-                      </div>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row justify-content-end mt-3">
-            <div class="col-md-6">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end mb-0">
-                  <li class="page-item disabled">
-                    <a
-                      class="page-link"
-                      href="#"
-                      tabindex="-1"
-                      aria-disabled="true"
-                      >Previous</a
-                    >
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end mt-3">
+          <div class="col-md-6">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-end mb-0">
+                <li class="page-item disabled">
+                  <a
+                    class="page-link"
+                    href="#"
+                    tabindex="-1"
+                    aria-disabled="true"
+                    >Précedents</a
+                  >
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Suivants</a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
