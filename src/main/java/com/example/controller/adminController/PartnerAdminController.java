@@ -5,11 +5,7 @@ import com.example.dto.responseDto.PartnerResponse;
 import com.example.service.PartnerService;
 import com.example.util.Constants;
 import io.swagger.annotations.Api;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,21 +48,6 @@ public class PartnerAdminController {
         return ResponseEntity.ok("delete success !");
     }
     
-    @PostMapping(value = "uploadImage/{partnerId}")
-    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file, @PathVariable Long partnerId){
-        partnerService.uploadImage(file,partnerId);
-        return ResponseEntity.ok("upload success");
-    }
-
-    @GetMapping("img/{filename:.+}")
-    public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
-
-
-        Resource resource = partnerService.serveImage(filename);
-        return   ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .body(resource);
-    }
 
 
 }

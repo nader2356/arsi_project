@@ -7,11 +7,17 @@ import com.example.util.enumData.Role;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SearchAdmin {
 	private Long id;
     private String firstName;
@@ -25,7 +31,8 @@ public class SearchAdmin {
     private Post post;
     @Enumerated(EnumType.STRING)
     private Office office;
-    private boolean expired = Boolean.FALSE;
+    private boolean status = Boolean.FALSE;
+    private boolean isPaid ;
     @Enumerated(EnumType.STRING)
     private Role role;
 

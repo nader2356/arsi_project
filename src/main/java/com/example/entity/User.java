@@ -59,7 +59,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     private String otp;
-    private boolean status = Boolean.TRUE;
+    private boolean status = Boolean.FALSE;
+    private boolean isPaid = Boolean.FALSE;
     private boolean deleted = Boolean.FALSE;
 
 
@@ -79,7 +80,7 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         if (role == Role.MEMBER) {
             // return true if today < expires_at
-            return (expiresAt.isAfter(Instant.now()) && status);
+        	 return (status);
         }
         return true;
     }

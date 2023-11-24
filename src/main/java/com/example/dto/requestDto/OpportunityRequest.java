@@ -24,5 +24,6 @@ public class OpportunityRequest {
     @Enumerated(EnumType.STRING)
     private OpportunityType type;
     private String company;
+    private String image;
 
 }

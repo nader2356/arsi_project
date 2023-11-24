@@ -4,6 +4,7 @@ package com.example.dto.searchRequest;
 import com.example.util.enumData.Gender;
 import com.example.util.enumData.Office;
 import com.example.util.enumData.Post;
+import com.example.util.enumData.Role;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,5 +25,7 @@ public class SearchMember {
     private Post post;
     @Enumerated(EnumType.STRING)
     private Office office;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }

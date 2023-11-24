@@ -10,6 +10,8 @@ import com.example.dto.searchRequest.SearchAdmin;
 import com.example.dto.searchRequest.SearchMember;
 
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -25,23 +27,12 @@ public interface UserService {
     void deleteMember(Long id);
     void enableMember(Long id);
     
-    void disableAccount(Long id);
-    
-    List<UserResponse> getMemberByFilter(SearchMember serachUserDTO);
-    List<UserResponse> getAllUserByFilter(SearchAdmin searchAdmin);
+    Page<UserResponse> getAllUserByFilter(SearchAdmin searchAdmin, Pageable pageable);
     void changePassword(PasswordChangeRequest passwordChangeRequest,Long id);
     
     void forgotPassword(String username) ;
 
 
     void resetPasswordWithOTP(String username, String otp, String newPassword) ;
-
-    void uploadImage(MultipartFile file,Long id);
-    
-    
-    Resource serveImage(String fileName);
-
-    void uploadCv(MultipartFile file,Long id);
-    Resource serveCv(String fileName);
 
 }

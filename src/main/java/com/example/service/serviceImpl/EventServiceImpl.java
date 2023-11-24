@@ -106,21 +106,5 @@ public class EventServiceImpl implements EventService {
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }
-    @Override
-    public void uploadImage(MultipartFile file, Long id) {
-        Event event = eventRepository.findById(id).orElseThrow(
-                ()-> new NotFoundException("event is not exist"));
-        if (UtilsConfiguration.isImage(Objects.requireNonNull(file.getContentType()))){
-            fileStorageService.storeFile(file, "EVENT_IMG");
-            event.setImage(file.getOriginalFilename());
-            eventRepository.save(event);
-        }else{
-            throw new RuntimeException("mahiyech image****************");
-        }
-    }
-    @Override
-    public Resource serveImage(String fileName) {
-        fileName = "EVENT_IMG/"+fileName;
-        return fileStorageService.loadFileAsResource(fileName);
-    }
+ 
 }

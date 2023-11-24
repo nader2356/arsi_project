@@ -6,13 +6,8 @@ import com.example.dto.responseDto.EventResponse;
 import com.example.service.EventService;
 import com.example.util.Constants;
 import com.example.util.enumData.EventType;
-
 import io.swagger.annotations.Api;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,20 +59,6 @@ public class EventAdminController {
         return ResponseEntity.ok("delete success !!");
     }
     
-    @PostMapping(value = "uploadImage/{eventId}")
-    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file, @PathVariable Long eventId){
-        eventService.uploadImage(file,eventId);
-        return ResponseEntity.ok("upload success");
-    }
-
-    @GetMapping("img/{filename:.+}")
-    public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
-
-
-        Resource resource = eventService.serveImage(filename);
-        return   ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .body(resource);
-    }
+   
 
 }

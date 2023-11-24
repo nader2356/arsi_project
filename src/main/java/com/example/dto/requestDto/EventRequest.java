@@ -30,6 +30,7 @@ public class EventRequest {
     private String formateur;
     private EventType type;
     private Long price;
+    private String image;
     private Long partnerId;
     private boolean isActivity;
 

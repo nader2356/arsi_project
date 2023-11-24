@@ -83,25 +83,5 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     }
 
-    @Override
-    public void uploadImage(MultipartFile file, Long id) {
-       Opportunity opportunity = opportunityRepository.findById(id).orElseThrow(
-                ()-> new NotFoundException("opportunity is not exist"));
-
-        if (UtilsConfiguration.isImage(Objects.requireNonNull(file.getContentType()))){
-
-            fileStorageService.storeFile(file, "OPPORTUNITY_IMG");
-            opportunity.setImage(file.getOriginalFilename());
-            opportunityRepository.save(opportunity);
-
-        }else{
-            throw new RuntimeException("mahiyech image****************");
-        }
-    }
-
-    @Override
-    public Resource serveImage(String fileName) {
-        fileName = "OPPORTUNITY_IMG/"+fileName;
-        return fileStorageService.loadFileAsResource(fileName);
-    }
+    
 }

@@ -2,7 +2,9 @@ package com.example.controller.memberController;
 
 import java.util.List;
 
-import org.springframework.core.io.Resource;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpHeaders;
 import com.example.dto.requestDto.PasswordChangeRequest;
 import com.example.dto.requestDto.UpdateMemberRequest;
-import com.example.dto.searchRequest.SearchMember;
+import com.example.dto.searchRequest.SearchAdmin;
 import com.example.dto.responseDto.UserResponse;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.websocket.server.PathParam;
 import com.example.service.UserService;
-
 import lombok.RequiredArgsConstructor;
 import com.example.util.Constants;
 import io.swagger.annotations.Api;
@@ -53,8 +49,8 @@ public class MemberController {
     }
 
     @PostMapping(value = "/filter")
-    public ResponseEntity<List<UserResponse>> getAllMember(@RequestBody SearchMember request){
-        return ResponseEntity.ok(userService.getMemberByFilter(request));
+    public ResponseEntity<Page<UserResponse>> getAllMember(@RequestBody SearchAdmin searchAdmin, Pageable pageable) {
+        return ResponseEntity.ok(userService.getAllUserByFilter(searchAdmin,pageable));
     }
      @PutMapping
     public ResponseEntity<String> updateMe(@RequestBody UpdateMemberRequest request){
@@ -70,35 +66,6 @@ public class MemberController {
         return ResponseEntity.ok("Password changed successfully !!");
     }
 
-    @PostMapping(value = "uploadImage/{userId}")
-    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file,@PathVariable Long userId){
-        userService.uploadImage(file,userId);
-        return ResponseEntity.ok("upload success");
-    }
-    
-    @GetMapping("img/{filename:.+}")
-    public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
-
-
-        Resource resource = userService.serveImage(filename);
-        return   ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg") // Modify the content type as needed
-                .body(resource);
-    }
-    @PostMapping(value = "uploadCV/{userId}")
-    public ResponseEntity<String> storeCV(@PathParam("file") MultipartFile file,@PathVariable Long userId){
-        userService.uploadCv(file,userId);
-        return ResponseEntity.ok("upload success");
-    }
-
-    @GetMapping("CV/{filename:.+}")
-    public ResponseEntity<Resource> serveCV(@PathVariable String filename) {
-
-        Resource resource = userService.serveCv(filename);
-        return   ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "application/pdf") // Modify the content type as needed
-                .body(resource);
-    }
-
+   
 
 }

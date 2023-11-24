@@ -6,13 +6,8 @@ import com.example.service.OpportunityService;
 import com.example.util.Constants;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.websocket.server.PathParam;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -52,21 +47,7 @@ public class OpportunityAdminController {
         opportunityService.deleteOpportunity(id);
         return ResponseEntity.ok("delete success !!!!");
     }
-    @PostMapping(value = "uploadImage/{opportunityId}")
-    public ResponseEntity<String> storeImage(@PathParam("file") MultipartFile file, @PathVariable Long opportunityId){
-        opportunityService.uploadImage(file,opportunityId);
-        return ResponseEntity.ok("upload success");
-    }
 
-    @GetMapping("img/{filename:.+}")
-    public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
-
-
-        Resource resource = opportunityService.serveImage(filename);
-        return   ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .body(resource);
-    }
 
 
 }
