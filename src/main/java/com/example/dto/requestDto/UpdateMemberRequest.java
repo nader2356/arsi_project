@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.URL;
+
 
 
 

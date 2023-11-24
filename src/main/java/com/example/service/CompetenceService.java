@@ -3,7 +3,7 @@ package com.example.service;
 
 import com.example.dto.requestDto.CompetenceRequest;
 import com.example.dto.responseDto.CompetenceResponse;
-import com.example.entity.Competence;
+
 
 import java.util.List;
 

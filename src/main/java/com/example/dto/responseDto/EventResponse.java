@@ -13,18 +13,22 @@ import java.time.LocalDateTime;
 @Builder
 public class EventResponse {
 
-    private Long id;
-    private String title;
-    private String description;
-    private LocalDateTime date;
-    private String image;
-    private Long numberOfParticipants;
-    private String location;
-    private EventType type;
-    private PartnerResponse partner;
-    private boolean status;
-    private Instant createdAt;
-    private Instant updatedAt;
+	 private Long id;
+	    private String title;
+	    private String description;
+	    private LocalDateTime date;
+	    private String image;
+	    private Long maxOfParticipants;
+	    private Long numberOfParticipants;
+	    private String formateur;
+	    private String location;
+	    private Long price;
+	    private EventType type;
+	    private PartnerResponse partner;
+	    private boolean status;
+	    private boolean isActivity;
+	    private Instant createdAt;
+	    private Instant updatedAt;
 
     public static EventResponse makeEvent(Event event){
         if (event.getPartner()==null){
@@ -38,6 +42,7 @@ public class EventResponse {
                     .location(event.getLocation())
                     .type(event.getType())
                     .status(event.isStatus())
+                    .isActivity(event.isActivity())
                     .createdAt(event.getCreatedAt())
                     .updatedAt(event.getUpdatedAt())
                     .build();
@@ -59,3 +64,4 @@ public class EventResponse {
     }
 
 }
+

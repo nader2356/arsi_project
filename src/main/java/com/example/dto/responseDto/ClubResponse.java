@@ -2,10 +2,10 @@ package com.example.dto.responseDto;
 
 import com.example.entity.Club;
 import com.example.util.enumData.Post;
-import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

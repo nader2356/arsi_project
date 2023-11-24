@@ -6,7 +6,7 @@ import com.example.config.UtilsConfiguration;
 import com.example.dto.requestDto.PasswordChangeRequest;
 import com.example.dto.requestDto.UpdateMemberRequest;
 import com.example.dto.requestDto.UpdateUserRequest;
-import com.example.dto.responseDto.UploadFileDetails;
+
 import com.example.dto.responseDto.UserResponse;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.dto.searchRequest.SearchMember;
@@ -22,13 +22,12 @@ import com.example.util.enumData.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityManager;
@@ -40,7 +39,7 @@ import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+
 
 @Service
 @RequiredArgsConstructor
@@ -223,6 +222,13 @@ public class UserServerImpl implements UserService {
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<User> root = criteriaQuery.from(User.class);
+        
+        if (searchAdmin.getId() != null) {
+            Predicate idPredicate = criteriaBuilder
+                    .equal(root.get("id"), searchAdmin.getId());
+            predicates.add(idPredicate);
+        }
+
         if (searchAdmin.getFirstName() != null) {
             Predicate firstNamePredicate = criteriaBuilder
                     .like(root.get("firstName"), "%" + searchAdmin.getFirstName() + "%");

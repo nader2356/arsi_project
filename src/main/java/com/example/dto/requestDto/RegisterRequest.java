@@ -7,10 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+
 import java.util.Date;
 
-import org.hibernate.validator.constraints.URL;
+
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -35,7 +35,7 @@ public class RegisterRequest {
     private String userName;
     @Email(message ="your email is not valid" )
     private String email;
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&.])[A-Za-z\\d@$!%*#?&.]{8,}$",
+    @Pattern(regexp = "^.{8,}$",
             message = "The password must contain at least 8 characters, including an uppercase letter, a lowercase letter, a number, and a special symbol.")
     private String password;
     @Enumerated(EnumType.STRING)

@@ -7,8 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.util.enumData.EventType;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
@@ -25,12 +24,14 @@ public class EventRequest {
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime date;
-    private String image;
+    private Long maxOfParticipants;
     @NotBlank(message = "location is required")
     private String location;
-    @Enumerated(EnumType.STRING)
+    private String formateur;
     private EventType type;
+    private Long price;
     private Long partnerId;
+    private boolean isActivity;
 
 
 

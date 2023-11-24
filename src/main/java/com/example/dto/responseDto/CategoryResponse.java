@@ -1,12 +1,12 @@
 package com.example.dto.responseDto;
 
 import com.example.entity.Category;
-import com.example.entity.Competence;
+
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.Instant;
-import java.util.List;
+
 
 @Data
 @Builder

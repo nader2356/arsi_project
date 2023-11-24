@@ -1,7 +1,7 @@
 package com.example.service.serviceImpl;
 
 
-import com.example.dto.responseDto.CategoryResponse;
+
 import com.example.dto.responseDto.CompetenceResponse;
 import com.example.dto.requestDto.CompetenceRequest;
 import com.example.entity.Category;

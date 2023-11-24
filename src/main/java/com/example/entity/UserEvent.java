@@ -1,6 +1,6 @@
 package com.example.entity;
 
-import com.example.util.enumData.Level;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
