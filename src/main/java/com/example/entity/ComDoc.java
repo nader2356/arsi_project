@@ -9,28 +9,28 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+
 import jakarta.persistence.*;
 import java.time.Instant;
 
-
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "club")
-@SQLDelete(sql = "UPDATE club SET deleted = true WHERE id=?")
+@Table(name = "Document_Com")
+@SQLDelete(sql = "UPDATE document_com SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false ")
-public class Club {
+public class ComDoc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String logo;
-    private String location;
-    private String description;
-    private String contact;
-    private boolean status;
+    @ManyToOne
+    @JoinColumn(name = "document_id")
+    private Document document;
+    @ManyToOne
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
     @CreationTimestamp
     private Instant createdAt;
     @CreationTimestamp
