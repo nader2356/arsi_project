@@ -100,6 +100,16 @@ public class UserClubServiceImpl implements UserClubService {
                 .orElseThrow(() -> new NotFoundException("UserClub not found"));
         User user = userClub.getUser();
         Club club = userClub.getClub();
+        if(request.getUserId() != null) {
+            User newUser = userRepository.findById(Long.valueOf(request.getUserId()))
+                    .orElseThrow(() -> new NotFoundException("User not found"));
+            userClub.setUser(newUser);
+        }
+        if (request.getClubId() != null) {
+            Club newClub = clubRepository.findById(request.getClubId())
+                    .orElseThrow(() -> new NotFoundException("Club not found"));
+            userClub.setClub(newClub);
+        }
         userClubRepository.save(userClub);
         return true;
     }
