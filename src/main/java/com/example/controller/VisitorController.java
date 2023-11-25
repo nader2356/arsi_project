@@ -1,14 +1,10 @@
 package com.example.controller;
 
-import com.example.dto.responseDto.EventResponse;
-import com.example.dto.responseDto.PartnerResponse;
-import com.example.dto.responseDto.UserResponse;
-import com.example.service.EventService;
-import com.example.service.PartnerService;
-import com.example.service.UserService;
+
 import com.example.util.Constants;
 import com.example.util.enumData.EventType;
-
+import com.example.dto.responseDto.*;
+import com.example.service.*;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +26,8 @@ public class VisitorController {
     public final UserService userService;
     public final EventService eventService;
     public final PartnerService partnerService;
+    public final OpportunityService opportunityService;
+    public final ClubService clubService;
 
     @GetMapping(value = "allMember")
     public ResponseEntity<List<UserResponse>> getAllMember() {
@@ -46,6 +44,22 @@ public class VisitorController {
     public ResponseEntity<List<PartnerResponse>> getAllPartner() {
         return ResponseEntity.ok(partnerService.getAllPartner());
     }
+    
+    @GetMapping("allOportunity")
+    public ResponseEntity<List<OpportunityResponse>> getAllOpportunity (){
+        return ResponseEntity.ok(opportunityService.getAllOpportunity());
+    }
 
+
+    @GetMapping(value = "event/{id}")
+    public ResponseEntity<EventResponse> getEventById(@PathVariable Long id) {
+        return ResponseEntity.ok(eventService.getEventById(id));
+    }
+
+    @GetMapping("/allClub")
+    public ResponseEntity<List<ClubResponse>> getAllClub() {
+        List<ClubResponse> clubs = clubService.getAllClub();
+        return ResponseEntity.ok(clubs);
+    }
 
 }
