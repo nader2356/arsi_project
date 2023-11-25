@@ -81,6 +81,7 @@ public class UserServerImpl implements UserService {
         user.setGender(request.getGender());
         user.setPhoneNumber(request.getPhoneNumber());
         user.setRegion(request.getRegion());
+        user.setImage(request.getImage());
         user.setDateOfBirth(request.getDateOfBirth());
         user.setJob(request.getJob());
         user.setUniversityOrCompany(request.getUniversityOrCompany());

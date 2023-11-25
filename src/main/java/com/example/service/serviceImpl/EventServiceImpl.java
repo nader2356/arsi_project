@@ -46,6 +46,7 @@ public class EventServiceImpl implements EventService {
                 .location(eventRequest.getLocation())
                 .type(eventRequest.getType())
                 .partner(partner)
+                .image(eventRequest.getImage())
                 .numberOfParticipants(0L)
                 .status(true).build());
 
@@ -99,6 +100,7 @@ public class EventServiceImpl implements EventService {
         event.setLocation(updateEventRequest.getLocation());
         event.setType(updateEventRequest.getType());
         event.setPartner(partner);
+        event.setImage(updateEventRequest.getImage());
         event.setStatus(event.isStatus());
         eventRepository.save(event);
     }

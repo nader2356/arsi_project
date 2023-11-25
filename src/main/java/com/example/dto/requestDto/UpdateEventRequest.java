@@ -30,6 +30,7 @@ public class UpdateEventRequest {
     private Long price;
     @NotBlank(message = "location is required")
     private String location;
+    private String image;
     @Enumerated(EnumType.STRING)
     private EventType type;
     private Long partnerId;
