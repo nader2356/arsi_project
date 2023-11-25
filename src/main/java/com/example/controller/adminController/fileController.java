@@ -32,7 +32,7 @@ public class fileController {
 
         Resource resource = service.serveFile(filename);
         return   ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg") // Modify the content type as needed
+        		.header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(resource);
     }
     @PostMapping(value = "uploadPDF")

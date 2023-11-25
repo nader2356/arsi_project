@@ -15,6 +15,7 @@ import com.example.exception.ConflictException;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.service.AuthenticationService;
+import com.example.util.EmailUtil;
 import com.example.util.enumData.Post;
 import com.example.util.enumData.Role;
 
@@ -28,6 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final EmailUtil emailUtil;
     
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
@@ -59,6 +61,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .office(request.getOffice())
                 .build();
         userRepository.save(user);
+        String subject = "Confirmation of Your Account Creation";
+        String content = "We are delighted to inform you that your account has been successfully created using this email address.";
+        String fromEmail ="mbarekk.skandar@gmail.com" ;
+        emailUtil.sendEmail(user.getEmail(),fromEmail,subject,content);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

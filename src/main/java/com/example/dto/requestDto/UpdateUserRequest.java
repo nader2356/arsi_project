@@ -28,28 +28,24 @@ import java.util.Date;
 public class UpdateUserRequest {
 
 
-    @NotBlank(message = "First name is required")
+
     private String firstName;
-    @NotBlank(message = "Last name is required")
-    private String lastName;
-    @NotBlank(message = "Username is required")
+    private String lastName;  
     private String userName;
-    @Email(message ="your email is not valid" )
+    @Email(message = "your email is not valid")
     private String email;
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private Date dateOfBirth;
-    @Pattern(regexp = "^[0-9]{8}$",message = "phone number not valid")
+    @Pattern(regexp = "^[0-9]{8}$", message = "phone number not valid")
     private String phoneNumber;
-    @NotBlank(message = "your region is required")
     private String region;
-    @NotBlank(message = "job is required")
     private String job;
-    @NotBlank(message = "universityOrCompany is required")
     private String universityOrCompany;
     @Enumerated(EnumType.STRING)
     private Office office;
     private String image;
+    private String cv;
     @Enumerated(EnumType.STRING)
     private Post post;
     @Enumerated(EnumType.STRING)

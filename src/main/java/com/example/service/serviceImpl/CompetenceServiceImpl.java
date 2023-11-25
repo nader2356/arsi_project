@@ -74,12 +74,17 @@ public class CompetenceServiceImpl implements CompetenceService {
         if(!competence.getName().equals(competenceRequest.getName()) && competenceRepository.existsByName(competenceRequest.getName())){
             throw  new ConflictException(String.format("this name is already exist ( [%s] ) ",competenceRequest.getName()));
         }
-        Category category = categoryRepository.findById(competenceRequest.getCategoryId()).orElseThrow(
-                ()->new NotFoundException(String.format("this Category with id[%s] is not exist",id)));
-
-        competence.setName(competenceRequest.getName());
-        competence.setDescription(competenceRequest.getDescription());
-        competence.setCategory(category);
+        if (competenceRequest.getName() != null) {
+            competence.setName(competenceRequest.getName());
+        }
+        if (competenceRequest.getDescription() != null) {
+            competence.setDescription(competenceRequest.getDescription());
+        }
+        if (competenceRequest.getCategoryId() != null) {
+            Category category = categoryRepository.findById(competenceRequest.getCategoryId()).orElseThrow(
+                    () -> new NotFoundException(String.format("this Category with id[%s] is not exist", id)));
+            competence.setCategory(category);
+        }
 
         competenceRepository.save(competence);
     }

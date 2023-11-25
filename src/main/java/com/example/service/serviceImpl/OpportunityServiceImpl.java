@@ -1,6 +1,6 @@
 package com.example.service.serviceImpl;
 
-import com.example.config.UtilsConfiguration;
+
 import com.example.dto.requestDto.OpportunityRequest;
 import com.example.dto.responseDto.OpportunityResponse;
 import com.example.entity.Opportunity;
@@ -10,22 +10,20 @@ import com.example.service.OpportunityService;
 import com.example.util.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Service
 @RequiredArgsConstructor
 public class OpportunityServiceImpl implements OpportunityService {
-
     private final OpportunityRepository opportunityRepository;
 
     @Autowired
     private FileStorageService fileStorageService;
+
     @Override
     public void createOpportunity(OpportunityRequest request) {
 
@@ -35,30 +33,26 @@ public class OpportunityServiceImpl implements OpportunityService {
                 .company(request.getCompany())
                 .type(request.getType()).build();
         opportunityRepository.save(opportunity);
-
     }
-
     @Override
     public OpportunityResponse getOpportunityById(Long id) {
         Opportunity opportunity = opportunityRepository.findById(id).orElseThrow();
         return OpportunityResponse.makeOpportunity(opportunity);
     }
-
     @Override
     public List<OpportunityResponse> getAllOpportunity() {
 
         List<Opportunity> opportunities = opportunityRepository.findAll();
         List<OpportunityResponse> opportunityResponses = new ArrayList<>();
-        for (Opportunity opportunity: opportunities) {
+        for (Opportunity opportunity : opportunities) {
             OpportunityResponse opportunityResponse = OpportunityResponse.makeOpportunity(opportunity);
             opportunityResponses.add(opportunityResponse);
         }
-
         return opportunityResponses;
     }
 
     @Override
-    public void updateOpportunity(OpportunityRequest request,Long id) {
+    public void updateOpportunity(OpportunityRequest request, Long id) {
 
         Opportunity opportunity = opportunityRepository.findById(id).orElseThrow();
 
@@ -66,22 +60,31 @@ public class OpportunityServiceImpl implements OpportunityService {
         opportunity.setDescription(request.getDescription());
         opportunity.setCompany(request.getCompany());
         opportunity.setType(request.getType());
+        if (request.getTitle() != null) {
+            opportunity.setTitle(request.getTitle());
+        }
+        if (request.getDescription() != null) {
+            opportunity.setDescription(request.getDescription());
+        }
+        if (request.getCompany() != null) {
+            opportunity.setCompany(request.getCompany());
+        }
+        if (request.getType() != null) {
+            opportunity.setType(request.getType());
+        }
+
 
         opportunityRepository.save(opportunity);
 
-
     }
-
     @Override
     public void deleteOpportunity(Long id) {
 
-        if (opportunityRepository.existsById(id)){
+        if (opportunityRepository.existsById(id)) {
             opportunityRepository.deleteById(id);
-        }else {
+        } else {
             throw new NotFoundException("opportunity is not exist");
         }
 
     }
-
-    
 }

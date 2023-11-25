@@ -42,8 +42,14 @@ public class ContactServiceImpl implements ContactService {
         Contact contact = contactRepository.findById(id).orElseThrow(
                 ()->new NotFoundException(String.format("this contact with id [%s] is not exist",id)));
 
-        contact.setPlatform(request.getPlatform());
-        contact.setUrl(contact.getUrl());
+        if (request.getPlatform()!=null){
+            contact.setPlatform(request.getPlatform());
+        }
+        if (request.getUrl()!=null){
+            contact.setUrl(contact.getUrl());
+        }
+
+        contactRepository.save(contact);
 
     }
 

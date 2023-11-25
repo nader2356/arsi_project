@@ -9,6 +9,6 @@ public class NotFoundException extends ApiBaseException{
 
     @Override
     public HttpStatus getStatusCode() {
-        return HttpStatus.NOT_FOUND;
+    	  return HttpStatus.BAD_REQUEST;
     }
 }

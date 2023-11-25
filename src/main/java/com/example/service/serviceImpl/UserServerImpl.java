@@ -1,10 +1,10 @@
 package com.example.service.serviceImpl;
 
 
+
 import com.example.dto.requestDto.PasswordChangeRequest;
 import com.example.dto.requestDto.UpdateMemberRequest;
 import com.example.dto.requestDto.UpdateUserRequest;
-
 import com.example.dto.responseDto.UserResponse;
 import com.example.dto.searchRequest.SearchAdmin;
 import com.example.entity.User;
@@ -30,8 +30,9 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -47,9 +48,9 @@ public class UserServerImpl implements UserService {
 
 
 
-
     @Override
     public List<UserResponse> getAllMember() {
+
         List<User> users = userRepository.findAllMember();
         List<UserResponse> members = new ArrayList<>();
         for (User user : users) {
@@ -74,19 +75,51 @@ public class UserServerImpl implements UserService {
         if (!user.getUsername().equals(request.getUserName()) && userRepository.existsByUserName(request.getUserName())) {
             throw new ConflictException(String.format("this userName is already exist ( [%s] ) ", request.getUserName()));
         }
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setUserName(request.getUserName());
-        user.setEmail(request.getEmail());
-        user.setGender(request.getGender());
-        user.setPhoneNumber(request.getPhoneNumber());
-        user.setRegion(request.getRegion());
-        user.setImage(request.getImage());
-        user.setDateOfBirth(request.getDateOfBirth());
-        user.setJob(request.getJob());
-        user.setUniversityOrCompany(request.getUniversityOrCompany());
-        user.setOffice(request.getOffice());
+
+   
+
+        if (request.getFirstName() != null) {
+            user.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null) {
+            user.setLastName(request.getLastName());
+        }
+        if (request.getUserName() != null) {
+            user.setUserName(request.getUserName());
+        }
+        if (request.getEmail() != null) {
+            user.setEmail(request.getEmail());
+        }
+        if (request.getGender() != null) {
+            user.setGender(request.getGender());
+        }
+        if (request.getPhoneNumber() != null) {
+            user.setPhoneNumber(request.getPhoneNumber());
+        }
+        if (request.getRegion() != null) {
+            user.setRegion(request.getRegion());
+        }
+        if (request.getImage() != null) {
+            user.setImage(request.getImage());
+        }
+        if (request.getCv() != null) {
+            user.setCv(request.getCv());
+        }
+        if (request.getDateOfBirth() != null) {
+            user.setDateOfBirth(request.getDateOfBirth());
+        }
+        if (request.getJob() != null) {
+            user.setJob(request.getJob());
+        }
+        if (request.getUniversityOrCompany() != null) {
+            user.setUniversityOrCompany(request.getUniversityOrCompany());
+        }
+        if (request.getOffice() != null) {
+            user.setOffice(request.getOffice());
+        }
+
         userRepository.save(user);
+
     }
     @Override
     public void updateUser(Long id, UpdateUserRequest request) {
@@ -98,20 +131,56 @@ public class UserServerImpl implements UserService {
         if (!user.getUsername().equals(request.getUserName()) && userRepository.existsByUserName(request.getUserName())) {
             throw new ConflictException(String.format("this userName is already exist ( [%s] ) ", request.getUserName()));
         }
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setUserName(request.getUserName());
-        user.setEmail(request.getEmail());
-        user.setGender(request.getGender());
-        user.setPhoneNumber(request.getPhoneNumber());
-        user.setRegion(request.getRegion());
-        user.setDateOfBirth(request.getDateOfBirth());
-        user.setJob(request.getJob());
-        user.setUniversityOrCompany(request.getUniversityOrCompany());
-        user.setOffice(request.getOffice());
-        user.setPost(request.getPost());
-        user.setRole(request.getRole());
+
+     
+        if (request.getFirstName() != null) {
+            user.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null) {
+            user.setLastName(request.getLastName());
+        }
+        if (request.getUserName() != null) {
+            user.setUserName(request.getUserName());
+        }
+        if (request.getEmail() != null) {
+            user.setEmail(request.getEmail());
+        }
+        if (request.getGender() != null) {
+            user.setGender(request.getGender());
+        }
+        if (request.getPhoneNumber() != null) {
+            user.setPhoneNumber(request.getPhoneNumber());
+        }
+        if (request.getRegion() != null) {
+            user.setRegion(request.getRegion());
+        }
+        if (request.getDateOfBirth() != null) {
+            user.setDateOfBirth(request.getDateOfBirth());
+        }
+        if (request.getJob() != null) {
+            user.setJob(request.getJob());
+        }
+        if (request.getUniversityOrCompany() != null) {
+            user.setUniversityOrCompany(request.getUniversityOrCompany());
+        }
+        if (request.getOffice() != null) {
+            user.setOffice(request.getOffice());
+        }
+        if (request.getPost() != null) {
+            user.setPost(request.getPost());
+        }
+        if (request.getRole() != null) {
+            user.setRole(request.getRole());
+        }
+        if (request.getImage() != null) {
+            user.setImage(request.getImage());
+        }
+        if (request.getCv() != null) {
+            user.setCv(request.getCv());
+        }
+
         userRepository.save(user);
+
     }
     @Override
     public UserResponse getConnectedUser() {
@@ -128,16 +197,13 @@ public class UserServerImpl implements UserService {
     }
     @Override
     public void enableMember(Long id) {
-
         User user = userRepository.findById(id).orElseThrow();
-       
         user.setPaid(true);
         user.setStatus(!user.isStatus());
         userRepository.save(user);
-
     }
 
-  
+
 
 
 
@@ -146,16 +212,12 @@ public class UserServerImpl implements UserService {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         List<Predicate> predicates = new ArrayList<>();
-
         Root<User> root = criteriaQuery.from(User.class);
-
-
         if (searchAdmin.getId() != null) {
             Predicate idPredicate = criteriaBuilder
                     .equal(root.get("id"), searchAdmin.getId());
             predicates.add(idPredicate);
         }
-
         if (searchAdmin.getFirstName() != null) {
             Predicate firstNamePredicate = criteriaBuilder
                     .like(root.get("firstName"), "%" + searchAdmin.getFirstName() + "%");
@@ -204,36 +266,28 @@ public class UserServerImpl implements UserService {
             Predicate statusPredicate = criteriaBuilder.equal(root.get("status"), false);
             predicates.add(statusPredicate);
         }
-
         criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
-
         TypedQuery<User> query = em.createQuery(criteriaQuery);
-
         // Apply pagination
         query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
         query.setMaxResults(pageable.getPageSize());
-
         List<User> users = query.getResultList();
-
         // Convert User entities to UserResponse DTOs
         List<UserResponse> userDto = new ArrayList<>();
         for (User user : users) {
             UserResponse member = UserResponse.makeUser(user);
             userDto.add(member);
         }
-     
-
-
         // Create a Page<UserResponse> using the results and pageable
         long totalCount = countUsersByFilter(searchAdmin); // You'll need to implement this method to count total records.
         return new PageImpl<>(userDto, pageable, totalCount);
-}
+
+    }
 
     public long countUsersByFilter(SearchAdmin searchAdmin) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         List<Predicate> predicates = new ArrayList<>();
-
         Root<User> root = criteriaQuery.from(User.class);
         if (searchAdmin.getId() != null) {
             Predicate idPredicate = criteriaBuilder
@@ -280,25 +334,18 @@ public class UserServerImpl implements UserService {
                     .equal(root.get("office"), searchAdmin.getOffice());
             predicates.add(officePredicate);
         }
-
-        
-
-
         if (searchAdmin.getRole() != null) {
             Predicate rolePredicate = criteriaBuilder.equal(root.get("role"), searchAdmin.getRole());
             predicates.add(rolePredicate);
         }
-
-  
-  
-
+        // Your existing code to build predicates here...
         criteriaQuery.select(criteriaBuilder.count(root));
         criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
-
         TypedQuery<Long> query = em.createQuery(criteriaQuery);
 
         return query.getSingleResult();
     }
+
     @Override
     public void changePassword(PasswordChangeRequest passwordChangeRequest, Long id) {
 
@@ -330,8 +377,6 @@ public class UserServerImpl implements UserService {
             throw new RuntimeException("Invalid OTP or user not found.");
         }
     }
-
-   
 
 
 

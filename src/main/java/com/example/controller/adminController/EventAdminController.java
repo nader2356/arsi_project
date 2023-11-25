@@ -31,7 +31,7 @@ public class EventAdminController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EventResponse>> getAllEvent(@RequestParam  EventType type) {
+    public ResponseEntity<List<EventResponse>> getAllEvent(@RequestParam(required = false)  EventType type) {
         return ResponseEntity.ok(eventService.getAllEvent(type));
     }
 

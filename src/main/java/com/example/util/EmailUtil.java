@@ -42,4 +42,21 @@ public class EmailUtil {
 
     }
     
+    public void sendEmail(String recipientEmail,String fromEmail, String subject,String content) {
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setFrom(fromEmail);
+            helper.setTo(recipientEmail);
+            helper.setSubject(subject);
+            helper.setText(content);
+
+            javaMailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to send  email.");
+        }
+    }
+    
 }
