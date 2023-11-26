@@ -59,6 +59,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     private String otp;
+    @OneToMany(mappedBy = "user")
+    private List<Contact> contacts;
     private boolean status = Boolean.FALSE;
     private boolean isPaid = Boolean.FALSE;
     private boolean deleted = Boolean.FALSE;

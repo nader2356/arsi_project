@@ -2,6 +2,7 @@ package com.example.dto.responseDto;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 import com.example.entity.User;
 import com.example.util.enumData.Gender;
@@ -40,6 +41,7 @@ public class UserResponse {
 	    private Office office;
 		private String image;
 		private String cv;
+		private List<ContactResponse> contacts;
 		private boolean status;
 		private boolean isPaid;
 	    private Instant createdAt;
