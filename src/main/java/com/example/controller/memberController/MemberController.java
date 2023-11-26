@@ -1,10 +1,12 @@
 package com.example.controller.memberController;
 
+import java.util.Collections;
 import java.util.List;
 
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,45 +29,41 @@ import io.swagger.annotations.Api;
 @RestController
 @RequestMapping(Constants.APP_ROOT_MEMBER)
 @Api(tags = "(Member) User Management ")
-
-
 @CrossOrigin("*")
 public class MemberController {
-	
-	public final UserService userService;
-
-     @GetMapping()
-    public ResponseEntity<List<UserResponse>> getAllMember(){
+    public final UserService userService;
+    @GetMapping()
+    public ResponseEntity<List<UserResponse>> getAllMember() {
         return ResponseEntity.ok(userService.getAllMember());
     }
-
     @GetMapping(value = "{id}")
-    public ResponseEntity<UserResponse> getMemberById(@PathVariable(name = "id")Long id){
+    public ResponseEntity<UserResponse> getMemberById(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(userService.getMemberById(id));
     }
-   @GetMapping(value = "me")
-    public ResponseEntity<UserResponse> getMe(){
+    @GetMapping(value = "me")
+    public ResponseEntity<UserResponse> getMe() {
         return ResponseEntity.ok(userService.getConnectedUser());
     }
-
     @PostMapping(value = "/filter")
     public ResponseEntity<Page<UserResponse>> getAllMember(@RequestBody SearchAdmin searchAdmin, Pageable pageable) {
         return ResponseEntity.ok(userService.getAllUserByFilter(searchAdmin,pageable));
     }
-     @PutMapping
-    public ResponseEntity<String> updateMe(@RequestBody UpdateMemberRequest request){
+
+    @PutMapping
+    public ResponseEntity<Object> updateMe(@RequestBody UpdateMemberRequest request) {
         UserResponse user = userService.getConnectedUser();
-        userService.updateMember(user.getId(),request);
-        return ResponseEntity.ok("update success!!");
+        userService.updateMember(user.getId(), request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                Collections.singletonMap("message", "update success!!"));
     }
 
     @PutMapping(value = "/password")
-    public ResponseEntity<String> changeMyPassword(@RequestBody PasswordChangeRequest request){
+    public ResponseEntity<Object> changeMyPassword(@RequestBody PasswordChangeRequest request) {
         UserResponse user = userService.getConnectedUser();
-        userService.changePassword(request,user.getId());
-        return ResponseEntity.ok("Password changed successfully !!");
+        userService.changePassword(request, user.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                Collections.singletonMap("message", "Password changed successfully !!"));
     }
 
-   
 
 }

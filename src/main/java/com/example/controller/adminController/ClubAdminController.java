@@ -29,6 +29,7 @@ public class ClubAdminController {
         if (clubRequest != null) {
             clubService.createClub(clubRequest);
             return ResponseEntity.ok("club created successfully");
+            
         } else {
             return ResponseEntity.badRequest().body("Invalid club data");
         }}

@@ -1,4 +1,4 @@
-package com.example.controller.adminController;
+package com.example.controller;
 
 import com.example.service.fileService;
 import com.example.util.Constants;
