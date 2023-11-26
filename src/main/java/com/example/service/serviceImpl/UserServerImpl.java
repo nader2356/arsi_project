@@ -262,10 +262,10 @@ public class UserServerImpl implements UserService {
             Predicate rolePredicate = criteriaBuilder.equal(root.get("role"), searchAdmin.getRole());
             predicates.add(rolePredicate);
         }
-        if (!searchAdmin.isStatus()) {
-            Predicate statusPredicate = criteriaBuilder.equal(root.get("status"), false);
-            predicates.add(statusPredicate);
-        }
+//      if (!searchAdmin.isStatus()) {
+//      Predicate statusPredicate = criteriaBuilder.equal(root.get("status"), false);
+//      predicates.add(statusPredicate);
+//  }
         criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         // Apply pagination

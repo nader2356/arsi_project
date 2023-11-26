@@ -64,7 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String subject = "Confirmation of Your Account Creation";
         String content = "We are delighted to inform you that your account has been successfully created using this email address.";
         String fromEmail ="mbarekk.skandar@gmail.com" ;
-        emailUtil.sendEmail(user.getEmail(),fromEmail,subject,content);
+        //  emailUtil.sendEmail(user.getEmail(),fromEmail,subject,content);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
