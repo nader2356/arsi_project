@@ -11,12 +11,13 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event,Long> {
 
-	   @Query(value = "SELECT E from Event E where E.isActivity=false and  E.type= :type ")
-	    List<Event> findAllEvent(@Param("type") EventType type);
-	    @Query(value = "SELECT E from Event E where E.isActivity=false ")
-	    List<Event> findAllEvent();
 
-	    @Query(value = "SELECT E from Event E where E.isActivity=true ")
-	    List<Event> findAllActivity();
+    @Query(value = "SELECT E from Event E where  E.type= :type ")
+    List<Event> findAllEvent(@Param("type") EventType type);
 
+    @Query(value = "SELECT E from Event E")
+    List<Event> findAllEvent();
+
+    @Query(value = "SELECT E from Event E where E.isActivity=true ")
+    List<Event> findAllActivity();
 }

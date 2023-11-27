@@ -1,37 +1,28 @@
 package com.example.service.serviceImpl;
 
 
-import com.example.config.UtilsConfiguration;
+
 import com.example.dto.requestDto.EventRequest;
 import com.example.dto.requestDto.UpdateEventRequest;
 import com.example.dto.responseDto.EventResponse;
 import com.example.entity.Event;
-import com.example.entity.Opportunity;
 import com.example.entity.Partner;
 import com.example.exception.NotFoundException;
 import com.example.repository.EventRepository;
 import com.example.repository.PartnerRepository;
 import com.example.service.EventService;
-import com.example.util.FileStorageService;
 import com.example.util.enumData.EventType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Service
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private final PartnerRepository partnerRepository;
     private final EventRepository eventRepository;
-
-
-
     @Override
     public void addEvent(EventRequest eventRequest) {
         Partner partner = null;
@@ -53,7 +44,6 @@ public class EventServiceImpl implements EventService {
                 .numberOfParticipants(0L)
                 .status(true).build());
     }
-
     @Override
     public List<EventResponse> getAllEvent(EventType type) {
         System.out.println(type + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
@@ -70,7 +60,6 @@ public class EventServiceImpl implements EventService {
         }
         return eventResponses;
     }
-
     @Override
     public List<EventResponse> getAllActivity() {
         List<Event> events = eventRepository.findAllActivity();
@@ -81,9 +70,6 @@ public class EventServiceImpl implements EventService {
         }
         return eventResponses;
     }
-
-
-
     @Override
     public EventResponse getEventById(Long id) {
         Event event = eventRepository.findById(id).orElseThrow(
@@ -92,14 +78,8 @@ public class EventServiceImpl implements EventService {
     }
     @Override
     public void updateEvent(Long id, UpdateEventRequest updateEventRequest) {
-
-      
-
-
         Event event = eventRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(String.format("this Id [%s] is not exist", id)));
-        event.setStatus(event.isStatus());
-
         if (updateEventRequest.getTitle() != null) {
             event.setTitle(updateEventRequest.getTitle());
         }
@@ -109,10 +89,11 @@ public class EventServiceImpl implements EventService {
         if (updateEventRequest.getDate() != null) {
             event.setDate(updateEventRequest.getDate());
         }
-        if (updateEventRequest.getMaxOfParticipants() != null) {
+        if (updateEventRequest.getMaxOfParticipants() != 0) {
             event.setMaxOfParticipants(updateEventRequest.getMaxOfParticipants());
         }
-        if (updateEventRequest.getPrice() != null) {
+        System.out.println("----------------------------------------"+updateEventRequest.getPrice());
+        if (updateEventRequest.getPrice() != 0) {
             event.setPrice(updateEventRequest.getPrice());
         }
         if (updateEventRequest.getFormateur() != null) {
@@ -126,10 +107,8 @@ public class EventServiceImpl implements EventService {
         }
         if (updateEventRequest.getPartnerId() != null) {
             Partner partner = null;
-
                 partner = partnerRepository.findById(updateEventRequest.getPartnerId()).orElseThrow(
                         () -> new NotFoundException(String.format("this partnerId[%s] is not exist", updateEventRequest.getPartnerId())));
-
             event.setPartner(partner);
         }
         if (updateEventRequest.getImage() != null) {
@@ -138,10 +117,10 @@ public class EventServiceImpl implements EventService {
         if (!updateEventRequest.isStatus()) {
             event.setStatus(event.isStatus());
         }
+        event.setActivity(updateEventRequest.isActivity());
 
 
         eventRepository.save(event);
-
     }
     @Override
     public void deleteEvent(Long id) {

@@ -35,5 +35,6 @@ public class UpdateEventRequest {
     private EventType type;
     private Long partnerId;
     private boolean status;
+    private boolean isActivity;
 
 }
