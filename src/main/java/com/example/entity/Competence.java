@@ -9,6 +9,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,20 +33,15 @@ public class Competence {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(length = 1000)
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
     @CreationTimestamp
     private Instant createdAt;
     @UpdateTimestamp
     private Instant updatedAt;
     private boolean deleted = Boolean.FALSE;
-
-   
-
-
-
 }

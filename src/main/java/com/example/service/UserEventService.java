@@ -5,11 +5,12 @@ import com.example.dto.responseDto.EventUserResponse;
 import com.example.dto.responseDto.UserEventResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserEventService {
     void joinEvent(UserEventRequest request);
 
-    List<EventUserResponse> getListOfEventByUser(Long userId);
+    List<EventUserResponse> getListOfEventByUser(UUID userId);
 
     List<UserEventResponse> getListOfUserByEvent(Long eventId);
 

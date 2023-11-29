@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -43,7 +44,7 @@ public class UserCompetenceMemberController {
         return ResponseEntity.ok(userCompetenceService.getAllCompetenceByUser(userDto.getId()));
     }
     @GetMapping(value = "competences/{id}")
-    public ResponseEntity<List<UserCompetenceResponse>> getAllCompetencesByUser(@PathVariable Long id) {
+    public ResponseEntity<List<UserCompetenceResponse>> getAllCompetencesByUser(@PathVariable UUID id) {
         return ResponseEntity.ok(userCompetenceService.getAllCompetenceByUser(id));
     }
 

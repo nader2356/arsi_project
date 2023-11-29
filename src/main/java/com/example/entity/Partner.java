@@ -22,11 +22,11 @@ import java.time.Instant;
 @SQLDelete(sql = "UPDATE partner SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false ")
 public class Partner {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(length = 1000)
     private String description;
     private String address;
     private String contact;

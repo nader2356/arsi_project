@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,10 +33,8 @@ public class UserEventServiceImpl implements UserEventService {
                 () -> new NotFoundException(String.format("this userId [%s] is not exist", request.getUserId())));
         Event event = eventRepository.findById(request.getEventId()).orElseThrow(
                 () -> new NotFoundException(String.format("this eventId [%s] is not exist", request.getEventId())));
-
        Boolean existUserEvents =userEventRepository.CheckJoinedEvent(user, event);
         System.out.println("*************************************"+ existUserEvents);
-
         if ((Objects.equals(event.getNumberOfParticipants(), event.getMaxOfParticipants())  )) {
             throw new ConflictException(String.format("this nevent its full ( [%s] ) ", request.getEventId()));
         }
@@ -43,28 +42,24 @@ public class UserEventServiceImpl implements UserEventService {
             throw new ConflictException(String.format("this user event is already exist ( [%s] ) ", request.getUserId()));
         }
         event.setNumberOfParticipants(event.getNumberOfParticipants() + 1);
-
         userEventRepository.save(UserEvent.builder()
                 .event(event)
                 .user(user).build());
     }
-
-
     public boolean checkJoinedEvent(UserEventRequest request){
         User user = userRepository.findById(request.getUserId()).orElseThrow(
                 () -> new NotFoundException(String.format("this userId [%s] is not exist", request.getUserId())));
-
         Event event = eventRepository.findById(request.getEventId()).orElseThrow(
                 () -> new NotFoundException(String.format("this eventId [%s] is not exist", request.getEventId())));
-
         Boolean existUserEvents =userEventRepository.CheckJoinedEvent(user, event);
         System.out.println("*************************************"+ existUserEvents);
         return  existUserEvents;
     }
     @Override
-    public List<EventUserResponse> getListOfEventByUser(Long userId) {
+    public List<EventUserResponse> getListOfEventByUser(UUID userId) {
         List<UserEvent> userEvents = userEventRepository.findAllByUserId(userId);
         List<EventUserResponse> eventUserResponses = new ArrayList<>();
+
         for (UserEvent userEvent : userEvents) {
             EventUserResponse eventUserResponse = EventUserResponse.makeEventUserResponse(userEvent);
             eventUserResponses.add(eventUserResponse);

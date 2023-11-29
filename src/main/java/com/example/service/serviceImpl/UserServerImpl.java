@@ -33,6 +33,7 @@ import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -45,12 +46,8 @@ public class UserServerImpl implements UserService {
     private OtpUtil otpUtil;
     @Autowired
     private EmailUtil emailUtil;
-
-
-
     @Override
     public List<UserResponse> getAllMember() {
-
         List<User> users = userRepository.findAllMember();
         List<UserResponse> members = new ArrayList<>();
         for (User user : users) {
@@ -59,14 +56,16 @@ public class UserServerImpl implements UserService {
         }
         return members;
     }
+
     @Override
-    public UserResponse getMemberById(Long id) {
+    public UserResponse getMemberById(UUID id) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("this user with id [%s] not exist", id)));
         return UserResponse.makeUser(user);
     }
+
     @Override
-    public void updateMember(Long id, UpdateMemberRequest request) {
+    public void updateMember(UUID id, UpdateMemberRequest request) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("this user with id [%s] not exist", id)));
         if (!user.getEmail().equals(request.getEmail()) && userRepository.existsByEmail(request.getEmail())) {
@@ -75,9 +74,6 @@ public class UserServerImpl implements UserService {
         if (!user.getUsername().equals(request.getUserName()) && userRepository.existsByUserName(request.getUserName())) {
             throw new ConflictException(String.format("this userName is already exist ( [%s] ) ", request.getUserName()));
         }
-
-   
-
         if (request.getFirstName() != null) {
             user.setFirstName(request.getFirstName());
         }
@@ -89,6 +85,9 @@ public class UserServerImpl implements UserService {
         }
         if (request.getEmail() != null) {
             user.setEmail(request.getEmail());
+        }
+        if (request.getFirstLogin() != null) {
+            user.setFirstLogin(request.getFirstLogin());
         }
         if (request.getGender() != null) {
             user.setGender(request.getGender());
@@ -117,12 +116,11 @@ public class UserServerImpl implements UserService {
         if (request.getOffice() != null) {
             user.setOffice(request.getOffice());
         }
-
         userRepository.save(user);
-
     }
+
     @Override
-    public void updateUser(Long id, UpdateUserRequest request) {
+    public void updateUser(UUID id, UpdateUserRequest request) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("this user with id [%s] not exist", id)));
         if (!user.getEmail().equals(request.getEmail()) && userRepository.existsByEmail(request.getEmail())) {
@@ -131,8 +129,6 @@ public class UserServerImpl implements UserService {
         if (!user.getUsername().equals(request.getUserName()) && userRepository.existsByUserName(request.getUserName())) {
             throw new ConflictException(String.format("this userName is already exist ( [%s] ) ", request.getUserName()));
         }
-
-     
         if (request.getFirstName() != null) {
             user.setFirstName(request.getFirstName());
         }
@@ -178,35 +174,31 @@ public class UserServerImpl implements UserService {
         if (request.getCv() != null) {
             user.setCv(request.getCv());
         }
-
         userRepository.save(user);
-
     }
+
     @Override
     public UserResponse getConnectedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication() ;
         String currentUserName = authentication.getName();
         Optional<User> user = userRepository.findByUserName(currentUserName);
         if (user.isPresent()) {
             return UserResponse.makeUser(user.get());
         } else throw new RuntimeException("mafamech User *************");
     }
+
     @Override
-    public void deleteMember(Long id) {
+    public void deleteMember(UUID id) {
         userRepository.deleteById(id);
     }
+
     @Override
-    public void enableMember(Long id) {
+    public void enableMember(UUID id) {
         User user = userRepository.findById(id).orElseThrow();
         user.setPaid(true);
         user.setStatus(!user.isStatus());
         userRepository.save(user);
     }
-
-
-
-
-
     @Override
     public Page<UserResponse> getAllUserByFilter(SearchAdmin searchAdmin, Pageable pageable) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -262,10 +254,10 @@ public class UserServerImpl implements UserService {
             Predicate rolePredicate = criteriaBuilder.equal(root.get("role"), searchAdmin.getRole());
             predicates.add(rolePredicate);
         }
-//      if (!searchAdmin.isStatus()) {
-//      Predicate statusPredicate = criteriaBuilder.equal(root.get("status"), false);
-//      predicates.add(statusPredicate);
-//  }
+//        if (!searchAdmin.isStatus()) {
+//            Predicate statusPredicate = criteriaBuilder.equal(root.get("status"), false);
+//            predicates.add(statusPredicate);
+//        }
         criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         // Apply pagination
@@ -281,9 +273,7 @@ public class UserServerImpl implements UserService {
         // Create a Page<UserResponse> using the results and pageable
         long totalCount = countUsersByFilter(searchAdmin); // You'll need to implement this method to count total records.
         return new PageImpl<>(userDto, pageable, totalCount);
-
     }
-
     public long countUsersByFilter(SearchAdmin searchAdmin) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
@@ -342,12 +332,11 @@ public class UserServerImpl implements UserService {
         criteriaQuery.select(criteriaBuilder.count(root));
         criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
         TypedQuery<Long> query = em.createQuery(criteriaQuery);
-
         return query.getSingleResult();
     }
 
     @Override
-    public void changePassword(PasswordChangeRequest passwordChangeRequest, Long id) {
+    public void changePassword(PasswordChangeRequest passwordChangeRequest, UUID id) {
 
         User user = userRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(String.format("this user with id [%s] is not exist", id)));
@@ -377,8 +366,4 @@ public class UserServerImpl implements UserService {
             throw new RuntimeException("Invalid OTP or user not found.");
         }
     }
-
-
-
-
 }

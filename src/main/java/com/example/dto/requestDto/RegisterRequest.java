@@ -2,6 +2,8 @@ package com.example.dto.requestDto;
 
 import com.example.util.enumData.Gender;
 import com.example.util.enumData.Office;
+import com.example.util.enumData.Post;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,24 +29,26 @@ import jakarta.validation.constraints.Pattern;
 
 public class RegisterRequest {
 	
-	@NotBlank(message = "First name is required")
+
+    @NotBlank(message = "First name is required")
     private String firstName;
     @NotBlank(message = "Last name is required")
     private String lastName;
     @NotBlank(message = "Username is required")
     private String userName;
-    @Email(message ="your email is not valid" )
+    @Email(message = "your email is not valid")
     private String email;
     @NotBlank()
     private String password;
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private Date dateOfBirth;
-    @Pattern(regexp = "^[0-9]{8}$",message = "phone number not valid")
+    @Pattern(regexp = "^[0-9]{8}$", message = "phone number not valid")
     private String phoneNumber;
     @NotBlank(message = "your region is required")
     private String region;
     private String job;
+    private Post post;
     private String image;
     private String universityOrCompany;
     @Enumerated(EnumType.STRING)

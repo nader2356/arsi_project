@@ -13,6 +13,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -28,6 +29,7 @@ public class Club {
     private String name;
     private String logo;
     private String location;
+    @Column(length = 1000)
     private String description;
     private String contact;
     private boolean status;

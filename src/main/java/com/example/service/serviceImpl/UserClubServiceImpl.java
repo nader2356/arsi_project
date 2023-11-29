@@ -12,29 +12,28 @@ import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserClubServiceImpl implements UserClubService {
-
     private final ClubRepository clubRepository;
     private final UserRepository userRepository;
     private final UserClubRepository userClubRepository;
 
     @Override
     public void addUserClub(UserClubRequest request) {
-        User user = userRepository.findById(Long.valueOf(request.getUserId()))
+        User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new NotFoundException("User not found"));
         Club club = clubRepository.findById(request.getClubId())
                 .orElseThrow(() -> new NotFoundException("Club not found"));
-
         UserClub userClub = new UserClub();
         userClub.setUser(user);
         userClub.setClub(club);
         userClubRepository.save(userClub);
     }
     @Override
-    public List<UserClubResponse> getAllClub(Long id) {
+    public List<UserClubResponse> getAllClub(UUID id) {
         List<UserClub> userClubs = userClubRepository.findByUserId(id);
         List<UserClubResponse> userClubResponses = new ArrayList<>();
         for (UserClub userClub : userClubs) {
@@ -53,7 +52,7 @@ public class UserClubServiceImpl implements UserClubService {
     }
     @Override
     public void joinClub(UserClubRequest request) {
-        User user = userRepository.findById(Long.valueOf(request.getUserId()))
+        User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new NotFoundException("User not found"));
         Club club = clubRepository.findById(request.getClubId())
                 .orElseThrow(() -> new NotFoundException("Club not found"));
@@ -79,7 +78,7 @@ public class UserClubServiceImpl implements UserClubService {
         return userClubResponses;
     }
     @Override
-    public List<UserClubResponse> getAllClubByUser(Long id)
+    public List<UserClubResponse> getAllClubByUser(UUID id)
     {
         List<UserClubResponse> userClubResponses = new ArrayList<>();
         User user = userRepository.findById(id)
@@ -92,8 +91,6 @@ public class UserClubServiceImpl implements UserClubService {
         }
         return userClubResponses;
     }
-
-
     @Override
     public boolean updateUserClub(Long id, UserClubRequest request) {
         UserClub userClub = userClubRepository.findById(id)
@@ -101,7 +98,7 @@ public class UserClubServiceImpl implements UserClubService {
         User user = userClub.getUser();
         Club club = userClub.getClub();
         if(request.getUserId() != null) {
-            User newUser = userRepository.findById(Long.valueOf(request.getUserId()))
+            User newUser = userRepository.findById(request.getUserId())
                     .orElseThrow(() -> new NotFoundException("User not found"));
             userClub.setUser(newUser);
         }
@@ -113,5 +110,4 @@ public class UserClubServiceImpl implements UserClubService {
         userClubRepository.save(userClub);
         return true;
     }
-
 }

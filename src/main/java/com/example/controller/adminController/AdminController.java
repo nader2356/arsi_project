@@ -1,6 +1,6 @@
 package com.example.controller.adminController;
 
-import com.example.config.TokenExpiredException;
+
 import com.example.dto.requestDto.PasswordChangeRequest;
 import com.example.dto.requestDto.UpdateUserRequest;
 import com.example.dto.responseDto.UserResponse;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.Collections;
+import com.example.exception.ExpiredTokenException;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -34,13 +36,13 @@ public class AdminController {
         return ResponseEntity.ok(usersPage);
     }
     @PutMapping(value = "/enable/{id}")
-    public ResponseEntity<Object> enableMember(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Object> enableMember(@PathVariable(name = "id") UUID id) {
         userService.enableMember(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "This Account enabled with success !!!!!"));
     }
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Object> deleteMember(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Object> deleteMember(@PathVariable(name = "id") UUID id) {
         userService.deleteMember(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "this Account is deleted"));
@@ -48,18 +50,18 @@ public class AdminController {
 
     @GetMapping(value = "me")
     public ResponseEntity<Object> getUserConnected() {
-    try{
-        return ResponseEntity.ok(userService.getConnectedUser());
-    } catch (TokenExpiredException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token has expired");
-    } catch (Exception e) {
-        // Handle other exceptions
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
-    }
+    	        try {
+    	            return ResponseEntity.ok(userService.getConnectedUser());
+    	        } catch (ExpiredTokenException ex) {
+    	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token has expired");
+    	        } catch (Exception e) {
+    	            // Handle other exceptions
+    	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+    	        }
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable(name = "id") Long id, @RequestBody UpdateUserRequest request) {
+    public ResponseEntity<Object> updateUser(@PathVariable(name = "id") UUID id, @RequestBody UpdateUserRequest request) {
         userService.updateUser(id, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "update success!!"));
@@ -80,7 +82,7 @@ public class AdminController {
     }
     @PutMapping(value = "/password/{id}")
     public ResponseEntity<Object> changeUserPassword(@RequestBody PasswordChangeRequest request,
-                                                     @PathVariable Long id) {
+                                                     @PathVariable UUID id) {
         userService.changePassword(request, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "Password changed successfully !!"));

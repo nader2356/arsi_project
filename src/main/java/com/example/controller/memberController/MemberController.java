@@ -2,7 +2,7 @@ package com.example.controller.memberController;
 
 import java.util.Collections;
 import java.util.List;
-
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +37,7 @@ public class MemberController {
         return ResponseEntity.ok(userService.getAllMember());
     }
     @GetMapping(value = "{id}")
-    public ResponseEntity<UserResponse> getMemberById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<UserResponse> getMemberById(@PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok(userService.getMemberById(id));
     }
     @GetMapping(value = "me")

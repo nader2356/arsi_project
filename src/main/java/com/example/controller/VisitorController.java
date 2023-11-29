@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(Constants.APP_ROOT + "/visitor")
@@ -101,5 +102,9 @@ public class VisitorController {
             return ResponseEntity.badRequest().body(
                     Collections.singletonMap("message","Invalid newsletter data"));
         }
+    }
+    @GetMapping(value = "qrcode/{id}")
+    public ResponseEntity<Object> verificationUser(@PathVariable UUID id) {
+        return ResponseEntity.ok(userService.getMemberById(id));
     }
 }

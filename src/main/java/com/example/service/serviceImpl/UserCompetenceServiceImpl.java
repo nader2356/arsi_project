@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserCompetenceServiceImpl implements UserCompetenceService {
@@ -62,7 +63,7 @@ public class UserCompetenceServiceImpl implements UserCompetenceService {
         userCompetenceRepository.save(userCompetence);
     }
     @Override
-    public List<UserCompetenceResponse> getAllCompetenceByUser(Long id) {
+    public List<UserCompetenceResponse> getAllCompetenceByUser(UUID id) {
         List<UserCompetence> userCompetences = userCompetenceRepository.findAllByUserId(id);
         List<UserCompetenceResponse> userCompetenceResponses = new ArrayList<>();
         for (UserCompetence userCompetence : userCompetences) {

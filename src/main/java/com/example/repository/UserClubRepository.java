@@ -6,10 +6,11 @@ import com.example.entity.UserClub;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserClubRepository extends JpaRepository<UserClub, Long> {
 
-    List<UserClub> findByUserId(Long id);
+	List<UserClub> findByUserId(UUID id);
 
     boolean existsByUserAndClub(User user, Club club);
 

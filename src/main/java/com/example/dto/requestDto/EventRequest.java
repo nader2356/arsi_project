@@ -18,22 +18,22 @@ import java.time.LocalDateTime;
 public class EventRequest {
 
 
-    @NotBlank(message = "title is required")
-    private String title;
-    @NotBlank(message = "description is required")
-    private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime date;
-    private Long maxOfParticipants;
-    @NotBlank(message = "location is required")
-    private String location;
-    private String formateur;
-    private EventType type;
-    private Long price;
-    private String image;
-    private Long partnerId;
-    private boolean isActivity;
-
+	   @NotBlank(message = "title is required")
+	    private String title;
+	    @NotBlank(message = "description is required")
+	    private String description;
+	    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	    private LocalDateTime date;
+	    private Long maxOfParticipants;
+	    @NotBlank(message = "location is required")
+	    private String location;
+	    private String formateur;
+	    private EventType type;
+	    private Long price;
+	    private String urlFacebook;
+	    private String image;
+	    private Long partnerId;
+	    private boolean isActivity;
 
 
 

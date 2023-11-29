@@ -22,11 +22,11 @@ import java.time.Instant;
 @SQLDelete(sql = "UPDATE opportunity SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false ")
 public class Opportunity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    @Column(length = 1000)
     private String description;
     @Enumerated(EnumType.STRING)
     private OpportunityType type;

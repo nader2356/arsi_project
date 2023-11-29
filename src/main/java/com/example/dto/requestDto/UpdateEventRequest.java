@@ -28,13 +28,14 @@ public class UpdateEventRequest {
     private Long maxOfParticipants;
     private String formateur;
     private Long price;
+
     @NotBlank(message = "location is required")
     private String location;
+    private String urlFacebook;
     private String image;
     @Enumerated(EnumType.STRING)
     private EventType type;
     private Long partnerId;
     private boolean status;
     private boolean isActivity;
-
 }

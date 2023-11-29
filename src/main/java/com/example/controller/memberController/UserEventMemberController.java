@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -40,7 +41,7 @@ public class UserEventMemberController {
         return ResponseEntity.ok(userEventService.getListOfUserByEvent(eventId));
     }
     @GetMapping(value = "/events/{userId}")
-    public ResponseEntity<List<EventUserResponse>> getListOfEventByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<EventUserResponse>> getListOfEventByUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(userEventService.getListOfEventByUser(userId));
     }
     @DeleteMapping(value = "{id}")
