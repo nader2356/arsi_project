@@ -6,8 +6,11 @@ import com.example.util.enumData.Post;
 import com.example.util.enumData.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,7 +23,12 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-@Data
+
+
+
+@Setter
+ @Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -64,8 +72,6 @@ public class User implements UserDetails {
     private boolean status = Boolean.FALSE;
     private boolean isPaid = Boolean.FALSE;
     private boolean deleted = Boolean.FALSE;
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -81,8 +87,7 @@ public class User implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
         if (role == Role.MEMBER) {
-            // return true if today < expires_at
-        	 return (status);
+            return (status);
         }
         return true;
     }

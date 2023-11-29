@@ -14,4 +14,6 @@ public interface UserEventService {
     List<UserEventResponse> getListOfUserByEvent(Long eventId);
 
     void deleteUserEvent(Long id);
+
+    boolean checkJoinedEvent(UserEventRequest request);
 }
