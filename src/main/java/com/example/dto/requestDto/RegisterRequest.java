@@ -45,6 +45,7 @@ public class RegisterRequest {
     @NotBlank(message = "your region is required")
     private String region;
     private String job;
+    private String image;
     private String universityOrCompany;
     @Enumerated(EnumType.STRING)
     private Office office;

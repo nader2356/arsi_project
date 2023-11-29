@@ -1,5 +1,6 @@
 package com.example.controller.adminController;
 
+import com.example.config.TokenExpiredException;
 import com.example.dto.requestDto.PasswordChangeRequest;
 import com.example.dto.requestDto.UpdateUserRequest;
 import com.example.dto.responseDto.UserResponse;
@@ -32,15 +33,12 @@ public class AdminController {
         Page<UserResponse> usersPage = userService.getAllUserByFilter(request, pageable);
         return ResponseEntity.ok(usersPage);
     }
-
     @PutMapping(value = "/enable/{id}")
     public ResponseEntity<Object> enableMember(@PathVariable(name = "id") Long id) {
         userService.enableMember(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "This Account enabled with success !!!!!"));
     }
-
-
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Object> deleteMember(@PathVariable(name = "id") Long id) {
         userService.deleteMember(id);
@@ -49,8 +47,15 @@ public class AdminController {
     }
 
     @GetMapping(value = "me")
-    public ResponseEntity<UserResponse> getUserConnected() {
+    public ResponseEntity<Object> getUserConnected() {
+    try{
         return ResponseEntity.ok(userService.getConnectedUser());
+    } catch (TokenExpiredException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token has expired");
+    } catch (Exception e) {
+        // Handle other exceptions
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+    }
     }
 
     @PutMapping(value = "{id}")
@@ -59,7 +64,6 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "update success!!"));
     }
-
     @PutMapping
     public ResponseEntity<Object> updateMe(@RequestBody UpdateUserRequest request) {
         UserResponse user = userService.getConnectedUser();
@@ -67,24 +71,18 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "update success!!"));
     }
-
     @PutMapping(value = "/password")
     public ResponseEntity<Object> changeMyPassword(@RequestBody PasswordChangeRequest request) {
         UserResponse user = userService.getConnectedUser();
         userService.changePassword(request, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "Password changed successfully !!"));
-
     }
-
     @PutMapping(value = "/password/{id}")
     public ResponseEntity<Object> changeUserPassword(@RequestBody PasswordChangeRequest request,
                                                      @PathVariable Long id) {
-
         userService.changePassword(request, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "Password changed successfully !!"));
     }
-
-
 }

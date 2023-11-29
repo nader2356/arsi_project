@@ -20,27 +20,22 @@ import com.example.util.enumData.Post;
 import com.example.util.enumData.Role;
 
 
-
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final EmailUtil emailUtil;
-    
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
-
-        if (userRepository.findByEmail(request.getEmail()).isPresent()){
-            throw new ConflictException(String.format("this email is already exist ( [%s] ) ",request.getEmail()));
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new ConflictException(String.format("this email is already exist ( [%s] ) ", request.getEmail()));
         }
-         if ( userRepository.findByUserName(request.getUserName()).isPresent()){
-            throw new ConflictException(String.format("this email is already exist ( [%s] ) ",request.getUserName()));
+        if (userRepository.findByUserName(request.getUserName()).isPresent()) {
+            throw new ConflictException(String.format("this email is already exist ( [%s] ) ", request.getUserName()));
         }
-
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -54,9 +49,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .universityOrCompany(request.getUniversityOrCompany())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .deleted(false)
-                .status(false)
+                .status(true)
+                .image(request.getImage())
                 .isPaid(false)
-                .role( Role.MEMBER)
+                .role(Role.MEMBER)
                 .post(Post.MEMBER)
                 .office(request.getOffice())
                 .build();
@@ -64,13 +60,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String subject = "Confirmation of Your Account Creation";
         String content = "We are delighted to inform you that your account has been successfully created using this email address.";
         String fromEmail ="mbarekk.skandar@gmail.com" ;
-        //  emailUtil.sendEmail(user.getEmail(),fromEmail,subject,content);
+      //  emailUtil.sendEmail(user.getEmail(),fromEmail,subject,content);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
-
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -86,7 +81,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-
-	
-
 }

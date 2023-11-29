@@ -33,23 +33,24 @@ public class ClubAdminController {
             clubService.createClub(clubRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(
                     Collections.singletonMap("message", "club created successfully"));
-
         } else {
             return ResponseEntity.badRequest().body("Invalid club data");
         }}
-    @GetMapping("/allclub")
+
+    @GetMapping("")
     public ResponseEntity<List<ClubResponse>> getAllClub() {
         List<ClubResponse> clubs = clubService.getAllClub();
         return ResponseEntity.ok(clubs);
     }
-    @DeleteMapping("/delete/{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteClub(@PathVariable Integer id) {
         clubService.deleteClub(id);
         //return ResponseEntity.noContent().build();
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 Collections.singletonMap("message", "Delete successfully"));
     }
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ClubResponse> updateClub(@PathVariable Integer id, @RequestBody ClubRequest clubRequest) {
         ClubResponse updatedClub = clubService.updateClub(id, clubRequest);
         return ResponseEntity.ok(updatedClub);

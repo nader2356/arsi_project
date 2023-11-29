@@ -8,6 +8,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.example.config.TokenExpiredException;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.HashMap;
@@ -18,30 +21,26 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
-     @ExceptionHandler(ApiBaseException.class)
-    public ResponseEntity<ErrorDetails> handleApiExceptions(ApiBaseException ex ,WebRequest request){
-        ErrorDetails details = new ErrorDetails(ex.getMessage(),request.getDescription(false));
-        return new ResponseEntity<>(details,ex.getStatusCode());
+    @ExceptionHandler(ApiBaseException.class)
+    public ResponseEntity<ErrorDetails> handleApiExceptions(ApiBaseException ex, WebRequest request) {
+        ErrorDetails details = new ErrorDetails(ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(details, ex.getStatusCode());
     }
-
+    public ResponseEntity<Object> handleTokenExpiredException(TokenExpiredException ex) {
+        return new ResponseEntity<>("Token has expired", HttpStatus.UNAUTHORIZED);
+    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
-
         Map<String, List<String>> body = new HashMap<>();
-
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-
         body.put("errors", errors);
-
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
-
 }

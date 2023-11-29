@@ -24,20 +24,23 @@ public class EventMemberController {
     private final EventService eventService;
 
   
-   
 
-    @GetMapping(value = "{type}")
-    public ResponseEntity<List<EventResponse>> getAllEvent(@PathVariable EventType type) {
+//    @GetMapping(value = "{type}")
+//    public ResponseEntity<List<EventResponse>> getAllEvent(@PathVariable EventType type) {
+//        return ResponseEntity.ok(eventService.getAllEvent(type));
+//
+//    }
 
+    @GetMapping
+    public ResponseEntity<List<EventResponse>> getAllEvent(@RequestParam(required = false)  EventType type) {
         return ResponseEntity.ok(eventService.getAllEvent(type));
 
-
     }
+
     @GetMapping(value = "{id}")
-    public ResponseEntity<EventResponse> getEventById(@PathVariable Long id){
+    public ResponseEntity<EventResponse> getEventById(@PathVariable Long id) {
 
         return ResponseEntity.ok(eventService.getEventById(id));
-
     }
 
 
